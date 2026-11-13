@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Кафе «Папино» — База знаний, меню и регламент</title>
+  <title>Кафе «Папино» — Портал обучения</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { darkMode: 'class' }
@@ -18,33 +18,34 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
 
-  <!-- ЭКРАН АВТОРИЗАЦИИ -->
+  <!-- ЭКРАН АВТОРИЗАЦИИ С СОТРУДНИКАМИ ИЗ IIKO -->
   <div id="login-screen" class="fixed inset-0 bg-slate-950/95 z-50 flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-800">
       <div class="text-center mb-6">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 font-extrabold text-3xl mb-3 shadow-lg">П</div>
         <h1 class="text-2xl font-extrabold text-white">Кафе «Папино»</h1>
-        <p class="text-sm text-slate-400 mt-1">Закрытый портал обучения стажёров</p>
+        <p class="text-sm text-slate-400 mt-1">Авторизация сотрудников</p>
       </div>
 
       <form id="login-form" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Логин сотрудника</label>
-          <input type="text" id="login-user" required placeholder="Введите логин" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Имя (логин)</label>
+          <input type="text" id="login-user" required placeholder="Например: Полина, Оля, Изалия, Стажер..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль</label>
           <input type="password" id="login-pass" required placeholder="Введите пароль" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
-        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверный логин или пароль. Используйте демо-кнопки.</div>
+        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверное имя или пароль. Проверьте список внизу.</div>
         <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в портал</button>
       </form>
 
       <div class="mt-6 pt-5 border-t border-slate-800">
-        <p class="text-xs text-center text-slate-500 mb-3">Быстрый вход в 1 клик:</p>
-        <div class="grid grid-cols-2 gap-3">
-          <button onclick="quickLogin('waiter','123')" class="py-2.5 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-left">👨‍🍳 Стажёр<br><span class="text-[10px] text-slate-500">waiter / 123</span></button>
-          <button onclick="quickLogin('admin','admin')" class="py-2.5 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-left">🔑 Админ<br><span class="text-[10px] text-slate-500">admin / admin</span></button>
+        <p class="text-xs text-center text-slate-400 mb-2 font-medium">Быстрый вход по ролям:</p>
+        <div class="grid grid-cols-3 gap-2">
+          <button onclick="quickLogin('полина','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-amber-400 rounded-xl text-xs font-semibold transition text-center">👑 Менеджер<br><span class="text-[10px] text-slate-500">Полина</span></button>
+          <button onclick="quickLogin('изалия','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-center">🍽️ Официант<br><span class="text-[10px] text-slate-500">Изалия</span></button>
+          <button onclick="quickLogin('стажер','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-emerald-400 rounded-xl text-xs font-semibold transition text-center">🌱 Стажёр<br><span class="text-[10px] text-slate-500">Стажёр</span></button>
         </div>
       </div>
     </div>
@@ -57,8 +58,8 @@
         <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center font-black text-xl text-slate-950 shadow">П</div>
         <div>
           <span class="font-bold text-lg tracking-tight text-white">ПАПИНО</span>
-          <span id="role-badge" class="ml-2 text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-medium">Стажёр</span>
-          <p class="text-xs text-slate-400">База знаний и регламент</p>
+          <span id="role-badge" class="ml-2 text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-medium">Сотрудник</span>
+          <p id="iiko-badge" class="text-xs text-slate-400">iiko id: —</p>
         </div>
       </div>
 
@@ -76,7 +77,7 @@
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 flex flex-col">
 
-    <!-- ВКЛАДКА 1: МЕНЮ И ПОИСК -->
+    <!-- ВКЛАДКА 1: МЕНЮ -->
     <section id="section-menu" class="space-y-5">
       <div class="bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-800 space-y-3">
         <div class="flex flex-col sm:flex-row gap-3">
@@ -108,7 +109,7 @@
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (МЕТОДИЧКА И ШТРАФЫ) -->
+    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ -->
     <section id="section-rules" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
@@ -116,7 +117,6 @@
           <p class="text-sm text-slate-400 mt-1">Полный свод правил, стандартов сервиса, гигиены и ответственности сотрудников (ИП Лотфуллин М.М.)</p>
         </div>
 
-        <!-- Быстрая навигация -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности и Гость</a>
           <a href="#rule-conduct" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">👤 Внешний вид и Запреты</a>
@@ -128,7 +128,7 @@
         <div id="rule-corp" class="space-y-4 pt-2">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
-            Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе (даже во внутренних разговорах) мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
+            Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
@@ -149,7 +149,6 @@
                 <li><strong>Правило без слова «нет»:</strong> если блюда нет, предлагаем достойную альтернативу.</li>
                 <li><strong>Командная работа:</strong> помогать коллегам и просить помощи при запарке.</li>
                 <li><strong>Двойная роль:</strong> быть одновременно радушным хозяином и профессиональным продавцом.</li>
-                <li><strong>Внешний вид:</strong> помните, что любой посетитель ассоциирует с заведением каждого сотрудника.</li>
               </ul>
             </div>
           </div>
@@ -178,7 +177,6 @@
                 <li>Держать руки в карманах, облокачиваться на стены и барную стойку.</li>
                 <li>Пользоваться гостевым туалетом.</li>
                 <li>Сидеть на стульях, диванах и подлокотниках.</li>
-                <li>Разговаривать на отвлеченные темы и курить сотрудникам зала.</li>
               </ul>
             </div>
           </div>
@@ -190,11 +188,11 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <strong class="text-amber-300 block mb-1">Шаг 1. Встреча и приветствие</strong>
-              Приветствие в первые 30–60 сек. Уточнение брони, выбор зала (паровые коктейли или без). Подача меню в открытом виде.
+              Приветствие в первые 30–60 сек. Уточнение брони, выбор зала. Подача меню в открытом виде.
             </div>
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа</strong>
-              Использование «Сетки меню». Предупреждение о времени: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин.
+              Использование «Сетки меню». Тайминги: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин.
             </div>
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль)</strong>
@@ -301,11 +299,11 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ -->
+    <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ (ТОЛЬКО ДЛЯ МЕНЕДЖЕРОВ) -->
     <section id="section-admin" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
-        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Добавление новой позиции (включая бар и напитки)</h2>
-        <p class="text-xs text-slate-400 mb-5">Блюдо или напиток сохраняется в браузере и сразу доступно стажёрам в поиске и тестах.</p>
+        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Панель управления (Менеджер)</h2>
+        <p class="text-xs text-slate-400 mb-5">Добавление новых позиций, напитков и блюд в общую базу.</p>
         <form id="add-item-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Категория</label>
@@ -341,6 +339,26 @@
   </main>
 
   <script>
+    // БАЗА СОТРУДНИКОВ ИЗ IIKO
+    const IIKO_STAFF = {
+      // Менеджеры (Админы)
+      "полина": { role: "admin", name: "Полина", id: "5802", title: "Менеджер" },
+      "оля": { role: "admin", name: "Оля", id: "8696", title: "Менеджер" },
+      "ангелина": { role: "admin", name: "Ангелина", id: "8688", title: "Менеджер" },
+      // Бармены
+      "максим": { role: "waiter", name: "Максим", id: "4316", title: "Бармен" },
+      "эрик": { role: "waiter", name: "Эрик", id: "2902", title: "Бармен" },
+      // Официанты
+      "изалия": { role: "waiter", name: "Изалия", id: "0909", title: "Официант" },
+      "диляра": { role: "waiter", name: "Диляра", id: "1133", title: "Официант" },
+      "мария": { role: "waiter", name: "Мария", id: "0550", title: "Официант" },
+      "милена": { role: "waiter", name: "Милена", id: "7140", title: "Официант" },
+      "катя": { role: "waiter", name: "Катя", id: "6507", title: "Официант" },
+      "элина": { role: "waiter", name: "Элина", id: "5566", title: "Официант" },
+      // Стажёр
+      "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр" }
+    };
+
     const INITIAL_MENU = [
       { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "110 г", price: 329, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
       { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, имбирь маринованный, васаби" },
@@ -488,7 +506,7 @@
       { id: "H-15", category: "Горячие блюда", name: "Курица по корейски", weight: "160 г", price: 549, serving: "Стандартная подача", ingredients: "Куриное филе, лук репчатый, болгарский перец, огурец, уксус, сахар, фирменный соус вок, соль, перец, растительное масло, кунжут черный/белый, зеленый лук" },
       { id: "H-16", category: "Горячие блюда", name: "Окунь в кляре", weight: "380 г", price: 669, serving: "Стандартная подача", ingredients: "Окунь, картофель фри, лимон, соус «Тар-тар», кетчуп, кляр" },
       { id: "H-17", category: "Горячие блюда", name: "Свинина с гриб. с карт дольками", weight: "300 г", price: 709, serving: "Стандартная подача", ingredients: "Свинина, грибы шампиньоны, лук красный, корнишоны, картофельные дольки, соус кимчи, сливки 22%, кунжутное масло, уксус, соль, сахар, зелень" },
-      { id: "H-18", category: "Горячие блюда", name: "Сливочный окунь с пряными специями", weight: "230 г", price: 589, serving: "Стандартная подача", ingredients: "Окунь, сливки 22%, куриный бульон, соль, смесь перецев, орегано, мускатный орех, куркума, рис" },
+      { id: "H-18", category: "Горячие блюда", name: "Сливочный окунь с пряными специями", weight: "230 г", price: 589, serving: "Стандартная подача", ingredients: "Окунь, сливки 22%, куриный бульон, соль, смесь перцев, орегано, мускатный орех, куркума, рис" },
       { id: "H-19", category: "Горячие блюда", name: "Стейк из говядины", weight: "250 г", price: 1609, serving: "Стандартная подача", ingredients: "Говяжья вырезка, масло сливочное, масло растительное, розмарин, бальзамический уксус, соевый соус, соль, смесь перцев, листовой салат, салат «Айсберг», томаты черри, чесночное масло, мед" },
       { id: "H-20", category: "Горячие блюда", name: "Стейк со свининой", weight: "270 г", price: 699, serving: "Стандартная подача", ingredients: "Свинина карбонат, соевый соус, лимон, горчица, баклажан, томат, корнишоны, лук красный, уксус, сахар" },
       { id: "H-21", category: "Горячие блюда", name: "Стейк со свининой в пасте кочудян", weight: "270 г", price: 709, serving: "Стандартная подача", ingredients: "Свинина карбонат, соевый соус, имбирь, паста «Кочудян», баклажан, томаты, корнишоны, лук красный, уксус, сахар" },
@@ -552,32 +570,37 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_v3')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_v4')) || INITIAL_MENU;
     let currentCategory = 'Все';
-    let currentUserRole = 'waiter';
+    let currentStaff = null;
 
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
-      const u = document.getElementById('login-user').value.trim().toLowerCase();
-      const p = document.getElementById('login-pass').value.trim();
-      if ((u === 'waiter' && p === '123') || (u === 'admin' && p === 'admin')) {
-        completeLogin(u);
+      const nameInput = document.getElementById('login-user').value.trim().toLowerCase();
+      const passInput = document.getElementById('login-pass').value.trim();
+
+      if (IIKO_STAFF[nameInput] && passInput === "123") {
+        currentStaff = IIKO_STAFF[nameInput];
+        completeLogin(currentStaff);
       } else {
         document.getElementById('login-error').classList.remove('hidden');
       }
     });
 
-    function quickLogin(u, p) {
-      document.getElementById('login-user').value = u;
-      document.getElementById('login-pass').value = p;
-      completeLogin(u);
+    function quickLogin(nameKey, pass) {
+      document.getElementById('login-user').value = nameKey;
+      document.getElementById('login-pass').value = pass;
+      currentStaff = IIKO_STAFF[nameKey];
+      completeLogin(currentStaff);
     }
 
-    function completeLogin(role) {
-      currentUserRole = role;
+    function completeLogin(staff) {
       document.getElementById('login-screen').classList.add('hidden');
-      document.getElementById('role-badge').textContent = role === 'admin' ? 'Администратор' : 'Стажёр';
-      if (role === 'admin') {
+      document.getElementById('role-badge').textContent = `${staff.title}: ${staff.name}`;
+      document.getElementById('iiko-badge').textContent = `iiko id: #${staff.id}`;
+      
+      // Админку видят ТОЛЬКО Менеджеры
+      if (staff.role === 'admin') {
         document.getElementById('tab-admin').classList.remove('hidden');
       } else {
         document.getElementById('tab-admin').classList.add('hidden');
@@ -588,16 +611,18 @@
     function logout() {
       document.getElementById('login-screen').classList.remove('hidden');
       document.getElementById('login-pass').value = '';
+      document.getElementById('login-user').value = '';
     }
 
     function switchTab(tab) {
       ['menu', 'rules', 'quiz', 'admin'].forEach(t => {
         document.getElementById('section-' + t).classList.add('hidden');
         const btn = document.getElementById('tab-' + t);
-        btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
+        if (btn) btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
       });
       document.getElementById('section-' + tab).classList.remove('hidden');
-      document.getElementById('tab-' + tab).className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition';
+      const activeBtn = document.getElementById('tab-' + tab);
+      if (activeBtn) activeBtn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition';
     }
 
     function getCategories() {
@@ -843,7 +868,7 @@
 
       document.getElementById('quiz-result-emoji').textContent = pct >= 85 ? '🏆' : pct >= 60 ? '👍' : '📚';
       document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
-      document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Стажёр готов к работе.' : 'Рекомендуем повторить регламент и меню во вкладке «Устав».';
+      document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Сотрудник готов к работе.' : 'Рекомендуем повторить регламент и меню во вкладке «Устав».';
 
       const mistakesBox = document.getElementById('quiz-mistakes-box');
       const mistakesList = document.getElementById('quiz-mistakes-list');
@@ -862,24 +887,27 @@
       }
     }
 
-    document.getElementById('add-item-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const newItem = {
-        id: 'NEW-' + Date.now(),
-        category: document.getElementById('new-cat').value.trim(),
-        name: document.getElementById('new-name').value.trim(),
-        ingredients: document.getElementById('new-ing').value.trim(),
-        weight: document.getElementById('new-weight').value.trim(),
-        price: parseInt(document.getElementById('new-price').value, 10) || 0,
-        serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
-      };
-      menuData.push(newItem);
-      localStorage.setItem('papino_menu_v3', JSON.stringify(menuData));
-      this.reset();
-      renderCategories();
-      renderMenu();
-      alert(`Позиция «${newItem.name}» успешно добавлена!`);
-    });
+    const addItemForm = document.getElementById('add-item-form');
+    if (addItemForm) {
+      addItemForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const newItem = {
+          id: 'NEW-' + Date.now(),
+          category: document.getElementById('new-cat').value.trim(),
+          name: document.getElementById('new-name').value.trim(),
+          ingredients: document.getElementById('new-ing').value.trim(),
+          weight: document.getElementById('new-weight').value.trim(),
+          price: parseInt(document.getElementById('new-price').value, 10) || 0,
+          serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
+        };
+        menuData.push(newItem);
+        localStorage.setItem('papino_menu_v4', JSON.stringify(menuData));
+        this.reset();
+        renderCategories();
+        renderMenu();
+        alert(`Позиция «${newItem.name}» успешно добавлена!`);
+      });
+    }
 
     function initApp() {
       renderCategories();
