@@ -36,24 +36,15 @@
       <form id="login-form" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Имя сотрудника (Логин)</label>
-          <input type="text" id="login-user" required placeholder="Например: Полина, Изалия, Стажер..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <input type="text" id="login-user" required placeholder="Введите ваше имя" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль (Номер в iiko)</label>
-          <input type="password" id="login-pass" required placeholder="Ваш номер в iiko" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <input type="password" id="login-pass" required placeholder="Ваш личный код в iiko" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверное имя или номер в iiko. Проверьте данные.</div>
         <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в портал</button>
       </form>
-
-      <div class="mt-6 pt-5 border-t border-slate-800">
-        <p class="text-xs text-center text-slate-400 mb-2 font-medium">Примеры для входа:</p>
-        <div class="grid grid-cols-3 gap-2">
-          <button onclick="quickLogin('полина','5802')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-amber-400 rounded-xl text-xs font-semibold transition text-center">👑 Менеджер<br><span class="text-[10px] text-slate-500">Полина (5802)</span></button>
-          <button onclick="quickLogin('изалия','0909')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-center">🍽️ Официант<br><span class="text-[10px] text-slate-500">Изалия (0909)</span></button>
-          <button onclick="quickLogin('стажер','4727')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-emerald-400 rounded-xl text-xs font-semibold transition text-center">🌱 Стажёр<br><span class="text-[10px] text-slate-500">Стажёр (4727)</span></button>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -673,7 +664,7 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v13')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v14')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -695,18 +686,12 @@
 
       if (IIKO_STAFF[nameInput] && IIKO_STAFF[nameInput].pass === passInput) {
         currentStaff = IIKO_STAFF[nameInput];
+        document.getElementById('login-error').classList.add('hidden');
         completeLogin(currentStaff);
       } else {
         document.getElementById('login-error').classList.remove('hidden');
       }
     });
-
-    function quickLogin(nameKey, pass) {
-      document.getElementById('login-user').value = nameKey;
-      document.getElementById('login-pass').value = pass;
-      currentStaff = IIKO_STAFF[nameKey];
-      completeLogin(currentStaff);
-    }
 
     function completeLogin(staff) {
       document.getElementById('login-screen').classList.add('hidden');
@@ -1250,7 +1235,7 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v13', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v14', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
