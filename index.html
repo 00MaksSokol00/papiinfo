@@ -30,7 +30,7 @@
       <form id="login-form" class="space-y-4">
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Имя сотрудника (Логин)</label>
-          <input type="text" id="login-user" required placeholder="Например: Полина, Изалия, Максим..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <input type="text" id="login-user" required placeholder="Например: Полина, Изалия, Стажер..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div>
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль (Номер в iiko)</label>
@@ -64,8 +64,8 @@
       </div>
 
       <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl overflow-x-auto border border-slate-800">
-        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню и Подача</button>
-        <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав и Регламент</button>
+        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню</button>
+        <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав</button>
         <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр</button>
         <button onclick="switchTab('admin')" id="tab-admin" class="hidden px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚙️ Админка</button>
       </nav>
@@ -124,123 +124,27 @@
           <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы и Санкции</a>
         </div>
 
-        <!-- 1. Ценности -->
         <div id="rule-corp" class="space-y-4 pt-2">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
             Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-              <strong class="text-white block text-sm">7 правил создания атмосферы:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li>Радушно приветствуем каждого Гостя!</li>
-                <li>Проявляем внимание к КАЖДОМУ гостю, даже если он за чужим столом.</li>
-                <li>Официант отлично знает меню и предлагает блюда под потребности гостя.</li>
-                <li>Обеспечиваем радушный и заботливый сервис.</li>
-                <li>Всегда улыбаемся во время визита гостя!</li>
-                <li>Прощаемся с гостем всем коллективом!</li>
-                <li>Обслуживание заканчивается только после ухода гостя из ресторана!</li>
-              </ul>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-              <strong class="text-white block text-sm">Золотые правила официанта:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li><strong>Правило без слова «нет»:</strong> если блюда нет, предлагаем достойную альтернативу.</li>
-                <li><strong>Командная работа:</strong> помогать коллегам и просить помощи при запарке.</li>
-                <li><strong>Двойная роль:</strong> быть одновременно радушным хозяином и профессиональным продавцом.</li>
-              </ul>
-            </div>
-          </div>
         </div>
 
-        <!-- 2. Внешний вид и запреты -->
         <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> 2. Стандарты внешнего вида, гигиены и запреты</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-white block text-sm">Требования к внешнему виду:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li>Чистая, отутюженная униформа.</li>
-                <li>Волосы чистые, собраны в хвост или убранные с лица.</li>
-                <li>Закрытая черная обувь, черные носки.</li>
-                <li>Умеренный парфюм, неброский макияж, ухоженные ногти средней длины.</li>
-                <li>Бейдж на груди слева.</li>
-                <li><strong>Строго запрещены</strong> кольца (кроме обручального), браслеты, часы и серьги с камнями.</li>
-              </ul>
-            </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-red-400 block text-sm">Категорические запреты в зале:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li>Пользоваться мобильным телефоном в зале (кроме iiko waiter).</li>
-                <li>Жевать жвачку в зале и на кухне.</li>
-                <li>Держать руки в карманах, облокачиваться на стены и барную стойку.</li>
-                <li>Пользоваться гостевым туалетом.</li>
-                <li>Сидеть на стульях, диванах и подлокотниках.</li>
-              </ul>
-            </div>
-          </div>
+          <p class="text-sm text-slate-300">Чистая униформа, ухоженные волосы, закрытая черная обувь. Запрещено пользоваться телефонами в зале (кроме iiko waiter) и жевать жвачку.</p>
         </div>
 
-        <!-- 3. Шаги обслуживания -->
         <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 3. Шаги обслуживания и тайминги</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 1. Встреча и приветствие</strong>
-              Приветствие в первые 30–60 сек. Уточнение брони, выбор зала. Подача меню в открытом виде.
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа</strong>
-              Использование «Сетки меню». Тайминги: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин.
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль)</strong>
-              Опрос гостя сразу после того, как он попробовал блюдо («Вам понравился вкус заказанных блюд?»).
-            </div>
-            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 4. Расчёт и прощание</strong>
-              Фискальный чек за 3 мин, сдача за 4 мин. Прощание у дверей, предложение вернуться снова.
-            </div>
-          </div>
+          <p class="text-sm text-slate-300">Встреча в первые 30-60 секунд. Салаты готовятся 15–20 минут, горячие блюда — 15–25 минут, десерты — 5–10 минут.</p>
         </div>
 
-        <!-- 4. Штрафы (Депремирование) -->
         <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
-              <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
-                <tr>
-                  <th class="p-3 border-b border-slate-800">Вид нарушения</th>
-                  <th class="p-3 border-b border-slate-800 text-right">Размер штрафа</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-800 bg-slate-950/50">
-                <tr><td class="p-3">Опоздание (каждые 15 минут)</td><td class="p-3 text-right font-bold text-red-400">500 ₽</td></tr>
-                <tr><td class="p-3">Отсутствие на рабочем месте более 20 минут</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
-                <tr><td class="p-3">Невыход на работу без уважительной причины</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽</td></tr>
-                <tr><td class="p-3">Использование телефона / гаджетов в зале</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
-                <tr><td class="p-3">Приготовление или выдача блюд без перчаток</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
-                <tr><td class="p-3">Нарушение технологии приготовления и подачи</td><td class="p-3 text-right font-bold text-red-400">Оплата блюда по цене + 500 ₽</td></tr>
-                <tr><td class="p-3">Хищение / поедание продуктов</td><td class="p-3 text-right font-bold text-red-400">Сумма ущерба + штраф + увольнение</td></tr>
-                <tr><td class="p-3">Отсутствие маркировки / просроченная продукция</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽ (со смены)</td></tr>
-                <tr><td class="p-3">Открытые боксы, посторонние предметы в холодильниках</td><td class="p-3 text-right font-bold text-red-400">2 000 ₽ (со смены)</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900/60 text-xs text-red-300 space-y-1">
-            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и влечет немедленное увольнение:</strong>
-            <ul class="list-disc pl-4 space-y-1">
-              <li>Присутствие на рабочем месте под воздействием алкоголя или наркотических средств.</li>
-              <li>Приносить на работу продукты, продаваемые в заведении.</li>
-              <li>Выносить имущество заведения (ст. 158 УК РФ).</li>
-              <li>Покидать рабочее место без разрешения администратора.</li>
-            </ul>
-          </div>
+          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы)</h3>
+          <p class="text-sm text-slate-300">Опоздание (500 ₽), телефон в зале (1000 ₽), работа без перчаток (1000 ₽). Алкоголь и вынос имущества — немедленное увольнение.</p>
         </div>
-
       </div>
     </section>
 
@@ -257,9 +161,9 @@
               <option value="ALL">Вся база (169 позиций)</option>
             </select>
             <select id="quiz-count-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
-              <option value="10">10 вопросов</option>
-              <option value="20">20 вопросов</option>
-              <option value="30">30 вопросов</option>
+              <option value="10">10 вопросов (Экспресс)</option>
+              <option value="20">20 вопросов (Стандарт)</option>
+              <option value="30">30 вопросов (Экзамен)</option>
             </select>
             <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Новый тест</button>
           </div>
@@ -289,6 +193,7 @@
           <div id="quiz-result-emoji" class="text-5xl mb-3">🏆</div>
           <h3 id="quiz-result-title" class="text-2xl font-extrabold text-white">Результат теста</h3>
           <p id="quiz-result-subtitle" class="text-slate-400 mt-1 mb-6"></p>
+          <div id="sync-status" class="text-xs text-amber-400 mb-4 font-medium">Отправка результата в Google Таблицу...</div>
           <button onclick="startNewRandomQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow transition">Пройти ещё раз</button>
 
           <div id="quiz-mistakes-box" class="hidden mt-8 text-left max-w-3xl mx-auto">
@@ -339,26 +244,21 @@
   </main>
 
   <script>
-    // БАЗА СОТРУДНИКОВ ИЗ IIKO (Имя — ключ, Пароль — номер в айко)
+    // ССЫЛКА НА ВЕБ-ПРИЛОЖЕНИЕ GOOGLE APPS SCRIPT
+    const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtDTmpzHzzo819H8Ud_ihLtOnEarDLeeELRcAKGY_G8P46nmd78xKe2MdLq3hD10oj/exec";
+
     const IIKO_STAFF = {
-      // Менеджеры (Админы)
       "полина": { role: "admin", name: "Полина", id: "5802", title: "Менеджер", pass: "5802" },
       "оля": { role: "admin", name: "Оля", id: "8696", title: "Менеджер", pass: "8696" },
       "ангелина": { role: "admin", name: "Ангелина", id: "8688", title: "Менеджер", pass: "8688" },
-      
-      // Бармены (приравнены к официантам)
       "максим": { role: "waiter", name: "Максим", id: "4316", title: "Бармен", pass: "4316" },
       "эрик": { role: "waiter", name: "Эрик", id: "2902", title: "Бармен", pass: "2902" },
-      
-      // Официанты
       "изалия": { role: "waiter", name: "Изалия", id: "0909", title: "Официант", pass: "0909" },
       "диляра": { role: "waiter", name: "Диляра", id: "1133", title: "Официант", pass: "1133" },
       "мария": { role: "waiter", name: "Мария", id: "0550", title: "Официант", pass: "0550" },
       "милена": { role: "waiter", name: "Милена", id: "7140", title: "Официант", pass: "7140" },
       "катя": { role: "waiter", name: "Катя", id: "6507", title: "Официант", pass: "6507" },
       "элина": { role: "waiter", name: "Элина", id: "5566", title: "Официант", pass: "5566" },
-      
-      // Стажёр
       "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр", pass: "4727" }
     };
 
@@ -602,7 +502,6 @@
       document.getElementById('role-badge').textContent = `${staff.title}: ${staff.name}`;
       document.getElementById('iiko-badge').textContent = `iiko id: #${staff.id}`;
       
-      // Админку видят ТОЛЬКО Менеджеры
       if (staff.role === 'admin') {
         document.getElementById('tab-admin').classList.remove('hidden');
       } else {
@@ -619,11 +518,13 @@
 
     function switchTab(tab) {
       ['menu', 'rules', 'quiz', 'admin'].forEach(t => {
-        document.getElementById('section-' + t).classList.add('hidden');
+        const sec = document.getElementById('section-' + t);
+        if (sec) sec.classList.add('hidden');
         const btn = document.getElementById('tab-' + t);
         if (btn) btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
       });
-      document.getElementById('section-' + tab).classList.remove('hidden');
+      const activeSec = document.getElementById('section-' + tab);
+      if (activeSec) activeSec.classList.remove('hidden');
       const activeBtn = document.getElementById('tab-' + tab);
       if (activeBtn) activeBtn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition';
     }
@@ -873,6 +774,16 @@
       document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
       document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Сотрудник готов к работе.' : 'Рекомендуем повторить регламент и меню во вкладке «Устав».';
 
+      // ОТПРАВКА ДАННЫХ В GOOGLE ТАБЛИЦУ
+      sendResultToGoogleSheets({
+        date: new Date().toLocaleString('ru-RU'),
+        name: currentStaff ? currentStaff.name : "Гость",
+        title: currentStaff ? currentStaff.title : "Сотрудник",
+        id: currentStaff ? currentStaff.id : "—",
+        score: `${quizScore}/${total}`,
+        pct: pct
+      });
+
       const mistakesBox = document.getElementById('quiz-mistakes-box');
       const mistakesList = document.getElementById('quiz-mistakes-list');
 
@@ -888,6 +799,27 @@
       } else {
         mistakesBox.classList.add('hidden');
       }
+    }
+
+    function sendResultToGoogleSheets(data) {
+      const syncStatus = document.getElementById('sync-status');
+      syncStatus.textContent = "Сохранение результата в Google Таблицу...";
+      
+      fetch(GOOGLE_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(() => {
+        syncStatus.textContent = "✅ Результат успешно сохранен в Google Таблицу!";
+        syncStatus.className = "text-xs text-emerald-400 mb-4 font-medium";
+      })
+      .catch(err => {
+        console.error(err);
+        syncStatus.textContent = "⚠️ Ошибка синхронизации с таблицей.";
+        syncStatus.className = "text-xs text-red-400 mb-4 font-medium";
+      });
     }
 
     const addItemForm = document.getElementById('add-item-form');
