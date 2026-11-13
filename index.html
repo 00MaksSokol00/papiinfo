@@ -1,262 +1,338 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Кафе «Папино» — База знаний и обучение стажёров</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     body { font-family: 'Inter', sans-serif; }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-    mark { background-color: #fef08a; color: #1e293b; padding: 0 3px; border-radius: 4px; font-weight: 600; }
-    .perspective { perspective: 1000px; }
+    mark { background-color: #f59e0b; color: #0f172a; padding: 0 3px; border-radius: 4px; font-weight: 700; }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
 
   <!-- ЭКРАН АВТОРИЗАЦИИ -->
-  <div id="login-screen" class="fixed inset-0 bg-slate-900/95 z-50 flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-200">
+  <div id="login-screen" class="fixed inset-0 bg-slate-950/95 z-50 flex items-center justify-center p-4">
+    <div class="bg-slate-900 rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-800">
       <div class="text-center mb-6">
-        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500 text-white font-extrabold text-3xl mb-3 shadow-lg">П</div>
-        <h1 class="text-2xl font-extrabold text-slate-900">Кафе «Папино»</h1>
-        <p class="text-sm text-slate-500 mt-1">Внутренний портал обучения и справочник меню</p>
+        <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 font-extrabold text-3xl mb-3 shadow-lg">П</div>
+        <h1 class="text-2xl font-extrabold text-white">Кафе «Папино»</h1>
+        <p class="text-sm text-slate-400 mt-1">Внутренний портал обучения и справочник меню</p>
       </div>
 
       <form id="login-form" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Логин сотрудника</label>
-          <input type="text" id="login-user" required placeholder="Введите логин" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition" />
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Логин сотрудника</label>
+          <input type="text" id="login-user" required placeholder="Введите логин" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Пароль</label>
-          <input type="password" id="login-pass" required placeholder="Введите пароль" class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none transition" />
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль</label>
+          <input type="password" id="login-pass" required placeholder="Введите пароль" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
-        <div id="login-error" class="hidden text-xs text-red-600 bg-red-50 p-3 rounded-lg font-medium">Неверный логин или пароль. Попробуйте демо-кнопки ниже.</div>
-        <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-600 text-white font-bold rounded-xl shadow-md transition">Войти в базу знаний</button>
+        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверный логин или пароль. Попробуйте демо-кнопки ниже.</div>
+        <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в базу знаний</button>
       </form>
 
-      <div class="mt-6 pt-5 border-t border-slate-100">
-        <p class="text-xs text-center text-slate-400 mb-3">Быстрый вход в 1 клик:</p>
+      <div class="mt-6 pt-5 border-t border-slate-800">
+        <p class="text-xs text-center text-slate-500 mb-3">Быстрый вход в 1 клик:</p>
         <div class="grid grid-cols-2 gap-3">
-          <button onclick="quickLogin('waiter','123')" class="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">👨‍🍳 Стажёр / Официант<br><span class="text-[10px] text-slate-400">waiter / 123</span></button>
-          <button onclick="quickLogin('admin','admin')" class="py-2.5 px-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition">🔑 Администратор<br><span class="text-[10px] text-slate-400">admin / admin</span></button>
+          <button onclick="quickLogin('waiter','123')" class="py-2.5 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-left">👨‍🍳 Стажёр<br><span class="text-[10px] text-slate-500">waiter / 123</span></button>
+          <button onclick="quickLogin('admin','admin')" class="py-2.5 px-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-left">🔑 Админ<br><span class="text-[10px] text-slate-500">admin / admin</span></button>
         </div>
       </div>
     </div>
   </div>
 
   <!-- ШАПКА САЙТА -->
-  <header class="bg-slate-900 text-white sticky top-0 z-30 shadow-md">
+  <header class="bg-slate-900 text-white sticky top-0 z-30 shadow-md border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center font-black text-xl text-slate-900">П</div>
+        <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center font-black text-xl text-slate-950 shadow">П</div>
         <div>
-          <span class="font-bold text-lg tracking-tight">ПАПИНО</span>
-          <span id="role-badge" class="ml-2 text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium">Стажёр</span>
-          <p class="text-xs text-slate-400">Справочник меню и обучение (169 блюд)</p>
+          <span class="font-bold text-lg tracking-tight text-white">ПАПИНО</span>
+          <span id="role-badge" class="ml-2 text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-medium">Стажёр</span>
+          <p class="text-xs text-slate-400">Справочник меню и обучение</p>
         </div>
       </div>
 
-      <nav class="flex items-center gap-1 bg-slate-800 p-1 rounded-xl overflow-x-auto">
-        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-900 transition">📖 Меню</button>
-        <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр и Тест</button>
-        <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📋 Стандарты подачи</button>
-        <button onclick="switchTab('admin')" id="tab-admin" class="hidden px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚙️ Управление</button>
+      <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl overflow-x-auto border border-slate-800">
+        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню</button>
+        <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав и Регламент</button>
+        <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр</button>
+        <button onclick="switchTab('admin')" id="tab-admin" class="hidden px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚙️ Админка</button>
       </nav>
 
-      <button onclick="logout()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-700 hover:border-slate-500 transition">Выйти</button>
+      <button onclick="logout()" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 transition">Выйти</button>
     </div>
   </header>
 
   <!-- ОСНОВНОЙ КОНТЕНТ -->
-  <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1">
+  <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 flex flex-col">
 
     <!-- ВКЛАДКА 1: СПРАВОЧНИК МЕНЮ -->
     <section id="section-menu" class="space-y-5">
-      <!-- Поиск и стоп-фильтры аллергенов -->
-      <div class="bg-white p-4 rounded-2xl shadow-sm border border-slate-200 space-y-3">
+      <div class="bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-800 space-y-3">
         <div class="flex flex-col sm:flex-row gap-3">
           <div class="relative flex-1">
-            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по названию или ингредиенту (например: кинза, угорь, дорблю, песто, халапеньо)..." class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:border-amber-500 focus:ring-2 focus:ring-amber-200 outline-none text-sm" />
-            <span class="absolute left-3.5 top-3.5 text-slate-400">🔍</span>
+            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по названию или ингредиенту (например: кинза, угорь, дорблю, песто, халапеньо)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
+            <span class="absolute left-3.5 top-3.5 text-slate-500">🔍</span>
           </div>
-          <button onclick="resetFilters()" class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition shrink-0">Сбросить фильтры</button>
+          <button onclick="resetFilters()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition shrink-0 border border-slate-700">Сбросить фильтры</button>
         </div>
 
-        <!-- Быстрые теги для проверки аллергенов и особенностей -->
         <div class="flex items-center gap-2 flex-wrap pt-1">
           <span class="text-xs font-semibold text-slate-400">Быстрая проверка состава:</span>
-          <button onclick="setQuickSearch('кинза')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-100 font-medium border border-emerald-200">🌿 Кинза</button>
-          <button onclick="setQuickSearch('орех')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 hover:bg-amber-100 font-medium border border-amber-200">🥜 Орехи / Ореховый соус</button>
-          <button onclick="setQuickSearch('мед')" class="text-xs px-2.5 py-1 rounded-lg bg-yellow-50 text-yellow-800 hover:bg-yellow-100 font-medium border border-yellow-200">🍯 Мёд</button>
-          <button onclick="setQuickSearch('остр')" class="text-xs px-2.5 py-1 rounded-lg bg-red-50 text-red-700 hover:bg-red-100 font-medium border border-red-200">🌶️ Острое (Спайси/Кимчи/Халапеньо)</button>
-          <button onclick="setQuickSearch('чеснок')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-50 text-purple-700 hover:bg-purple-100 font-medium border border-purple-200">🧄 Чеснок / Чесночное масло</button>
-          <button onclick="setQuickSearch('креветк')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-50 text-sky-700 hover:bg-sky-100 font-medium border border-sky-200">🦐 Креветки</button>
+          <button onclick="setQuickSearch('кинза')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-400 hover:bg-emerald-900/60 font-medium border border-emerald-900/50">🌿 Кинза</button>
+          <button onclick="setQuickSearch('орех')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-950/60 text-amber-400 hover:bg-amber-900/60 font-medium border border-amber-900/50">🥜 Орехи</button>
+          <button onclick="setQuickSearch('мед')" class="text-xs px-2.5 py-1 rounded-lg bg-yellow-950/60 text-yellow-400 hover:bg-yellow-900/60 font-medium border border-yellow-900/50">🍯 Мёд</button>
+          <button onclick="setQuickSearch('остр')" class="text-xs px-2.5 py-1 rounded-lg bg-red-950/60 text-red-400 hover:bg-red-900/60 font-medium border border-red-900/50">🌶️ Острое</button>
+          <button onclick="setQuickSearch('чеснок')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-950/60 text-purple-400 hover:bg-purple-900/60 font-medium border border-purple-900/50">🧄 Чеснок</button>
+          <button onclick="setQuickSearch('креветк')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-950/60 text-sky-400 hover:bg-sky-900/60 font-medium border border-sky-900/50">🦐 Креветки</button>
         </div>
       </div>
 
-      <!-- Категории -->
       <div id="category-tabs" class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar"></div>
 
-      <!-- Счетчик найденного -->
-      <div class="flex items-center justify-between text-xs text-slate-500 px-1">
+      <div class="flex items-center justify-between text-xs text-slate-400 px-1">
         <span id="items-count">Показано позиций: 0</span>
-        <span>Нажмите на карточку для выделения</span>
+        <span>Стандарты подачи учтены в каждой карточке</span>
       </div>
 
-      <!-- Сетка карточек блюд -->
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: ТРЕНАЖЁР И РАНДОМНЫЙ ТЕСТ -->
-    <section id="section-quiz" class="hidden space-y-6">
-      <!-- Панель настройки рандомного теста -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
-          <div>
-            <h2 class="text-xl font-extrabold text-slate-900">🎲 Генератор случайных тестов для стажёров</h2>
-            <p class="text-sm text-slate-500 mt-1">Каждый раз создаются новые случайные вопросы по всем 169 позициям меню: составы, граммовки, правила подачи и аллергены.</p>
-          </div>
-          <div class="flex flex-wrap items-center gap-3">
-            <select id="quiz-cat-select" class="px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium bg-slate-50">
-              <option value="ALL">Все категории меню (169 блюд)</option>
-            </select>
-            <select id="quiz-count-select" class="px-3 py-2.5 rounded-xl border border-slate-300 text-xs sm:text-sm font-medium bg-slate-50">
-              <option value="10">10 вопросов (быстрый зачёт)</option>
-              <option value="20">20 вопросов (экзамен)</option>
-              <option value="30">30 вопросов (полная аттестация)</option>
-            </select>
-            <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Новый рандомный тест</button>
-          </div>
+    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (ПОЛНАЯ МЕТОДИЧКА) -->
+    <section id="section-rules" class="hidden space-y-6">
+      <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-6">
+        <div class="border-b border-slate-800 pb-4">
+          <h2 class="text-2xl font-extrabold text-white">📜 Внутренний устав, регламент и стандарты Кафе «Папино»</h2>
+          <p class="text-sm text-slate-400 mt-1">Официальное учебное пособие и свод правил для сотрудников зала (ИП Лотфуллин М.М.)</p>
         </div>
 
-        <!-- Игровое поле теста -->
-        <div id="quiz-active-area" class="mt-6">
-          <div class="flex items-center justify-between mb-3">
-            <span id="quiz-progress-text" class="text-xs font-bold uppercase tracking-wider text-amber-600">Вопрос 1 из 10</span>
-            <span id="quiz-score-live" class="text-xs font-semibold text-slate-500">Правильных ответов: 0</span>
-          </div>
-          <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-6">
-            <div id="quiz-progress-bar" class="h-full bg-amber-500 transition-all duration-300" style="width: 10%"></div>
-          </div>
+        <!-- Навигация по уставу -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности и Миссия</a>
+          <a href="#rule-conduct" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">👤 Дресс-код и Гигиена</a>
+          <a href="#rule-steps" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🚶‍♂️ Шаги обслуживания</a>
+          <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">⚠️ Штрафы и Депремирование</a>
+        </div>
 
-          <div id="quiz-question-card" class="bg-slate-50 p-5 sm:p-6 rounded-2xl border border-slate-200">
-            <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-200 text-slate-700 mb-3">Тип вопроса</div>
-            <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-slate-900 mb-5">Текст вопроса...</h3>
-            <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
-            <div id="quiz-feedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
-            <div class="mt-5 flex justify-end">
-              <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-semibold rounded-xl text-sm transition">Следующий вопрос →</button>
+        <!-- 1. Ценности и атмосфера -->
+        <div id="rule-corp" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> Ценности и Правила создания атмосферы гостеприимства</h3>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            Ресторан — это необычное государство со своей историей, традициями и законами. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе (даже во внутренних переговорах) мы <strong>никогда не используем слов «клиент», «посетитель»</strong>. Мы используем исключительно понятие <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>[cite: 20].
+          </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
+              <strong class="text-white block text-sm">7 правил гостеприимства:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Радушно приветствуем каждого Гостя![cite: 8]</li>
+                <li>Проявляем внимание к КАЖДОМУ гостю, даже если он сидит за столом другого официанта[cite: 8].</li>
+                <li>Официант отлично знает меню и может предложить любое блюдо, исходя из потребности гостей[cite: 8].</li>
+                <li>Во время визита гостя официант представляет радушный и заботливый сервис[cite: 8].</li>
+                <li>Во время визита гостя официант всегда улыбается![cite: 8]</li>
+                <li>Прощаться с гостем необходимо всем сотрудникам ресторана[cite: 8]!</li>
+                <li>Обслуживание заканчивается только тогда, когда гость покинул ресторан[cite: 8]!</li>
+              </ul>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
+              <strong class="text-white block text-sm">Главные принципы работы:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li><strong>Правило без слова «нет»:</strong> если в меню нет блюда, которым интересуется Гость, мы не отказываем, а обязательно предлагаем альтернативу[cite: 20].</li>
+                <li><strong>Команда:</strong> каждый официант должен помогать своим коллегам и сам просить о помощи, когда она необходима[cite: 19, 20].</li>
+                <li><strong>Роль официанта:</strong> одновременно быть радушным хозяином и хорошим продавцом[cite: 22].</li>
+              </ul>
             </div>
           </div>
         </div>
 
-        <!-- Экран результатов теста и разбора ошибок -->
+        <!-- 2. Внешний вид и гигиена -->
+        <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> Стандарты внешнего вида и гигиены</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <strong class="text-white block text-sm">Дресс-код и внешний вид:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Униформу необходимо носить полностью: чистая, выглаженная, в хорошем состоянии[cite: 3].</li>
+                <li>Волосы чистые, ухоженные, убранные с лица[cite: 3].</li>
+                <li>Закрытая черная обувь, черные носки[cite: 3].</li>
+                <li>Умеренный парфюм, неброская декоративная косметика[cite: 3].</li>
+                <li>Ногти средней длины, чистые и ухоженные[cite: 3].</li>
+                <li>Бейдж с именем на груди слева[cite: 3].</li>
+                <li><strong>Отсутствие украшений</strong> и сережек с камнями, часов (разрешается только обручальное кольцо)[cite: 3].</li>
+              </ul>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <strong class="text-white block text-sm">Строгие запреты в зале:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Категорически запрещено пользоваться мобильными телефонами во время работы (исключение: iiko waiter)[cite: 2, 7].</li>
+                <li>Запрещено жевать жевательную резинку в зале и на кухне[cite: 2, 6, 7].</li>
+                <li>Запрещено держать руки в карманах, облокачиваться на стены, стейшены и барную стойку[cite: 7, 10].</li>
+                <li>Запрещено принимать пищу и напитки в не отведенных для этого местах[cite: 2, 10].</li>
+                <li>Запрещено сидеть на стульях, диванах, подлокотниках[cite: 10].</li>
+                <li>Запрещено пользоваться гостевым туалетом[cite: 2, 10].</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Шаги обслуживания -->
+        <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> Алгоритм и шаги обслуживания гостей</h3>
+          <div class="space-y-3 text-xs text-slate-300">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-300 text-sm">Шаг 1. Встреча и приветствие</strong>
+              <p>Приветствие Гостя в течение 30-60 секунд. Уточнение брони, предпочтений (зал с паровыми коктейлями или без). Пропроводка к столу, подача меню в открытом виде[cite: 21, 23].</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-300 text-sm">Шаг 2. Принятие заказа (Сетка меню)</strong>
+              <p>Рекомендация закусок, супов, основных блюд[cite: 22]. Ввод заказа в iiko. <strong>Тайминги приготовления:</strong> салаты 15–20 мин, горячие блюда 15–25 мин, десерты 5–10 мин[cite: 22, 25].</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-300 text-sm">Шаг 3. Контроль качества (Check Back)</strong>
+              <p>Обязательный опрос гостя о блюде сразу после того, как он попробовал, или во время уборки посуды («Вам понравился вкус заказанных блюд?»)[cite: 22, 26].</p>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-300 text-sm">Шаг 4. Расчёт и прощание</strong>
+              <p>Фискальный чек в счетнице приносится не позднее 3-х минут после запроса. Сдача возвращается в течение 4 минут. Прощание у дверей, предложение вернуться снова[cite: 22, 27].</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Штрафы (Депремирование) -->
+        <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
+              <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
+                <tr>
+                  <th class="p-3 border-b border-slate-800">Нарушение</th>
+                  <th class="p-3 border-b border-slate-800 text-right">Сумма штрафа</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 bg-slate-950/50">
+                <tr><td class="p-3">Опоздание (каждые 15 минут)[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">500 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Отсутствие на рабочем месте более 20 минут[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Невыход на работу без уважительной причины[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Использование сотового телефона в зале[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Приготовление блюд без перчаток[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Нарушение технологии приготовления и подачи блюда[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">Оплата блюда по цене + 500 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Хищение / поедание продуктов[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">Сумма ущерба + штраф + увольнение[cite: 1]</td></tr>
+                <tr><td class="p-3">Отсутствие маркировки на продукции / просрочка[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽ (со смены)[cite: 1]</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900/60 text-xs text-red-300 space-y-1">
+            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и приводит к немедленному увольнению:</strong>
+            <ul class="list-disc pl-4 space-y-1">
+              <li>Присутствие на рабочем месте под воздействием алкоголя или наркотических средств[cite: 1].</li>
+              <li>Приносить на работу продукты, продаваемые в заведении[cite: 1].</li>
+              <li>Выносить имущество заведения! (ст. 158 УК РФ)[cite: 1].</li>
+              <li>Покидать рабочее место без разрешения администратора[cite: 1].</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ВКЛАДКА 3: ТРЕНАЖЁР И ТЕСТ -->
+    <section id="section-quiz" class="hidden space-y-6">
+      <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">🎲 Генератор случайных тестов для стажёров</h2>
+            <p class="text-sm text-slate-400 mt-1">Рандомные вопросы по меню, стандартам подачи и правилам сервиса Кафе «Папино».</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <select id="quiz-cat-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+              <option value="ALL">Все категории меню</option>
+            </select>
+            <select id="quiz-count-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+              <option value="10">10 вопросов</option>
+              <option value="20">20 вопросов</option>
+              <option value="30">30 вопросов</option>
+            </select>
+            <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Новый тест</button>
+          </div>
+        </div>
+
+        <div id="quiz-active-area" class="mt-6">
+          <div class="flex items-center justify-between mb-3">
+            <span id="quiz-progress-text" class="text-xs font-bold uppercase tracking-wider text-amber-400">Вопрос 1 из 10</span>
+            <span id="quiz-score-live" class="text-xs font-semibold text-slate-400">Правильных: 0</span>
+          </div>
+          <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden mb-6 border border-slate-800">
+            <div id="quiz-progress-bar" class="h-full bg-amber-500 transition-all duration-300" style="width: 10%"></div>
+          </div>
+
+          <div id="quiz-question-card" class="bg-slate-950 p-5 sm:p-6 rounded-2xl border border-slate-800">
+            <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 mb-3">Тип вопроса</div>
+            <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-white mb-5">Текст вопроса...</h3>
+            <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
+            <div id="quiz-feedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
+            <div class="mt-5 flex justify-end">
+              <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden px-6 py-2.5 bg-white hover:bg-slate-200 text-slate-950 font-semibold rounded-xl text-sm transition">Следующий →</button>
+            </div>
+          </div>
+        </div>
+
         <div id="quiz-result-area" class="hidden mt-6 text-center py-6">
           <div id="quiz-result-emoji" class="text-5xl mb-3">🏆</div>
-          <h3 id="quiz-result-title" class="text-2xl font-extrabold text-slate-900">Результат теста</h3>
-          <p id="quiz-result-subtitle" class="text-slate-600 mt-1 mb-6"></p>
-          <button onclick="startNewRandomQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-900 font-bold rounded-xl shadow transition">Пройти ещё раз (новые вопросы)</button>
+          <h3 id="quiz-result-title" class="text-2xl font-extrabold text-white">Результат теста</h3>
+          <p id="quiz-result-subtitle" class="text-slate-400 mt-1 mb-6"></p>
+          <button onclick="startNewRandomQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow transition">Пройти ещё раз</button>
 
           <div id="quiz-mistakes-box" class="hidden mt-8 text-left max-w-3xl mx-auto">
-            <h4 class="text-sm font-bold uppercase tracking-wider text-red-600 mb-3">Разбор ошибок (повторите эти позиции):</h4>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-red-400 mb-3">Разбор ошибок:</h4>
             <div id="quiz-mistakes-list" class="space-y-3"></div>
           </div>
         </div>
       </div>
-
-      <!-- Флеш-карточки для самопроверки -->
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <div class="flex items-center justify-between mb-4">
-          <div>
-            <h3 class="text-lg font-bold text-slate-900">🃏 Быстрые флеш-карточки (Угадай состав)</h3>
-            <p class="text-xs text-slate-500">Нажмите на карточку, чтобы увидеть полный состав, вес и подачу</p>
-          </div>
-          <button onclick="nextFlashcard()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-xl text-xs font-bold transition">Следующее случайное блюдо 🎲</button>
-        </div>
-        <div onclick="toggleFlashcard()" class="cursor-pointer bg-gradient-to-br from-slate-800 to-slate-900 text-white rounded-2xl p-6 sm:p-8 text-center shadow-lg select-none">
-          <span id="fc-cat" class="text-xs uppercase tracking-widest text-amber-400 font-bold">Категория</span>
-          <h4 id="fc-name" class="text-2xl font-extrabold mt-2">Название блюда</h4>
-          <p id="fc-hint" class="text-xs text-slate-400 mt-3">👆 Нажмите, чтобы открыть состав и подачу</p>
-          <div id="fc-answer" class="hidden mt-5 pt-5 border-t border-slate-700 text-left space-y-2">
-            <p class="text-sm"><span class="text-slate-400">Состав:</span> <span id="fc-ing" class="font-medium text-amber-100"></span></p>
-            <p class="text-sm"><span class="text-slate-400">Выход и цена:</span> <span id="fc-meta" class="font-bold"></span></p>
-            <p class="text-sm"><span class="text-slate-400">Подача:</span> <span id="fc-serve" class="text-emerald-300 font-semibold"></span></p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- ВКЛАДКА 3: СТАНДАРТЫ ПОДАЧИ И УСТАВ -->
-    <section id="section-rules" class="hidden space-y-6">
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <h2 class="text-xl font-extrabold text-slate-900 mb-4">📋 Обязательные правила подачи блюд в Кафе «Папино»</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="p-4 rounded-xl bg-amber-50 border border-amber-200">
-            <div class="font-bold text-amber-900 text-base mb-1">🍣 Классические, Фирменные и Запечённые роллы</div>
-            <p class="text-sm text-amber-800">Обязательно подаются: <strong>палочки</strong> (по количеству гостей), <strong>имбирь маринованный, васаби и соевый соус</strong>.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-orange-50 border border-orange-200">
-            <div class="font-bold text-orange-900 text-base mb-1">🔥 Горячие роллы (темпура)</div>
-            <p class="text-sm text-orange-800">Обязательная подача: <strong>палочки, соус спайси и соевый соус</strong> (имбирь и васаби в стандарт горячих роллов не входят).</p>
-          </div>
-          <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-200">
-            <div class="font-bold text-emerald-900 text-base mb-1">🍕 Пицца и Мини-пицца 20 см</div>
-            <p class="text-sm text-emerald-800">Каждая пицца и мини-пицца обязательно подаётся гостю <strong>с оливковым маслом</strong>.</p>
-          </div>
-          <div class="p-4 rounded-xl bg-slate-100 border border-slate-300">
-            <div class="font-bold text-slate-900 text-base mb-1">🍔 Бургеры (все 9 позиций)</div>
-            <p class="text-sm text-slate-700">К каждому бургеру обязательно подаются <strong>одноразовые перчатки</strong>. Сендвичи (с курицей и ростбифом) идут со стандартной подачей и картофелем фри в составе.</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
-        <h3 class="text-lg font-extrabold text-slate-900">Чек-лист работы официанта в зале</h3>
-        <ul class="space-y-2.5 text-sm text-slate-700 list-disc pl-5">
-          <li><strong>Встреча гостя:</strong> приветствие в течение первых 30–60 секунд, подача меню в открытом виде.</li>
-          <li><strong>Уточнение аллергенов и стоп-ингредиентов:</strong> если гость не ест кинзу, острое, лук или орехи — сразу проверьте блюдо через строку поиска во вкладке «Меню».</li>
-          <li><strong>Продажа напитков и дополнений:</strong> к пицце и закускам предлагайте фирменные соусы (70 ₽ / 30 г), к роллам и горячему — напитки бара.</li>
-          <li><strong>Проверка перед выносом:</strong> сверьте комплектацию (палочки, перчатки, оливковое масло, нужные соусы) до подхода к столу.</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ (ДЛЯ ДОБАВЛЕНИЯ НАПИТКОВ И НОВЫХ БЛЮД) -->
+    <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ -->
     <section id="section-admin" class="hidden space-y-6">
-      <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
-        <h2 class="text-xl font-extrabold text-slate-900 mb-1">⚙️ Добавление новой позиции (включая будущий раздел «Напитки»)</h2>
-        <p class="text-xs text-slate-500 mb-5">Добавленные здесь блюда и напитки сразу сохраняются в памяти браузера и попадают в общий поиск и рандомные тесты.</p>
+      <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
+        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Добавление новой позиции (включая напитки)</h2>
+        <p class="text-xs text-slate-400 mb-5">Сохраняется в памяти вашего браузера и сразу попадает в поиск и тесты.</p>
         <form id="add-item-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Категория</label>
-            <input type="text" id="new-cat" required placeholder="Например: Напитки / Кофе / Лимонады" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Категория</label>
+            <input type="text" id="new-cat" required placeholder="Например: Напитки / Кофе" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Название позиции</label>
-            <input type="text" id="new-name" required placeholder="Например: Лимонад Манго-Маракуйя" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Название позиции</label>
+            <input type="text" id="new-name" required placeholder="Лимонад Манго-Маракуйя" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-xs font-bold text-slate-600 mb-1">Состав / Описание</label>
-            <input type="text" id="new-ing" required placeholder="Состав через запятую" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Состав / Описание</label>
+            <input type="text" id="new-ing" required placeholder="Ингредиенты через запятую" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Выход (г / мл)</label>
-            <input type="text" id="new-weight" required placeholder="400 мл" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Выход (г / мл)</label>
+            <input type="text" id="new-weight" required placeholder="400 мл" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-600 mb-1">Цена (₽)</label>
-            <input type="number" id="new-price" required placeholder="299" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Цена (₽)</label>
+            <input type="number" id="new-price" required placeholder="299" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-xs font-bold text-slate-600 mb-1">Особенности подачи</label>
-            <input type="text" id="new-serve" value="Стандартная подача" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Особенности подачи</label>
+            <input type="text" id="new-serve" value="Стандартная подача" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
-            <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-sm shadow transition">+ Добавить в базу меню</button>
+            <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm shadow transition">+ Добавить в меню</button>
           </div>
         </form>
       </div>
@@ -265,11 +341,8 @@
   </main>
 
   <script>
-    // =========================================================================
-    // ПОЛНАЯ БАЗА МЕНЮ КАФЕ «ПАПИНО» (169 ПОЗИЦИЙ)
-    // =========================================================================
     const INITIAL_MENU = [
-      // 1. Классические роллы (7)
+      // Роллы и прочее меню (169 позиций)
       { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "110 г", price: 329, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
       { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, имбирь маринованный, васаби" },
       { id: "CR-03", category: "Классические роллы", name: "Ролл с копченой курицей", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, куриное филе копченое, имбирь маринованный, васаби" },
@@ -278,7 +351,6 @@
       { id: "CR-06", category: "Классические роллы", name: "Ролл с огурцом", weight: "110 г", price: 199, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, огурец, белый кунжут, имбирь маринованный, васаби" },
       { id: "CR-07", category: "Классические роллы", name: "Ролл с тунцом", weight: "110 г", price: 289, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, тунец, имбирь маринованный, васаби" },
 
-      // 2. Фирменные роллы (26)
       { id: "PR-01", category: "Фирменные роллы", name: "Асахи", weight: "220 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, икра масаго, имбирь маринованный, васаби" },
       { id: "PR-02", category: "Фирменные роллы", name: "Инь-Ян", weight: "200 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, лосось, угорь, огурец, имбирь маринованный, васаби" },
       { id: "PR-03", category: "Фирменные роллы", name: "Кайто", weight: "220 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, кукуруза консервированная, болгарский перец, огурец, ореховый соус, имбирь маринованный, васаби" },
@@ -306,7 +378,6 @@
       { id: "PR-25", category: "Фирменные роллы", name: "Ямайка", weight: "240 г", price: 499, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, огурец, сыр «чеддер», имбирь маринованный, васаби" },
       { id: "PR-26", category: "Фирменные роллы", name: "Ятоми", weight: "220 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, томаты, салат «Айсберг», сыр «Чеддер», соус «Цезарь», имбирь маринованный, васаби" },
 
-      // 3. Горячие роллы (12)
       { id: "HR-01", category: "Горячие роллы", name: "Азуми", weight: "260 г", price: 529, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, мидии, соус «терияки», мука, яйцо, панировочные сухари, соус спайси" },
       { id: "HR-02", category: "Горячие роллы", name: "Аруки маки", weight: "235 г", price: 569, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, паста «том ям», лосось, томат, лук зеленый, мука, яйцо, панировочные сухари, соус спайси" },
       { id: "HR-03", category: "Горячие роллы", name: "Горячий с курицей", weight: "200 г", price: 459, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, авокадо, мука, яйцо, панировочные сухари, соус спайси" },
@@ -320,7 +391,6 @@
       { id: "HR-11", category: "Горячие роллы", name: "Фьюжн", weight: "250 г", price: 559, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, лосось, томат, сыр сливочный, мука, яйцо, панировочные сухари, соус спайси" },
       { id: "HR-12", category: "Горячие роллы", name: "Цезарь ролл горячий", weight: "210 г", price: 489, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, грибы шампиньоны жареные, куриное филе копченое, томаты, листовой салат, соус «Цезарь», мука, яйцо, панировочные сухари, соус спайси" },
 
-      // 4. Запечённые роллы (7)
       { id: "BR-01", category: "Запечённые роллы", name: "Акари", weight: "240 г", price: 629, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, угорь, креветка тигровая, стружка тунца, майонез, сыр «Пармезан», медовый соус, имбирь маринованный, васаби" },
       { id: "BR-02", category: "Запечённые роллы", name: "Бостон", weight: "255 г", price: 569, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, креветка тигровая, сыр сливочный, огурец, икра масаго, майонез, сыр «Моцарелла», сливки 33%, медовый соус, имбирь маринованный, васаби" },
       { id: "BR-03", category: "Запечённые роллы", name: "Вулкан", weight: "280 г", price: 659, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, паста «том ям», креветка тигровая, зеленый лук, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
@@ -329,26 +399,22 @@
       { id: "BR-06", category: "Запечённые роллы", name: "Сегун", weight: "260 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
       { id: "BR-07", category: "Запечённые роллы", name: "Хокку", weight: "255 г", price: 489, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, салат «Айсберг», майонез, сыр «Пармезан», имбирь маринованный, васаби" },
 
-      // 5. Суши (4)
       { id: "SU-01", category: "Суши", name: "Суши с лососем", weight: "40 г", price: 189, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Рис, лосось, сливочный сыр" },
       { id: "SU-02", category: "Суши", name: "Суши с тигровой креветкой", weight: "35 г", price: 189, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Рис, тигровая креветка" },
       { id: "SU-03", category: "Суши", name: "Суши с тунцом", weight: "40 г", price: 179, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Рис, тунец, масаго" },
       { id: "SU-04", category: "Суши", name: "Суши с угрём", weight: "35 г", price: 239, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Рис, угорь, соус «Унаги», белый кунжут" },
 
-      // 6. Сеты (4)
       { id: "SET-01", category: "Сеты", name: "Сет «Папино»", weight: "780 г", price: 1899, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Филадельфия с огурцом, инь-ян, классический ролл с крабом и сливочным сыром, классический ролл с копченой курицей и сливочным сыром" },
       { id: "SET-02", category: "Сеты", name: "Сет «Самурай»", weight: "1010 г", price: 2449, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Тендо, киото, канада, монреаль" },
       { id: "SET-03", category: "Сеты", name: "Сет «Сытно и точка»", weight: "1190 г", price: 2559, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Ятоми, сакура, токай, бостон, хокку" },
       { id: "SET-04", category: "Сеты", name: "Сет «Якудза»", weight: "1260 г", price: 2659, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Цезарь ролл, кани, фьюжн, сегун, акари" },
 
-      // 7. Поке (5)
       { id: "PK-01", category: "Поке", name: "Поке с крабовым мясом", weight: "260 г", price: 509, serving: "Стандартная подача", ingredients: "Рис, имитация краба, авокадо, огурец, омлет, лук красный, соевый соус, соус «Сладкий чили», грецкий орех, кунжут черный/белый, нори" },
       { id: "PK-02", category: "Поке", name: "Поке с креветкой", weight: "260 г", price: 589, serving: "Стандартная подача", ingredients: "Рис, томаты черри, огурец, кукуруза, омлет, креветки в панировке, ореховый соус, соевый соус, кунжут черный" },
       { id: "PK-03", category: "Поке", name: "Поке с курицей", weight: "260 г", price: 509, serving: "Стандартная подача", ingredients: "Рис, куриное филе, томаты черри, огурец, кукуруза, имбирь маринованный, соевый соус, соус кимчи, соус барбекю, кунжут черный/белый, нори" },
       { id: "PK-04", category: "Поке", name: "Поке с лососем", weight: "270 г", price: 719, serving: "Стандартная подача", ingredients: "Рис, лосось, авокадо, болгарский перец, кукуруза, огурец, соевый соус, соус терияки, кунжут белый" },
       { id: "PK-05", category: "Поке", name: "Поке с тунцом и лососем", weight: "280 г", price: 759, serving: "Стандартная подача", ingredients: "Рис, тунец, лосось, огурец, авокадо, имбирь маринованный, соевый соус, соус терияки, соус «Шрирача», кунжутное масло, лимонный сок, кунжут черный/белый, нори" },
 
-      // 8. Пицца (17)
       { id: "PZ-01", category: "Пицца", name: "Амаро", weight: "1000 г", price: 779, serving: "Подача с оливковым маслом", ingredients: "Соус сметанный, соус горчичный, пепперони, сыр моцарелла, лук красный, картофель по-деревенски, бекон, корнишоны, соус барбекю" },
       { id: "PZ-02", category: "Пицца", name: "Вегетарианский микс", weight: "1000 г", price: 849, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, томаты, лук красный, маслины, сыр фета, руккола, соус песто" },
       { id: "PZ-03", category: "Пицца", name: "Мечта мясника", weight: "527 г", price: 1129, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, томаты, ветчина, бекон, курица копченая, колбаски охотничьи, фарш говяжий, соус на выбор (барбекю/сливочный)" },
@@ -367,13 +433,11 @@
       { id: "PZ-16", category: "Пицца", name: "Чизбургер", weight: "690 г", price: 899, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», фарш говяжий, лук красный, корнишоны, томаты, соус «Бургер»" },
       { id: "PZ-17", category: "Пицца", name: "Чикен Баффало", weight: "630 г", price: 739, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», куриное филе копченое, лук красный, соус «Барбекю», соус «Кимчи»" },
 
-      // 9. Мини пицца 20 см (4)
       { id: "MPZ-01", category: "Мини пицца 20 см", name: "Мини пицца Греческая", weight: "330 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», томаты, сыр «Фета», лук красный, маслины" },
       { id: "MPZ-02", category: "Мини пицца 20 см", name: "Мини пицца Карбонара", weight: "310 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», бекон, сыр «Чеддер», томаты" },
       { id: "MPZ-03", category: "Мини пицца 20 см", name: "Петито цезарь", weight: "310 г", price: 439, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, бекон, куриное филе копченое, сыр «Моцарелла», салат «Айсберг»" },
       { id: "MPZ-04", category: "Мини пицца 20 см", name: "Петито пепперони", weight: "310 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», колбаски «Пепперони», орегано" },
 
-      // 10. Салаты (12)
       { id: "SAL-01", category: "Салаты", name: "Осьминожки", weight: "150 г", price: 769, serving: "Стандартная подача", ingredients: "Осьминожки бейби, огурец, лимон, белый кунжут, соус «Кимчи», соус «Шрирача», кунжутное масло, мицукан" },
       { id: "SAL-02", category: "Салаты", name: "Чука", weight: "100 г", price: 289, serving: "Стандартная подача", ingredients: "Водоросли чука, ореховый соус, лимон, белый кунжут" },
       { id: "SAL-03", category: "Салаты", name: "Цезарь с курицей", weight: "220 г", price: 579, serving: "Стандартная подача", ingredients: "Салат «Айсберг», листовой салат, куриное филе, томаты черри, перепелиное яйцо, соус «Цезарь», сухари, сыр «Пармезан»" },
@@ -387,7 +451,6 @@
       { id: "SAL-11", category: "Салаты", name: "Салат фитнес", weight: "150 г", price: 639, serving: "Стандартная подача", ingredients: "Руккола, авокадо, огурец, креветки тигровые, лук зеленый, лимонный сок, оливковое масло, соль, соевый соус" },
       { id: "SAL-12", category: "Салаты", name: "Теплый салат с курицей", weight: "150 г", price: 519, serving: "Стандартная подача", ingredients: "Куриное филе, листовой салат, цуккини, брокколи, болгарский перец, томаты черри, масло подсолнечное, соевый соус, соус «Терияки», белый кунжут" },
 
-      // 11. Супы (8)
       { id: "S-01", category: "Супы", name: "Том ям", weight: "300 г", price: 569, serving: "Стандартная подача", ingredients: "Бульон том ям, кокосовое молоко, кальмар, мидии, креветки тигровые, кинза, мята, лайм, кунжут белый, масло растительное, перец чили, грибы шампиньоны" },
       { id: "S-02", category: "Супы", name: "Сливочный суп с морепродуктами", weight: "300 г", price: 799, serving: "Стандартная подача", ingredients: "Лосось, креветки тигровые, кальмар, мидии, куриный бульон, сливки 22%, устричный соус, сыр «Пармезан», соус «Песто», соль, перец, орегано" },
       { id: "S-03", category: "Супы", name: "Юкедян", weight: "300 г", price: 549, serving: "Стандартная подача", ingredients: "Свинина карбонат, куриный бульон, цуккини, грибы шитаке, лук репчатый, имбирь, соевый соус, паста «Кочудян», масло растительное, соль, перец, сыр «Чеддер», яйцо куриное, зелень" },
@@ -397,13 +460,11 @@
       { id: "S-07", category: "Супы", name: "Рамен", weight: "300 г", price: 519, serving: "Стандартная подача", ingredients: "Куриный бульон, лапша удон, куриное филе копченое, сливки 22%, грибы шиитаке, яйцо куриное, кунжут белый/черный, мисо паста светлая, устричный соус, лук зеленый, кинза" },
       { id: "S-08", category: "Супы", name: "Пельмени", weight: "420 г", price: 499, serving: "Стандартная подача", ingredients: "Куриный бульон, тесто, говяжий фарш, зелень" },
 
-      // 12. Воки (4)
       { id: "W-01", category: "Воки", name: "Вок с говядиной", weight: "250 г", price: 699, serving: "Стандартная подача", ingredients: "Удон, говяжья вырезка, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Кисло-сладкий», паста «Том ям», соевый соус, кинза, кунжут белый" },
       { id: "W-02", category: "Воки", name: "Вок с креветками", weight: "250 г", price: 649, serving: "Стандартная подача", ingredients: "Лапша удон, креветки тигровые, лук репчатый, болгарский перец, имбирь свежий, чесночное масло, соус «Кисло-сладкий», соус «Кимчи», соевый соус, кунжут белый, зеленый лук" },
       { id: "W-03", category: "Воки", name: "Вок с курицей", weight: "250 г", price: 549, serving: "Стандартная подача", ingredients: "Лапша удон, куриное филе, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Терияки», устричный соус, лук зеленый, кунжут белый" },
       { id: "W-04", category: "Воки", name: "Вок со свининой", weight: "250 г", price: 549, serving: "Стандартная подача", ingredients: "Лапша удон, карбонад свинины, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, устричный соус, соус «Кисло-сладкий», кинза, кунжут белый" },
 
-      // 13. Пасты (6)
       { id: "P-01", category: "Пасты", name: "Альфредо", weight: "320 г", price: 559, serving: "Стандартная подача", ingredients: "Куриное филе, грибы шампиньоны, лук репчатый, куриный бульон, сыр «Пармезан», сливки 22%, томаты черри, спагетти, петрушка" },
       { id: "P-02", category: "Пасты", name: "Карбонара", weight: "310 г", price: 599, serving: "Стандартная подача", ingredients: "Бекон, лук репчатый, сыр «Пармезан», томаты черри, спагетти, яичный желток, петрушка, куриный бульон" },
       { id: "P-03", category: "Пасты", name: "Паста с лососем", weight: "300 г", price: 839, serving: "Стандартная подача", ingredients: "Феттучини, лосось, цуккини, сливки 22%, сыр «Пармезан», томаты черри, петрушка, куриный бульон" },
@@ -411,7 +472,6 @@
       { id: "P-05", category: "Пасты", name: "Тальятеле с курицей и говядиной", weight: "350 г", price: 749, serving: "Стандартная подача", ingredients: "Феттучини, куриное филе, вырезка говяжья, цуккини, перец болгарский, лук репчатый, томаты, сыр «Пармезан», чесночное масло, соус кимчи, томаты черри, сливки 22%, петрушка, масло растительное" },
       { id: "P-06", category: "Пасты", name: "Болоньезе", weight: "320 г", price: 639, serving: "Стандартная подача", ingredients: "Спагетти, фарш говяжий, перец болгарский, лук репчатый, соус томатный, сыр «Пармезан», томаты черри, кинза, чесночное масло" },
 
-      // 14. Горячие блюда (21)
       { id: "H-01", category: "Горячие блюда", name: "Кур. грудка обж. с брокколи в сливочном соусе", weight: "369.1 г", price: 749, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», брокколи, сливки, соус «Терияки», кетчуп, соевый соус" },
       { id: "H-02", category: "Горячие блюда", name: "Кур. грудка обж. с карт. по-деревенски", weight: "317 г", price: 669, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», картофель по-деревенски, соус «Терияки», кетчуп" },
       { id: "H-03", category: "Горячие блюда", name: "Кур. грудка обж. с овощами в соусе терияки", weight: "366.1 г", price: 709, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», брокколи, болгарский перец, грибы шампиньоны, лук репчатый, кунжут белый, соус «Терияки», кетчуп, соевый соус" },
@@ -434,7 +494,6 @@
       { id: "H-20", category: "Горячие блюда", name: "Стейк со свининой", weight: "270 г", price: 699, serving: "Стандартная подача", ingredients: "Свинина карбонат, соевый соус, лимон, горчица, баклажан, томат, корнишоны, лук красный, уксус, сахар" },
       { id: "H-21", category: "Горячие блюда", name: "Стейк со свининой в пасте кочудян", weight: "270 г", price: 709, serving: "Стандартная подача", ingredients: "Свинина карбонат, соевый соус, имбирь, паста «Кочудян», баклажан, томаты, корнишоны, лук красный, уксус, сахар" },
 
-      // 15. Закуски (18)
       { id: "SN-01", category: "Закуски", name: "Картофельные шарики", weight: "150 г", price: 339, serving: "Стандартная подача", ingredients: "Картофель, соль" },
       { id: "SN-02", category: "Закуски", name: "Картошка по-деревенски", weight: "140 г", price: 299, serving: "Стандартная подача", ingredients: "Картофель, соль" },
       { id: "SN-03", category: "Закуски", name: "Картошка фри", weight: "130 г", price: 299, serving: "Стандартная подача", ingredients: "Картофель, соль" },
@@ -454,7 +513,6 @@
       { id: "SN-17", category: "Закуски", name: "Сырные палочки 5 шт", weight: "110 г", price: 369, serving: "Стандартная подача", ingredients: "Панировочные сухари, крахмал кукурузный, сыр «Моцарелла»" },
       { id: "SN-18", category: "Закуски", name: "Чесночные гренки", weight: "85 г", price: 249, serving: "Стандартная подача", ingredients: "Хлеб бородинский, чесночное масло, соль" },
 
-      // 16. Бургеры и Сендвичи (11)
       { id: "BS-01", category: "Бургеры и Сендвичи", name: "Бургер «Делюкс»", weight: "350 г", price: 789, serving: "Подача: перчатки", ingredients: "Булка, говяжья котлета, сыр «Чеддер», лук красный, соус «Бургер», томаты, огурец маринованный, салат «Айсберг»" },
       { id: "BS-02", category: "Бургеры и Сендвичи", name: "Бургер «Ковбой»", weight: "300 г", price: 789, serving: "Подача: перчатки", ingredients: "Булка, говяжья котлета, сыр «Чеддер», салат «Айсберг», лук маринованный, соус «Гриль», томаты" },
       { id: "BS-03", category: "Бургеры и Сендвичи", name: "Бургер «Ранч»", weight: "300 г", price: 569, serving: "Подача: перчатки", ingredients: "Булка, куриное филе в панировке, салат айсберг, томаты, соус «Ранч», сыр «Чеддер»" },
@@ -467,7 +525,6 @@
       { id: "BS-10", category: "Бургеры и Сендвичи", name: "Сендвич с ростбифом", weight: "300 г", price: 799, serving: "Стандартная подача (с картофелем фри)", ingredients: "Хлеб тостовый, ростбиф, огурцы маринованные, лук красный, листовой салат, томаты, сыр «Чеддер», соус «Бургер», картофель фри" },
       { id: "BS-11", category: "Бургеры и Сендвичи", name: "Сендвич с курицей", weight: "300 г", price: 699, serving: "Стандартная подача (с картофелем фри)", ingredients: "Хлеб тостовый, куриное филе, огурцы, лук красный, салат латук, томаты, сыр «Чеддер», соус бургер, картофель фри" },
 
-      // 17. Детское меню (11)
       { id: "D-01", category: "Детское меню", name: "Детские пельмени", weight: "225 г", price: 329, serving: "Стандартная подача", ingredients: "Мини-пельмени, куриный бульон, зелень, сметана" },
       { id: "D-02", category: "Детское меню", name: "Детский «Салат Фруктовый»", weight: "195 г", price: 319, serving: "Стандартная подача", ingredients: "Банан, мандарин, киви, йогурт, грецкий орех, гранат" },
       { id: "D-03", category: "Детское меню", name: "Детский суп", weight: "350 г", price: 339, serving: "Стандартная подача", ingredients: "Макароны-фигурки, фрикадельки, куриный бульон, зелень" },
@@ -480,7 +537,6 @@
       { id: "D-10", category: "Детское меню", name: "Хрустики с палочками", weight: "270 г", price: 499, serving: "Стандартная подача", ingredients: "Сырные палочки 3 шт, наггетсы 5 шт, картофель фри, сырный соус" },
       { id: "D-11", category: "Детское меню", name: "Я не голодный", weight: "220 г", price: 309, serving: "Стандартная подача", ingredients: "Макароны спагетти, куриное филе в панировке, огурец, кетчуп, зелень" },
 
-      // 18. Соуса (14)
       { id: "SOU-01", category: "Соуса", name: "Горчичный соус", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Горчичный соус" },
       { id: "SOU-02", category: "Соуса", name: "Кетчуп", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Кетчуп томатный" },
       { id: "SOU-03", category: "Соуса", name: "Оливковое масло 30мл", weight: "30 г", price: 80, serving: "Соусник", ingredients: "Оливковое масло" },
@@ -497,13 +553,10 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_v2')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_v3')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentUserRole = 'waiter';
 
-    // =========================================================================
-    // АВТОРИЗАЦИЯ И ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
-    // =========================================================================
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const u = document.getElementById('login-user').value.trim().toLowerCase();
@@ -524,7 +577,7 @@
     function completeLogin(role) {
       currentUserRole = role;
       document.getElementById('login-screen').classList.add('hidden');
-      document.getElementById('role-badge').textContent = role === 'admin' ? 'Администратор' : 'Стажёр / Официант';
+      document.getElementById('role-badge').textContent = role === 'admin' ? 'Администратор' : 'Стажёр';
       if (role === 'admin') {
         document.getElementById('tab-admin').classList.remove('hidden');
       } else {
@@ -539,18 +592,15 @@
     }
 
     function switchTab(tab) {
-      ['menu', 'quiz', 'rules', 'admin'].forEach(t => {
+      ['menu', 'rules', 'quiz', 'admin'].forEach(t => {
         document.getElementById('section-' + t).classList.add('hidden');
         const btn = document.getElementById('tab-' + t);
         btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
       });
       document.getElementById('section-' + tab).classList.remove('hidden');
-      document.getElementById('tab-' + tab).className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-900 transition';
+      document.getElementById('tab-' + tab).className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition';
     }
 
-    // =========================================================================
-    // РЕНДЕР МЕНЮ И ПОИСК С ПОДСВЕТКОЙ
-    // =========================================================================
     function getCategories() {
       const cats = ['Все'];
       menuData.forEach(item => {
@@ -568,11 +618,10 @@
         const count = cat === 'Все' ? menuData.length : menuData.filter(i => i.category === cat).length;
         const active = cat === currentCategory;
         return `<button onclick="selectCategory('${cat}')" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition ${
-          active ? 'bg-slate-900 text-amber-400 shadow' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+          active ? 'bg-amber-500 text-slate-950 shadow' : 'bg-slate-900 text-slate-300 hover:bg-slate-800 border border-slate-800'
         }">${cat} <span class="opacity-60 ml-1">(${count})</span></button>`;
       }).join('');
 
-      // Обновляем селектор категорий в генераторе теста
       quizSelect.innerHTML = `<option value="ALL">Все категории меню (${menuData.length} блюд)</option>` +
         cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => `<option value="${c}">${c}</option>`).join('');
     }
@@ -619,31 +668,28 @@
 
       const grid = document.getElementById('menu-grid');
       if (filtered.length === 0) {
-        grid.innerHTML = `<div class="col-span-full bg-white p-8 rounded-2xl text-center text-slate-500 border border-slate-200">Ничего не найдено по запросу «${query}». Попробуйте другое слово.</div>`;
+        grid.innerHTML = `<div class="col-span-full bg-slate-900 p-8 rounded-2xl text-center text-slate-400 border border-slate-800">Ничего не найдено по запросу «${query}».</div>`;
         return;
       }
 
       grid.innerHTML = filtered.map(item => `
-        <div class="bg-white rounded-2xl p-5 shadow-sm border border-slate-200 hover:border-amber-400 transition flex flex-col justify-between">
+        <div class="bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-800 hover:border-amber-500/50 transition flex flex-col justify-between">
           <div>
             <div class="flex items-start justify-between gap-2 mb-2">
-              <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-100 text-slate-600">${item.category}</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">${item.category}</span>
               <span class="text-xs font-semibold text-slate-400">${item.weight}</span>
             </div>
-            <h3 class="text-base font-extrabold text-slate-900 mb-2">${highlightText(item.name, query)}</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4"><strong class="text-slate-800">Состав:</strong> ${highlightText(item.ingredients, query)}</p>
+            <h3 class="text-base font-extrabold text-white mb-2">${highlightText(item.name, query)}</h3>
+            <p class="text-xs text-slate-300 leading-relaxed mb-4"><strong class="text-slate-200">Состав:</strong> ${highlightText(item.ingredients, query)}</p>
           </div>
-          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-            <span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200">🍽️ ${highlightText(item.serving, query)}</span>
-            <span class="text-base font-black text-slate-900 shrink-0">${item.price} ₽</span>
+          <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
+            <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-900/50">🍽️ ${highlightText(item.serving, query)}</span>
+            <span class="text-base font-black text-white shrink-0">${item.price} ₽</span>
           </div>
         </div>
       `).join('');
     }
 
-    // =========================================================================
-    // ДИНАМИЧЕСКИЙ ГЕНЕРАТОР РАНДОМНЫХ ВОПРОСОВ ДЛЯ ТЕСТА
-    // =========================================================================
     let quizQuestions = [];
     let currentQIndex = 0;
     let quizScore = 0;
@@ -660,7 +706,6 @@
     }
 
     function generateRandomQuestions(count, categoryFilter) {
-      // Исключаем простые соусы из сложных вопросов по составу
       let pool = menuData.filter(i => i.category !== 'Соуса');
       if (categoryFilter !== 'ALL') {
         pool = pool.filter(i => i.category === categoryFilter);
@@ -672,80 +717,35 @@
 
       for (let i = 0; i < count; i++) {
         const target = shuffledPool[i % shuffledPool.length];
-        // Выбираем distractors (неправильные варианты) преимущественно из той же категории
         let sameCat = pool.filter(x => x.id !== target.id && x.category === target.category);
         if (sameCat.length < 3) {
           sameCat = menuData.filter(x => x.id !== target.id && x.category !== 'Соуса');
         }
         const wrongItems = shuffleArray(sameCat).slice(0, 3);
-
-        // 5 типов вопросов для разнообразия
         const qTypes = ['GUESS_NAME_BY_ING', 'GUESS_ING_BY_NAME', 'SERVING_RULE', 'WEIGHT_CHECK', 'INGREDIENT_CONTAINS'];
         const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
         if (chosenType === 'GUESS_NAME_BY_ING') {
           const options = shuffleArray([target.name, ...wrongItems.map(w => w.name)]);
-          generated.push({
-            badge: `Угадай блюдо по составу • ${target.category}`,
-            question: `Какое блюдо из категории «${target.category}» имеет следующий состав: «${target.ingredients}»?`,
-            options,
-            correct: target.name,
-            item: target
-          });
+          generated.push({ badge: `Угадай блюдо • ${target.category}`, question: `Какое блюдо имеет состав: «${target.ingredients}»?`, options, correct: target.name, item: target });
         } else if (chosenType === 'GUESS_ING_BY_NAME') {
           const options = shuffleArray([target.ingredients, ...wrongItems.map(w => w.ingredients)]);
-          generated.push({
-            badge: `Знание состава • ${target.category}`,
-            question: `Выберите точный состав позиции «${target.name}» (${target.weight}):`,
-            options,
-            correct: target.ingredients,
-            item: target
-          });
+          generated.push({ badge: `Состав • ${target.category}`, question: `Выберите точный состав позиции «${target.name}» (${target.weight}):`, options, correct: target.ingredients, item: target });
         } else if (chosenType === 'SERVING_RULE') {
-          const servingOptions = [
-            "Палочки, имбирь маринованный, васаби, соевый соус",
-            "Подача: соус спайси, соевый соус, палочки",
-            "Подача с оливковым маслом",
-            "Подача: перчатки",
-            "Стандартная подача"
-          ];
-          const correctServe = target.serving.includes('спайси') ? "Подача: соус спайси, соевый соус, палочки"
-            : target.serving.includes('Палочки') ? "Палочки, имбирь маринованный, васаби, соевый соус"
-            : target.serving.includes('оливковым') ? "Подача с оливковым маслом"
-            : target.serving.includes('перчатки') ? "Подача: перчатки"
-            : "Стандартная подача";
+          const servingOptions = ["Палочки, имбирь маринованный, васаби, соевый соус", "Подача: соус спайси, соевый соус, палочки", "Подача с оливковым маслом", "Подача: перчатки", "Стандартная подача"];
+          const correctServe = target.serving.includes('спайси') ? "Подача: соус спайси, соевый соус, палочки" : target.serving.includes('Палочки') ? "Палочки, имбирь маринованный, васаби, соевый соус" : target.serving.includes('оливковым') ? "Подача с оливковым маслом" : target.serving.includes('перчатки') ? "Подача: перчатки" : "Стандартная подача";
           const wrongServes = shuffleArray(servingOptions.filter(s => s !== correctServe)).slice(0, 3);
-          generated.push({
-            badge: `Правила подачи • ${target.category}`,
-            question: `Какая обязательная подача идёт к блюду «${target.name}» (${target.category})?`,
-            options: shuffleArray([correctServe, ...wrongServes]),
-            correct: correctServe,
-            item: target
-          });
+          generated.push({ badge: `Подача • ${target.category}`, question: `Какая подача идёт к позиции «${target.name}»?`, options: shuffleArray([correctServe, ...wrongServes]), correct: correctServe, item: target });
         } else if (chosenType === 'WEIGHT_CHECK') {
           const allWeights = [...new Set(pool.map(x => x.weight))].filter(w => w !== target.weight);
           const wrongWeights = shuffleArray(allWeights).slice(0, 3);
-          generated.push({
-            badge: `Граммовка и выход • ${target.category}`,
-            question: `Какой выход (вес) у позиции «${target.name}»?`,
-            options: shuffleArray([target.weight, ...wrongWeights]),
-            correct: target.weight,
-            item: target
-          });
+          generated.push({ badge: `Граммовка • ${target.category}`, question: `Какой выход у позиции «${target.name}»?`, options: shuffleArray([target.weight, ...wrongWeights]), correct: target.weight, item: target });
         } else {
-          // INGREDIENT_CONTAINS: какой ингредиент входит в блюдо
           const targetIngs = target.ingredients.split(',').map(s => s.trim()).filter(Boolean);
           const trueIng = targetIngs[Math.floor(Math.random() * targetIngs.length)] || target.ingredients;
-          const fakeCandidates = ['Сыр «Дорблю»', 'Паста «Том ям»', 'Угорь', 'Ореховый соус', 'Перец «Халапеньо»', 'Грибы шиитаке', 'Кинза', 'Бекон', 'Авокадо', 'Пюре манго']
-            .filter(f => !target.ingredients.toLowerCase().includes(f.toLowerCase()));
+          const fakeCandidates = ['Сыр «Дорблю»', 'Паста «Том ям»', 'Угорь', 'Ореховый соус', 'Перец «Халапеньо»', 'Грибы шиитаке', 'Кинза', 'Бекон', 'Авокадо'].filter(f => !target.ingredients.toLowerCase().includes(f.toLowerCase()));
           const wrongFakes = shuffleArray(fakeCandidates).slice(0, 3);
-          generated.push({
-            badge: `Проверка ингредиентов • ${target.category}`,
-            question: `Какой из перечисленных ингредиентов ТОЧНО входит в состав блюда «${target.name}»?`,
-            options: shuffleArray([trueIng, ...wrongFakes]),
-            correct: trueIng,
-            item: target
-          });
+          generated.push({ badge: `Ингредиенты • ${target.category}`, question: `Какой ингредиент ТОЧНО входит в состав «${target.name}»?`, options: shuffleArray([trueIng, ...wrongFakes]), correct: trueIng, item: target });
         }
       }
       return generated;
@@ -770,7 +770,7 @@
       const total = quizQuestions.length;
 
       document.getElementById('quiz-progress-text').textContent = `Вопрос ${currentQIndex + 1} из ${total}`;
-      document.getElementById('quiz-score-live').textContent = `Правильных ответов: ${quizScore}`;
+      document.getElementById('quiz-score-live').textContent = `Правильных: ${quizScore}`;
       document.getElementById('quiz-progress-bar').style.width = `${((currentQIndex + 1) / total) * 100}%`;
 
       document.getElementById('quiz-q-badge').textContent = q.badge;
@@ -780,7 +780,7 @@
 
       const optsContainer = document.getElementById('quiz-options');
       optsContainer.innerHTML = q.options.map((opt, idx) => `
-        <button onclick="selectQuizOption(${idx})" id="q-opt-${idx}" class="w-full text-left p-4 rounded-xl border border-slate-300 bg-white hover:border-amber-500 hover:bg-amber-50/40 transition text-xs sm:text-sm font-medium text-slate-800">
+        <button onclick="selectQuizOption(${idx})" id="q-opt-${idx}" class="w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-amber-500 hover:bg-slate-800 transition text-xs sm:text-sm font-medium text-white">
           ${opt}
         </button>
       `).join('');
@@ -797,36 +797,31 @@
       if (isCorrect) {
         quizScore++;
       } else {
-        quizMistakes.push({
-          question: q.question,
-          chosen,
-          correct: q.correct,
-          item: q.item
-        });
+        quizMistakes.push({ question: q.question, chosen, correct: q.correct, item: q.item });
       }
 
       q.options.forEach((opt, i) => {
         const btn = document.getElementById('q-opt-' + i);
         if (opt === q.correct) {
-          btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-50 text-emerald-900 font-bold text-xs sm:text-sm';
+          btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-950/60 text-emerald-200 font-bold text-xs sm:text-sm';
         } else if (i === idx && !isCorrect) {
-          btn.className = 'w-full text-left p-4 rounded-xl border-2 border-red-400 bg-red-50 text-red-900 font-semibold text-xs sm:text-sm';
+          btn.className = 'w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-950/60 text-red-200 font-semibold text-xs sm:text-sm';
         } else {
-          btn.className = 'w-full text-left p-4 rounded-xl border border-slate-200 bg-white opacity-50 text-xs sm:text-sm';
+          btn.className = 'w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900 opacity-40 text-xs sm:text-sm';
         }
       });
 
       const fb = document.getElementById('quiz-feedback');
       fb.classList.remove('hidden');
       if (isCorrect) {
-        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-100 text-emerald-900';
-        fb.innerHTML = `✅ <strong>Верно!</strong> ${q.item.name} (${q.item.weight}, ${q.item.price} ₽) — ${q.item.ingredients}.`;
+        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-950 border border-emerald-900 text-emerald-200';
+        fb.innerHTML = `✅ <strong>Верно!</strong> ${q.item.name} (${q.item.weight}, ${q.item.price} ₽).`;
       } else {
-        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-red-100 text-red-900';
-        fb.innerHTML = `❌ <strong>Ошибка.</strong> Правильный ответ: <strong>${q.correct}</strong>.<br><span class="text-xs">Полный состав «${q.item.name}»: ${q.item.ingredients} (${q.item.serving}).</span>`;
+        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-red-950 border border-red-900 text-red-200';
+        fb.innerHTML = `❌ <strong>Ошибка.</strong> Правильно: <strong>${q.correct}</strong>.<br><span class="text-xs">Состав: ${q.item.ingredients}</span>`;
       }
 
-      document.getElementById('quiz-score-live').textContent = `Правильных ответов: ${quizScore}`;
+      document.getElementById('quiz-score-live').textContent = `Правильных: ${quizScore}`;
       document.getElementById('quiz-next-btn').classList.remove('hidden');
     }
 
@@ -848,10 +843,8 @@
       const pct = Math.round((quizScore / total) * 100);
 
       document.getElementById('quiz-result-emoji').textContent = pct >= 85 ? '🏆' : pct >= 60 ? '👍' : '📚';
-      document.getElementById('quiz-result-title').textContent = `Ваш результат: ${quizScore} из ${total} (${pct}%)`;
-      document.getElementById('quiz-result-subtitle').textContent = pct >= 85
-        ? 'Отличное знание меню Кафе «Папино»! Стажёр готов к работе в зале.'
-        : 'Рекомендуем повторить позиции ниже и пройти рандомный тест ещё раз.';
+      document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
+      document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Стажёр готов к работе.' : 'Рекомендуем повторить регламент и меню во вкладке «Устав».';
 
       const mistakesBox = document.getElementById('quiz-mistakes-box');
       const mistakesList = document.getElementById('quiz-mistakes-list');
@@ -859,11 +852,10 @@
       if (quizMistakes.length > 0) {
         mistakesBox.classList.remove('hidden');
         mistakesList.innerHTML = quizMistakes.map(m => `
-          <div class="p-4 rounded-xl bg-red-50 border border-red-200 text-xs sm:text-sm space-y-1">
-            <div class="font-bold text-slate-900">${m.item.name} (${m.item.category}, ${m.item.weight})</div>
-            <div class="text-red-700">Ваш ответ: ${m.chosen}</div>
-            <div class="text-emerald-800 font-semibold">Правильно: ${m.correct}</div>
-            <div class="text-slate-600 pt-1">Состав: ${m.item.ingredients} • ${m.item.serving}</div>
+          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900 text-xs sm:text-sm space-y-1">
+            <div class="font-bold text-white">${m.item.name} (${m.item.category})</div>
+            <div class="text-red-400">Ваш ответ: ${m.chosen}</div>
+            <div class="text-emerald-400 font-semibold">Правильно: ${m.correct}</div>
           </div>
         `).join('');
       } else {
@@ -871,29 +863,6 @@
       }
     }
 
-    // =========================================================================
-    // ФЛЕШ-КАРТОЧКИ
-    // =========================================================================
-    function nextFlashcard() {
-      const pool = menuData.filter(i => i.category !== 'Соуса');
-      const item = pool[Math.floor(Math.random() * pool.length)];
-      document.getElementById('fc-cat').textContent = item.category;
-      document.getElementById('fc-name').textContent = item.name;
-      document.getElementById('fc-ing').textContent = item.ingredients;
-      document.getElementById('fc-meta').textContent = `${item.weight} • ${item.price} ₽`;
-      document.getElementById('fc-serve').textContent = item.serving;
-      document.getElementById('fc-answer').classList.add('hidden');
-      document.getElementById('fc-hint').classList.remove('hidden');
-    }
-
-    function toggleFlashcard() {
-      document.getElementById('fc-answer').classList.toggle('hidden');
-      document.getElementById('fc-hint').classList.toggle('hidden');
-    }
-
-    // =========================================================================
-    // ДОБАВЛЕНИЕ НОВЫХ ПОЗИЦИЙ ЧЕРЕЗ АДМИНКУ
-    // =========================================================================
     document.getElementById('add-item-form').addEventListener('submit', function(e) {
       e.preventDefault();
       const newItem = {
@@ -906,19 +875,17 @@
         serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
       };
       menuData.push(newItem);
-      localStorage.setItem('papino_menu_v2', JSON.stringify(menuData));
+      localStorage.setItem('papino_menu_v3', JSON.stringify(menuData));
       this.reset();
-      document.getElementById('new-serve').value = 'Стандартная подача';
       renderCategories();
       renderMenu();
-      alert(`Позиция «${newItem.name}» добавлена в раздел «${newItem.category}»!`);
+      alert(`Позиция «${newItem.name}» успешно добавлена!`);
     });
 
     function initApp() {
       renderCategories();
       renderMenu();
       startNewRandomQuiz();
-      nextFlashcard();
     }
   </script>
 </body>
