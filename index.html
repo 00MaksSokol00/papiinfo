@@ -62,6 +62,7 @@
 
       <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl overflow-x-auto border border-slate-800">
         <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню</button>
+        <button onclick="switchTab('allergens')" id="tab-allergens" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚠️ Аллергены</button>
         <button onclick="switchTab('cards')" id="tab-cards" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🃏 Карточки</button>
         <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав</button>
         <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр</button>
@@ -87,7 +88,7 @@
         </div>
 
         <div class="flex items-center gap-2 flex-wrap pt-1">
-          <span class="text-xs font-semibold text-slate-400">Фильтр стоп-ингредиентов:</span>
+          <span class="text-xs font-semibold text-slate-400">Быстрый поиск:</span>
           <button onclick="setQuickSearch('кинза')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-400 hover:bg-emerald-900/60 font-medium border border-emerald-900/50">🌿 Кинза</button>
           <button onclick="setQuickSearch('орех')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-950/60 text-amber-400 hover:bg-amber-900/60 font-medium border border-amber-900/50">🥜 Орехи</button>
           <button onclick="setQuickSearch('мед')" class="text-xs px-2.5 py-1 rounded-lg bg-yellow-950/60 text-yellow-400 hover:bg-yellow-900/60 font-medium border border-yellow-900/50">🍯 Мёд</button>
@@ -107,7 +108,77 @@
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: ФЛЕШ-КАРТОЧКИ («УЧИТЬ МЕНЮ») -->
+    <!-- ВКЛАДКА 2: АЛЛЕРГЕНЫ И СТОП-ИНГРЕДИЕНТЫ -->
+    <section id="section-allergens" class="hidden space-y-6">
+      <!-- Памятка скрытых аллергенов -->
+      <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-800 space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
+          <div>
+            <h2 class="text-xl font-extrabold text-white flex items-center gap-2">⚠️ Справочник аллергенов и конструктор безопасного меню</h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-1">Отметьте продукты, которые НЕЛЬЗЯ гостю — система отфильтрует меню и подскажет, что можно убрать при отдаче.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-amber-400 mb-3">🔍 Скрытые аллергены в соусах и заготовках «Папино»:</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-amber-300 block text-sm">🥜 Орехи и Кунжут</strong>
+              <p class="text-slate-300">Соус «Песто» (кедровый орех, сыр), «Ореховый соус» (ролл Кайто, Сендай, Поке с креветкой, салат Чука), грецкий орех (Поке с крабом, Греческий, Детский фруктовый салат), кунжутное масло и семена кунжута.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-yellow-300 block text-sm">🍯 Мёд (Пчелопродукты)</strong>
+              <p class="text-slate-300">Запечённые роллы «Акари» и «Бостон» (входит в медовый соус), пицца «Сент-Луис», Салат с ростбифом, Салат с тунцом и ананасами, Стейк из говядины.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-red-400 block text-sm">🌶️ Острое и специи</strong>
+              <p class="text-slate-300">Соусы «Спайси», «Кимчи», «Шрирача», паста «Том ям», паста «Кочудян» (суп Юкедян, Стейк со свининой), перец «Халапеньо» (ролл Кама, Папино пицца), перец чили.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-sky-300 block text-sm">🦐 Морепродукты и Рыба</strong>
+              <p class="text-slate-300">Стружка тунца (ролл Токай, Акари), икра масаго, устричный соус (Вок с курицей/свининой, Рамен, Сливочный суп), бульон и паста Том ям (содержат креветку).</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-emerald-300 block text-sm">🌿 Кинза, Чеснок и Лук</strong>
+              <p class="text-slate-300">Кинза и зелёный лук в большинстве блюд идут как декор (можно попросить кухню не класть). Чесночное масло используется в пиццах, воках, пастах и гренках.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
+              <strong class="text-purple-300 block text-sm">🥛 Лактоза и Яйцо</strong>
+              <p class="text-slate-300">Сливки 22%/33% (в шапках запечённых роллов Бостон, Вулкан, Сегун, в супах и пастах), сливочный сыр, сыры Моцарелла/Пармезан/Дорблю/Фета/Чеддер. Яйцо — в кляре горячих роллов и майонезе.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Панель выбора аллергенов -->
+      <div class="bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-800 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="text-xs font-bold uppercase tracking-wider text-slate-400">Режим фильтрации:</span>
+            <button id="alg-mode-safe" onclick="setAllergenMode('safe')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 shadow transition">✅ Что МОЖНО гостю (исключить аллергены)</button>
+            <button id="alg-mode-danger" onclick="setAllergenMode('danger')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition">⛔ Где СОДЕРЖИТСЯ аллерген</button>
+          </div>
+          <button onclick="clearAllergens()" class="text-xs font-semibold text-slate-400 hover:text-white px-3 py-1.5 rounded-lg border border-slate-800 hover:border-slate-700 transition">Сбросить выбор</button>
+        </div>
+
+        <div>
+          <p class="text-xs text-slate-400 mb-2.5 font-medium">Нажмите на один или несколько аллергенов, которые нужно проверить:</p>
+          <div id="allergen-buttons" class="flex flex-wrap gap-2"></div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-800">
+          <select id="alg-cat-select" onchange="renderAllergens()" class="px-3.5 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+            <option value="ALL">Все категории меню</option>
+          </select>
+          <span id="alg-count-info" class="text-xs font-semibold text-slate-400">Выберите аллергены выше</span>
+        </div>
+      </div>
+
+      <!-- Сетка отфильтрованных блюд -->
+      <div id="allergen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
+
+    <!-- ВКЛАДКА 3: ФЛЕШ-КАРТОЧКИ («УЧИТЬ МЕНЮ») -->
     <section id="section-cards" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
@@ -171,7 +242,7 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 3: УСТАВ И РЕГЛАМЕНТ -->
+    <!-- ВКЛАДКА 4: УСТАВ И РЕГЛАМЕНТ -->
     <section id="section-rules" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
@@ -305,7 +376,7 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 4: ТРЕНАЖЁР И ЭКЗАМЕН -->
+    <!-- ВКЛАДКА 5: ТРЕНАЖЁР И ЭКЗАМЕН -->
     <section id="section-quiz" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
@@ -328,7 +399,7 @@
 
         <!-- Баннер блокировки при активном экзамене -->
         <div id="exam-lock-banner" class="hidden mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex flex-wrap items-center justify-between gap-2 text-xs text-amber-300">
-          <span>🔒 <strong>Режим экзамена активен:</strong> вкладки «Меню», «Карточки» и «Устав» заблокированы до завершения сдачи.</span>
+          <span>🔒 <strong>Режим экзамена активен:</strong> вкладки «Меню», «Аллергены», «Карточки» и «Устав» заблокированы до завершения сдачи.</span>
           <span id="exam-timer-badge" class="font-mono font-extrabold text-sm bg-slate-950 px-3 py-1 rounded-lg text-amber-400 border border-amber-500/40">⏱️ 20:00</span>
         </div>
 
@@ -377,7 +448,7 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 5: АДМИН-ПАНЕЛЬ -->
+    <!-- ВКЛАДКА 6: АДМИН-ПАНЕЛЬ -->
     <section id="section-admin" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Панель управления (Менеджер)</h2>
@@ -664,9 +735,43 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v14')) || INITIAL_MENU;
+    // Группы аллергенов для умного фильтра
+    const ALLERGEN_GROUPS = [
+      { id: 'nuts', label: '🥜 Орехи и Песто', keywords: ['орех', 'песто'] },
+      { id: 'sesame', label: '🌾 Кунжут', keywords: ['кунжут'] },
+      { id: 'seafood', label: '🦐 Рыба и Морепродукты', keywords: ['лосось', 'тунец', 'тунца', 'угорь', 'угрём', 'креветк', 'краб', 'мидии', 'кальмар', 'осьминож', 'масаго', 'окунь', 'устричный', 'том ям'] },
+      { id: 'dairy', label: '🥛 Молочка / Сыр / Сливки', keywords: ['сыр', 'сливк', 'сметан', 'моцарелла', 'пармезан', 'дорблю', 'фета', 'чеддер', 'йогурт', 'масло сливочное', 'творож'] },
+      { id: 'honey', label: '🍯 Мёд', keywords: ['мед', 'мёд'] },
+      { id: 'cilantro', label: '🌿 Кинза', keywords: ['кинза'] },
+      { id: 'spicy', label: '🌶️ Острое', keywords: ['спайси', 'кимчи', 'шрирач', 'халапеньо', 'чили', 'кочудян', 'том ям', 'остр'] },
+      { id: 'garlic_onion', label: '🧄 Лук и Чеснок', keywords: ['чеснок', 'чесночн', 'лук'] },
+      { id: 'egg', label: '🥚 Яйцо и Майонез', keywords: ['яйц', 'яичн', 'омлет', 'майонез', 'цезарь', 'тар-тар'] },
+      { id: 'gluten', label: '🍞 Глютен (мука / кляр / паста)', keywords: ['мука', 'сухари', 'кляр', 'панировк', 'удон', 'спагетти', 'феттучини', 'макарон', 'булка', 'хлеб', 'гренки', 'тесто'] }
+    ];
+
+    // Ингредиенты, которые кухня может легко не класть при сборке/отдаче
+    const REMOVABLE_HINTS = [
+      { kw: 'кинза', label: 'без кинзы' },
+      { kw: 'лук зеленый', label: 'без зелёного лука' },
+      { kw: 'зеленый лук', label: 'без зелёного лука' },
+      { kw: 'лук красный', label: 'без красного лука' },
+      { kw: 'красный лук', label: 'без красного лука' },
+      { kw: 'кунжут', label: 'без семян кунжута' },
+      { kw: 'грецкий орех', label: 'без грецкого ореха' },
+      { kw: 'халапеньо', label: 'без халапеньо' },
+      { kw: 'орегано', label: 'без орегано' },
+      { kw: 'зелень', label: 'без зелени' },
+      { kw: 'петрушка', label: 'без петрушки' },
+      { kw: 'сухари', label: 'без сухарей (в салате/супе)' }
+    ];
+
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v15')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
+
+    // Состояние вкладки аллергенов
+    let selectedAllergens = [];
+    let allergenMode = 'safe'; // 'safe' (что можно) или 'danger' (где содержится)
 
     // Переменные состояния экзамена и таймера
     let isExamInProgress = false;
@@ -719,11 +824,11 @@
     function switchTab(tab) {
       // Защита от списывания: блокировка переключения вкладок во время активного экзамена
       if (isExamInProgress && tab !== 'quiz') {
-        alert('🔒 Во время сдачи экзамена (30 вопросов) переход в разделы «Меню», «Карточки» и «Устав» заблокирован!');
+        alert('🔒 Во время сдачи экзамена (30 вопросов) переход в разделы «Меню», «Аллергены», «Карточки» и «Устав» заблокирован!');
         return;
       }
 
-      ['menu', 'cards', 'rules', 'quiz', 'admin'].forEach(t => {
+      ['menu', 'allergens', 'cards', 'rules', 'quiz', 'admin'].forEach(t => {
         const sec = document.getElementById('section-' + t);
         if (sec) sec.classList.add('hidden');
         const btn = document.getElementById('tab-' + t);
@@ -749,6 +854,7 @@
       const container = document.getElementById('category-tabs');
       const quizSelect = document.getElementById('quiz-cat-select');
       const fcSelect = document.getElementById('fc-cat-select');
+      const algSelect = document.getElementById('alg-cat-select');
       const cats = getCategories();
 
       container.innerHTML = cats.map(cat => {
@@ -765,6 +871,10 @@
 
       quizSelect.innerHTML = optionsHtml;
       if (fcSelect) fcSelect.innerHTML = optionsHtml;
+      if (algSelect) {
+        algSelect.innerHTML = `<option value="ALL">Все категории меню (${menuData.length})</option>` +
+          cats.filter(c => c !== 'Все').map(c => `<option value="${c}">${c}</option>`).join('');
+      }
     }
 
     function selectCategory(cat) {
@@ -829,6 +939,148 @@
           </div>
         </div>
       `).join('');
+    }
+
+    // ================= ЛОГИКА ВКЛАДКИ АЛЛЕРГЕНОВ =================
+    function renderAllergenButtons() {
+      const container = document.getElementById('allergen-buttons');
+      if (!container) return;
+      container.innerHTML = ALLERGEN_GROUPS.map(g => {
+        const active = selectedAllergens.includes(g.id);
+        return `<button onclick="toggleAllergen('${g.id}')" class="px-3.5 py-2 rounded-xl text-xs font-bold transition border ${
+          active
+            ? 'bg-red-500 text-slate-950 border-red-400 shadow-md'
+            : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-700 hover:bg-slate-800'
+        }">${g.label} ${active ? '✖' : ''}</button>`;
+      }).join('');
+    }
+
+    function toggleAllergen(id) {
+      if (selectedAllergens.includes(id)) {
+        selectedAllergens = selectedAllergens.filter(x => x !== id);
+      } else {
+        selectedAllergens.push(id);
+      }
+      renderAllergenButtons();
+      renderAllergens();
+    }
+
+    function setAllergenMode(mode) {
+      allergenMode = mode;
+      const safeBtn = document.getElementById('alg-mode-safe');
+      const dangerBtn = document.getElementById('alg-mode-danger');
+      if (mode === 'safe') {
+        safeBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-500 text-slate-950 shadow transition';
+        dangerBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition';
+      } else {
+        dangerBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-red-500 text-slate-950 shadow transition';
+        safeBtn.className = 'px-3.5 py-2 rounded-xl text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800 hover:bg-slate-800 transition';
+      }
+      renderAllergens();
+    }
+
+    function clearAllergens() {
+      selectedAllergens = [];
+      document.getElementById('alg-cat-select').value = 'ALL';
+      renderAllergenButtons();
+      renderAllergens();
+    }
+
+    function getItemMatchedAllergens(item) {
+      const text = (item.name + ' ' + item.ingredients + ' ' + item.serving).toLowerCase();
+      const matchedGroups = [];
+      const matchedKeywords = [];
+
+      selectedAllergens.forEach(algId => {
+        const group = ALLERGEN_GROUPS.find(g => g.id === algId);
+        if (!group) return;
+        const foundKws = group.keywords.filter(kw => text.includes(kw.toLowerCase()));
+        if (foundKws.length > 0) {
+          matchedGroups.push(group.label);
+          foundKws.forEach(k => { if (!matchedKeywords.includes(k)) matchedKeywords.push(k); });
+        }
+      });
+
+      return { hasAllergen: matchedGroups.length > 0, matchedGroups, matchedKeywords };
+    }
+
+    function getRemovableTips(item) {
+      const ingLower = item.ingredients.toLowerCase();
+      // В роллах и суши кунжут или огурец часто внутри/снаружи по техкарте, но в воках, супах, салатах и горячем посыпка легко убирается
+      const tips = [];
+      REMOVABLE_HINTS.forEach(h => {
+        if (ingLower.includes(h.kw) && !tips.includes(h.label)) {
+          tips.push(h.label);
+        }
+      });
+      return tips;
+    }
+
+    function renderAllergens() {
+      const catFilter = document.getElementById('alg-cat-select').value;
+      const grid = document.getElementById('allergen-grid');
+      const info = document.getElementById('alg-count-info');
+
+      let pool = menuData.filter(item => catFilter === 'ALL' || item.category === catFilter);
+
+      if (selectedAllergens.length === 0) {
+        info.textContent = `Аллергены не выбраны — показаны все позиции (${pool.length})`;
+      }
+
+      const filtered = pool.filter(item => {
+        if (selectedAllergens.length === 0) return true;
+        const check = getItemMatchedAllergens(item);
+        return allergenMode === 'safe' ? !check.hasAllergen : check.hasAllergen;
+      });
+
+      if (selectedAllergens.length > 0) {
+        info.textContent = allergenMode === 'safe'
+          ? `✅ Безопасных позиций (без выбранных аллергенов): ${filtered.length} из ${pool.length}`
+          : `⛔ Позиций, содержащих выбранные аллергены: ${filtered.length} из ${pool.length}`;
+      }
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="col-span-full bg-slate-900 p-8 rounded-2xl text-center text-slate-400 border border-slate-800">Нет позиций по заданным критериям аллергенов.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(item => {
+        const check = getItemMatchedAllergens(item);
+        const removable = getRemovableTips(item);
+
+        let ingHtml = item.ingredients;
+        if (check.matchedKeywords.length > 0) {
+          check.matchedKeywords.forEach(kw => {
+            const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(${escaped}[а-яё]*)`, 'gi');
+            ingHtml = ingHtml.replace(regex, '<mark>$1</mark>');
+          });
+        }
+
+        return `
+          <div class="bg-slate-900 rounded-2xl p-5 shadow-sm border ${check.hasAllergen ? 'border-red-500/50' : 'border-slate-800 hover:border-emerald-500/50'} transition flex flex-col justify-between space-y-3">
+            <div>
+              <div class="flex items-start justify-between gap-2 mb-2">
+                <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">${item.category}</span>
+                <span class="text-xs font-semibold text-slate-400">${item.weight} • ${item.price} ₽</span>
+              </div>
+              <h3 class="text-base font-extrabold text-white mb-2">${item.name}</h3>
+              <p class="text-xs text-slate-300 leading-relaxed mb-3"><strong class="text-slate-200">Состав:</strong> ${ingHtml}</p>
+            </div>
+
+            <div class="space-y-2 pt-2 border-t border-slate-800">
+              ${check.hasAllergen
+                ? `<div class="text-[11px] font-bold text-red-300 bg-red-950/60 px-2.5 py-1.5 rounded-lg border border-red-900/60">⛔ Содержит: ${check.matchedGroups.join(', ')}</div>`
+                : (selectedAllergens.length > 0 ? `<div class="text-[11px] font-bold text-emerald-300 bg-emerald-950/60 px-2.5 py-1.5 rounded-lg border border-emerald-900/60">✅ Безопасно по выбранным фильтрам</div>` : '')
+              }
+              ${removable.length > 0
+                ? `<div class="text-[11px] text-amber-300 bg-amber-950/40 px-2.5 py-1.5 rounded-lg border border-amber-900/40">🛠️ <strong>Можно убрать при отдаче:</strong> ${removable.join(', ')}</div>`
+                : ''
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
     // ================= ЛОГИКА ФЛЕШ-КАРТОЧЕК =================
@@ -1235,10 +1487,11 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v14', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v15', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
+        renderAllergens();
         initFlashcards();
         alert(`Позиция «${newItem.name}» успешно добавлена!`);
       });
@@ -1247,6 +1500,8 @@
     function initApp() {
       renderCategories();
       renderMenu();
+      renderAllergenButtons();
+      renderAllergens();
       initFlashcards();
       startNewRandomQuiz();
     }
