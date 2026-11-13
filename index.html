@@ -263,10 +263,10 @@
             <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 mb-3">Категория</div>
             <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-white mb-5">Загрузка вопроса...</h3>
             
-            <!-- Контейнер для вариантов ответа или ручного ввода -->
+            <!-- Контейнер для вариантов ответа -->
             <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
             
-            <!-- Блок ручного ввода для экзамена -->
+            <!-- Блок ручного ввода для экзамена с нейтральным примером -->
             <div id="quiz-manual-container" class="hidden space-y-3">
               <textarea id="quiz-manual-input" rows="3" placeholder="Перечислите основные ингредиенты через запятую..." class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm"></textarea>
               <p class="text-xs text-slate-400 italic">💡 Пример заполнения: Рис, нори, сливочный сыр, огурец, лосось, угорь...</p>
@@ -355,15 +355,22 @@
     const INITIAL_MENU = [
       { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "110 г", price: 329, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
       { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, имбирь маринованный, васаби" },
+      { id: "CR-03", category: "Классические роллы", name: "Ролл с копченой курицей", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, куриное филе копченое, имбирь маринованный, васаби" },
+      { id: "CR-04", category: "Классические роллы", name: "Ролл с креветкой", weight: "110 г", price: 279, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, тигровая креветка, имбирь маринованный, васаби" },
+      { id: "CR-05", category: "Классические роллы", name: "Ролл с лососем", weight: "110 г", price: 309, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, лосось, имбирь маринованный, васаби" },
+      { id: "CR-06", category: "Классические роллы", name: "Ролл с огурцом", weight: "110 г", price: 199, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, огурец, белый кунжут, имбирь маринованный, васаби" },
+      { id: "CR-07", category: "Классические роллы", name: "Ролл с тунцом", weight: "110 г", price: 289, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, тунец, имбирь маринованный, васаби" },
       { id: "PR-01", category: "Фирменные роллы", name: "Асахи", weight: "220 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, икра масаго, имбирь маринованный, васаби" },
       { id: "PR-02", category: "Фирменные роллы", name: "Инь-Ян", weight: "200 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, лосось, угорь, огурец, имбирь маринованный, васаби" },
+      { id: "PR-03", category: "Фирменные роллы", name: "Кайто", weight: "220 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, кукуруза консервированная, болгарский перец, огурец, ореховый соус, имбирь маринованный, васаби" },
+      { id: "PR-04", category: "Фирменные роллы", name: "Калифорния с имитацией краба", weight: "240 г", price: 499, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, огурец, имитация краба, икра масаго, имбирь маринованный, васаби" },
       { id: "PR-08", category: "Фирменные роллы", name: "Канада", weight: "235 г", price: 729, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, огурец, авокадо, лосось терияки, угорь, белый кунжут, соус «Унаги», имбирь маринованный, васаби" },
       { id: "HR-01", category: "Горячие роллы", name: "Азуми", weight: "260 г", price: 529, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, мидии, соус «терияки», мука, яйцо, панировочные сухари, соус спайси" },
       { id: "PZ-06", category: "Пицца", name: "Папино пицца", weight: "630 г", price: 789, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», ветчина, колбаски «Пепперони», томаты, перец «Халапеньо», соус «Шрирачо», орегано" },
       { id: "S-01", category: "Супы", name: "Том ям", weight: "300 г", price: 569, serving: "Стандартная подача", ingredients: "Бульон том ям, кокосовое молоко, кальмар, мидии, креветки тигровые, кинза, мята, лайм, кунжут белый, масло растительное, перец чили, грибы шампиньоны" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_v7')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_v8')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -532,7 +539,7 @@
 
       const generated = [];
       const shuffledPool = shuffleArray(pool);
-      const isExam = (count >= 30); // Если выбрано 30 вопросов, включаем режим экзамена с ручным вводом
+      const isExam = (count >= 30); // 30 вопросов — экзамен с ручным вводом
 
       for (let i = 0; i < count; i++) {
         const target = shuffledPool[i % shuffledPool.length];
@@ -543,7 +550,6 @@
         const wrongItems = shuffleArray(sameCat).slice(0, 3);
 
         if (isExam) {
-          // Режим экзамена: ручной ввод состава
           generated.push({
             badge: `Экзамен • ${target.category}`,
             question: `Напишите точный состав позиции «${target.name}» (${target.weight}):`,
@@ -552,7 +558,6 @@
             item: target
           });
         } else {
-          // Обычный тест с выбором вариантов
           const qTypes = ['GUESS_NAME_BY_ING', 'GUESS_ING_BY_NAME', 'SERVING_RULE', 'WEIGHT_CHECK'];
           const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
@@ -657,7 +662,6 @@
       const q = quizQuestions[currentQIndex];
       const correctLower = q.correct.toLowerCase();
       
-      // Проверяем совпадение ключевых слов (если совпало более 50% слов из состава)
       const correctWords = correctLower.split(/,\s*|\s+/).filter(w => w.length > 2);
       const matchedCount = correctWords.filter(w => userInput.includes(w)).length;
       const isCorrect = (matchedCount / correctWords.length) >= 0.5;
@@ -764,7 +768,7 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_v7', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_v8', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
