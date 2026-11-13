@@ -109,7 +109,7 @@
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ -->
+    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (ПОЛНЫЙ ТЕКСТ) -->
     <section id="section-rules" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
@@ -124,27 +124,123 @@
           <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы и Санкции</a>
         </div>
 
+        <!-- 1. Ценности -->
         <div id="rule-corp" class="space-y-4 pt-2">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
             Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
           </p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
+              <strong class="text-white block text-sm">7 правил создания атмосферы:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Радушно приветствуем каждого Гостя!</li>
+                <li>Проявляем внимание к КАЖДОМУ гостю, даже если он за чужим столом.</li>
+                <li>Официант отлично знает меню и предлагает блюда под потребности гостя.</li>
+                <li>Обеспечиваем радушный и заботливый сервис.</li>
+                <li>Всегда улыбаемся во время визита гостя!</li>
+                <li>Прощаемся с гостем всем коллективом!</li>
+                <li>Обслуживание заканчивается только после ухода гостя из ресторана!</li>
+              </ul>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
+              <strong class="text-white block text-sm">Золотые правила официанта:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li><strong>Правило без слова «нет»:</strong> если блюда нет, предлагаем достойную альтернативу.</li>
+                <li><strong>Командная работа:</strong> помогать коллегам и просить помощи при запарке.</li>
+                <li><strong>Двойная роль:</strong> быть одновременно радушным хозяином и профессиональным продавцом.</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
+        <!-- 2. Внешний вид и запреты -->
         <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> 2. Стандарты внешнего вида, гигиены и запреты</h3>
-          <p class="text-sm text-slate-300">Чистая униформа, ухоженные волосы, закрытая черная обувь. Запрещено пользоваться телефонами в зале (кроме iiko waiter) и жевать жвачку.</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <strong class="text-white block text-sm">Требования к внешнему виду:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Чистая, отутюженная униформа.</li>
+                <li>Волосы чистые, собраны в хвост или убранные с лица.</li>
+                <li>Закрытая черная обувь, черные носки.</li>
+                <li>Умеренный парфюм, неброский макияж, ухоженные ногти средней длины.</li>
+                <li>Бейдж на груди слева.</li>
+                <li><strong>Строго запрещены</strong> кольца (кроме обручального), браслеты, часы и серьги с камнями.</li>
+              </ul>
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
+              <strong class="text-red-400 block text-sm">Категорические запреты в зале:</strong>
+              <ul class="list-disc pl-4 space-y-1">
+                <li>Пользоваться мобильным телефоном в зале (кроме iiko waiter).</li>
+                <li>Жевать жвачку в зале и на кухне.</li>
+                <li>Держать руки в карманах, облокачиваться на стены и барную стойку.</li>
+                <li>Пользоваться гостевым туалетом.</li>
+                <li>Сидеть на стульях, диванах и подлокотниках.</li>
+              </ul>
+            </div>
+          </div>
         </div>
 
+        <!-- 3. Шаги обслуживания -->
         <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 3. Шаги обслуживания и тайминги</h3>
-          <p class="text-sm text-slate-300">Встреча в первые 30-60 секунд. Салаты готовятся 15–20 минут, горячие блюда — 15–25 минут, десерты — 5–10 минут.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 1. Встреча и приветствие</strong>
+              Приветствие в первые 30–60 сек. Уточнение брони, выбор зала. Подача меню в открытом виде.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа</strong>
+              Использование «Сетки меню». Тайминги: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль)</strong>
+              Опрос гостя сразу после того, как он попробовал блюдо («Вам понравился вкус заказанных блюд?»).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 4. Расчёт и прощание</strong>
+              Фискальный чек за 3 мин, сдача за 4 мин. Прощание у дверей, предложение вернуться снова.
+            </div>
+          </div>
         </div>
 
+        <!-- 4. Штрафы (Депремирование) -->
         <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы)</h3>
-          <p class="text-sm text-slate-300">Опоздание (500 ₽), телефон в зале (1000 ₽), работа без перчаток (1000 ₽). Алкоголь и вынос имущества — немедленное увольнение.</p>
+          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
+              <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
+                <tr>
+                  <th class="p-3 border-b border-slate-800">Вид нарушения</th>
+                  <th class="p-3 border-b border-slate-800 text-right">Размер штрафа</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-800 bg-slate-950/50">
+                <tr><td class="p-3">Опоздание (каждые 15 минут)</td><td class="p-3 text-right font-bold text-red-400">500 ₽</td></tr>
+                <tr><td class="p-3">Отсутствие на рабочем месте более 20 минут</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
+                <tr><td class="p-3">Невыход на работу без уважительной причины</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽</td></tr>
+                <tr><td class="p-3">Использование телефона / гаджетов в зале</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
+                <tr><td class="p-3">Приготовление или выдача блюд без перчаток</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽</td></tr>
+                <tr><td class="p-3">Нарушение технологии приготовления и подачи</td><td class="p-3 text-right font-bold text-red-400">Оплата блюда по цене + 500 ₽</td></tr>
+                <tr><td class="p-3">Хищение / поедание продуктов</td><td class="p-3 text-right font-bold text-red-400">Сумма ущерба + штраф + увольнение</td></tr>
+                <tr><td class="p-3">Отсутствие маркировки / просроченная продукция</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽ (со смены)</td></tr>
+                <tr><td class="p-3">Открытые боксы, посторонние предметы в холодильниках</td><td class="p-3 text-right font-bold text-red-400">2 000 ₽ (со смены)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900/60 text-xs text-red-300 space-y-1">
+            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и влечет немедленное увольнение:</strong>
+            <ul class="list-disc pl-4 space-y-1">
+              <li>Присутствие на рабочем месте под воздействием алкоголя или наркотических средств.</li>
+              <li>Приносить на работу продукты, продаваемые в заведении.</li>
+              <li>Выносить имущество заведения (ст. 158 УК РФ).</li>
+              <li>Покидать рабочее место без разрешения администратора.</li>
+            </ul>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -244,7 +340,6 @@
   </main>
 
   <script>
-    // ССЫЛКА НА ВЕБ-ПРИЛОЖЕНИЕ GOOGLE APPS SCRIPT
     const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwtDTmpzHzzo819H8Ud_ihLtOnEarDLeeELRcAKGY_G8P46nmd78xKe2MdLq3hD10oj/exec";
 
     const IIKO_STAFF = {
@@ -774,7 +869,7 @@
       document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
       document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Сотрудник готов к работе.' : 'Рекомендуем повторить регламент и меню во вкладке «Устав».';
 
-      // ОТПРАВКА ДАННЫХ В GOOGLE ТАБЛИЦУ
+      // ОТПРАВКА ДАННЫХ В GOOGLE ТАБЛИЦУ (Статус выставит сам скрипт в таблице)
       sendResultToGoogleSheets({
         date: new Date().toLocaleString('ru-RU'),
         name: currentStaff ? currentStaff.name : "Гость",
