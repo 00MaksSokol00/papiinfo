@@ -3,12 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Кафе «Папино» — База знаний и обучение стажёров</title>
+  <title>Кафе «Папино» — База знаний, меню и регламент</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-    }
+    tailwind.config = { darkMode: 'class' }
   </script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -26,7 +24,7 @@
       <div class="text-center mb-6">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 font-extrabold text-3xl mb-3 shadow-lg">П</div>
         <h1 class="text-2xl font-extrabold text-white">Кафе «Папино»</h1>
-        <p class="text-sm text-slate-400 mt-1">Внутренний портал обучения и справочник меню</p>
+        <p class="text-sm text-slate-400 mt-1">Закрытый портал обучения стажёров</p>
       </div>
 
       <form id="login-form" class="space-y-4">
@@ -38,8 +36,8 @@
           <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль</label>
           <input type="password" id="login-pass" required placeholder="Введите пароль" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
-        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверный логин или пароль. Попробуйте демо-кнопки ниже.</div>
-        <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в базу знаний</button>
+        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверный логин или пароль. Используйте демо-кнопки.</div>
+        <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в портал</button>
       </form>
 
       <div class="mt-6 pt-5 border-t border-slate-800">
@@ -60,12 +58,12 @@
         <div>
           <span class="font-bold text-lg tracking-tight text-white">ПАПИНО</span>
           <span id="role-badge" class="ml-2 text-xs px-2.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-medium">Стажёр</span>
-          <p class="text-xs text-slate-400">Справочник меню и обучение</p>
+          <p class="text-xs text-slate-400">База знаний и регламент</p>
         </div>
       </div>
 
       <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl overflow-x-auto border border-slate-800">
-        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню</button>
+        <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню и Подача</button>
         <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав и Регламент</button>
         <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр</button>
         <button onclick="switchTab('admin')" id="tab-admin" class="hidden px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚙️ Админка</button>
@@ -78,19 +76,19 @@
   <!-- ОСНОВНОЙ КОНТЕНТ -->
   <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 flex flex-col">
 
-    <!-- ВКЛАДКА 1: СПРАВОЧНИК МЕНЮ -->
+    <!-- ВКЛАДКА 1: МЕНЮ И ПОИСК -->
     <section id="section-menu" class="space-y-5">
       <div class="bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-800 space-y-3">
         <div class="flex flex-col sm:flex-row gap-3">
           <div class="relative flex-1">
-            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по названию или ингредиенту (например: кинза, угорь, дорблю, песто, халапеньо)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
+            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по блюду, составу или аллергенам (кинза, угорь, дорблю, песто)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
             <span class="absolute left-3.5 top-3.5 text-slate-500">🔍</span>
           </div>
-          <button onclick="resetFilters()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition shrink-0 border border-slate-700">Сбросить фильтры</button>
+          <button onclick="resetFilters()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition shrink-0 border border-slate-700">Сбросить</button>
         </div>
 
         <div class="flex items-center gap-2 flex-wrap pt-1">
-          <span class="text-xs font-semibold text-slate-400">Быстрая проверка состава:</span>
+          <span class="text-xs font-semibold text-slate-400">Фильтр стоп-ингредиентов:</span>
           <button onclick="setQuickSearch('кинза')" class="text-xs px-2.5 py-1 rounded-lg bg-emerald-950/60 text-emerald-400 hover:bg-emerald-900/60 font-medium border border-emerald-900/50">🌿 Кинза</button>
           <button onclick="setQuickSearch('орех')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-950/60 text-amber-400 hover:bg-amber-900/60 font-medium border border-amber-900/50">🥜 Орехи</button>
           <button onclick="setQuickSearch('мед')" class="text-xs px-2.5 py-1 rounded-lg bg-yellow-950/60 text-yellow-400 hover:bg-yellow-900/60 font-medium border border-yellow-900/50">🍯 Мёд</button>
@@ -104,83 +102,83 @@
 
       <div class="flex items-center justify-between text-xs text-slate-400 px-1">
         <span id="items-count">Показано позиций: 0</span>
-        <span>Стандарты подачи учтены в каждой карточке</span>
+        <span>Палочки, перчатки и оливковое масло учтены</span>
       </div>
 
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (ПОЛНАЯ МЕТОДИЧКА) -->
+    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (МЕТОДИЧКА И ШТРАФЫ) -->
     <section id="section-rules" class="hidden space-y-6">
-      <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-6">
+      <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
-          <h2 class="text-2xl font-extrabold text-white">📜 Внутренний устав, регламент и стандарты Кафе «Папино»</h2>
-          <p class="text-sm text-slate-400 mt-1">Официальное учебное пособие и свод правил для сотрудников зала (ИП Лотфуллин М.М.)</p>
+          <h2 class="text-2xl font-extrabold text-white">📜 Официальный регламент и устав Кафе «Папино»</h2>
+          <p class="text-sm text-slate-400 mt-1">Полный свод правил, стандартов сервиса, гигиены и ответственности сотрудников (ИП Лотфуллин М.М.)</p>
         </div>
 
-        <!-- Навигация по уставу -->
+        <!-- Быстрая навигация -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности и Миссия</a>
-          <a href="#rule-conduct" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">👤 Дресс-код и Гигиена</a>
+          <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности и Гость</a>
+          <a href="#rule-conduct" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">👤 Внешний вид и Запреты</a>
           <a href="#rule-steps" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🚶‍♂️ Шаги обслуживания</a>
-          <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">⚠️ Штрафы и Депремирование</a>
+          <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы и Санкции</a>
         </div>
 
-        <!-- 1. Ценности и атмосфера -->
-        <div id="rule-corp" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> Ценности и Правила создания атмосферы гостеприимства</h3>
+        <!-- 1. Ценности -->
+        <div id="rule-corp" class="space-y-4 pt-2">
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
-            Ресторан — это необычное государство со своей историей, традициями и законами. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе (даже во внутренних переговорах) мы <strong>никогда не используем слов «клиент», «посетитель»</strong>. Мы используем исключительно понятие <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>[cite: 20].
+            Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе (даже во внутренних разговорах) мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>[cite: 20].
           </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-              <strong class="text-white block text-sm">7 правил гостеприимства:</strong>
+              <strong class="text-white block text-sm">7 правил создания атмосферы:</strong>
               <ul class="list-disc pl-4 space-y-1">
                 <li>Радушно приветствуем каждого Гостя![cite: 8]</li>
-                <li>Проявляем внимание к КАЖДОМУ гостю, даже если он сидит за столом другого официанта[cite: 8].</li>
-                <li>Официант отлично знает меню и может предложить любое блюдо, исходя из потребности гостей[cite: 8].</li>
-                <li>Во время визита гостя официант представляет радушный и заботливый сервис[cite: 8].</li>
-                <li>Во время визита гостя официант всегда улыбается![cite: 8]</li>
-                <li>Прощаться с гостем необходимо всем сотрудникам ресторана[cite: 8]!</li>
-                <li>Обслуживание заканчивается только тогда, когда гость покинул ресторан[cite: 8]!</li>
+                <li>Проявляем внимание к КАЖДОМУ гостю, даже если он за чужим столом.[cite: 8]</li>
+                <li>Официант отлично знает меню и предлагает блюда под потребности гостя.[cite: 8]</li>
+                <li>Обеспечиваем радушный и заботливый сервис.[cite: 8]</li>
+                <li>Всегда улыбаемся во время визита гостя![cite: 8]</li>
+                <li>Прощаемся с гостем всем коллективом![cite: 8]</li>
+                <li>Обслуживание заканчивается только после ухода гостя из ресторана![cite: 8]</li>
               </ul>
             </div>
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-              <strong class="text-white block text-sm">Главные принципы работы:</strong>
+              <strong class="text-white block text-sm">Золотые правила официанта:</strong>
               <ul class="list-disc pl-4 space-y-1">
-                <li><strong>Правило без слова «нет»:</strong> если в меню нет блюда, которым интересуется Гость, мы не отказываем, а обязательно предлагаем альтернативу[cite: 20].</li>
-                <li><strong>Команда:</strong> каждый официант должен помогать своим коллегам и сам просить о помощи, когда она необходима[cite: 19, 20].</li>
-                <li><strong>Роль официанта:</strong> одновременно быть радушным хозяином и хорошим продавцом[cite: 22].</li>
+                <li><strong>Правило без слова «нет»:</strong> если блюда нет, предлагаем достойную альтернативу[cite: 20].</li>
+                <li><strong>Командная работа:</strong> помогать коллегам и просить помощи при запарке[cite: 19, 20].</li>
+                <li><strong>Двойная роль:</strong> быть одновременно радушным хозяином и профессиональным продавцом[cite: 22].</li>
+                <li><strong>Внешний вид:</strong> помните, что любой посетитель ассоциирует с заведением каждого сотрудника[cite: 5].</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <!-- 2. Внешний вид и гигиена -->
+        <!-- 2. Внешний вид и запреты -->
         <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> Стандарты внешнего вида и гигиены</h3>
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> 2. Стандарты внешнего вида, гигиены и запреты</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-white block text-sm">Дресс-код и внешний вид:</strong>
+              <strong class="text-white block text-sm">Требования к внешнему виду:</strong>
               <ul class="list-disc pl-4 space-y-1">
-                <li>Униформу необходимо носить полностью: чистая, выглаженная, в хорошем состоянии[cite: 3].</li>
-                <li>Волосы чистые, ухоженные, убранные с лица[cite: 3].</li>
+                <li>Чистая, отутюженная униформа[cite: 3].</li>
+                <li>Волосы чистые, собраны в хвост или убранные с лица[cite: 3].</li>
                 <li>Закрытая черная обувь, черные носки[cite: 3].</li>
-                <li>Умеренный парфюм, неброская декоративная косметика[cite: 3].</li>
-                <li>Ногти средней длины, чистые и ухоженные[cite: 3].</li>
-                <li>Бейдж с именем на груди слева[cite: 3].</li>
-                <li><strong>Отсутствие украшений</strong> и сережек с камнями, часов (разрешается только обручальное кольцо)[cite: 3].</li>
+                <li>Умеренный парфюм, неброский макияж, ухоженные ногти средней длины[cite: 3].</li>
+                <li>Бейдж на груди слева[cite: 3].</li>
+                <li><strong>Строго запрещены</strong> кольца (кроме обручального), браслеты, часы и серьги с камнями[cite: 3].</li>
               </ul>
             </div>
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-white block text-sm">Строгие запреты в зале:</strong>
+              <strong class="text-red-400 block text-sm">Категорические запреты в зале:</strong>
               <ul class="list-disc pl-4 space-y-1">
-                <li>Категорически запрещено пользоваться мобильными телефонами во время работы (исключение: iiko waiter)[cite: 2, 7].</li>
-                <li>Запрещено жевать жевательную резинку в зале и на кухне[cite: 2, 6, 7].</li>
-                <li>Запрещено держать руки в карманах, облокачиваться на стены, стейшены и барную стойку[cite: 7, 10].</li>
-                <li>Запрещено принимать пищу и напитки в не отведенных для этого местах[cite: 2, 10].</li>
-                <li>Запрещено сидеть на стульях, диванах, подлокотниках[cite: 10].</li>
-                <li>Запрещено пользоваться гостевым туалетом[cite: 2, 10].</li>
+                <li>Пользоваться мобильным телефоном в зале (кроме iiko waiter)[cite: 2, 7].</li>
+                <li>Жевать жвачку в зале и на кухне[cite: 2, 6, 7].</li>
+                <li>Держать руки в карманах, облокачиваться на стены и барную стойку[cite: 7, 10].</li>
+                <li>Пользоваться гостевым туалетом[cite: 2, 10].</li>
+                <li>Сидеть на стульях, диванах и подлокотниках[cite: 10].</li>
+                <li>Разговаривать на отвлеченные темы и курить сотрудникам зала[cite: 3, 10].</li>
               </ul>
             </div>
           </div>
@@ -188,56 +186,58 @@
 
         <!-- 3. Шаги обслуживания -->
         <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> Алгоритм и шаги обслуживания гостей</h3>
-          <div class="space-y-3 text-xs text-slate-300">
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <strong class="text-amber-300 text-sm">Шаг 1. Встреча и приветствие</strong>
-              <p>Приветствие Гостя в течение 30-60 секунд. Уточнение брони, предпочтений (зал с паровыми коктейлями или без). Пропроводка к столу, подача меню в открытом виде[cite: 21, 23].</p>
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 3. Шаги обслуживания и тайминги</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 1. Встреча и приветствие</strong>
+              Приветствие в первые 30–60 сек. Уточнение брони, выбор зала (паровые коктейли или без). Подача меню в открытом виде[cite: 21, 23].
             </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <strong class="text-amber-300 text-sm">Шаг 2. Принятие заказа (Сетка меню)</strong>
-              <p>Рекомендация закусок, супов, основных блюд[cite: 22]. Ввод заказа в iiko. <strong>Тайминги приготовления:</strong> салаты 15–20 мин, горячие блюда 15–25 мин, десерты 5–10 мин[cite: 22, 25].</p>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа</strong>
+              Использование «Сетки меню». Предупреждение о времени: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин[cite: 22, 25].
             </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <strong class="text-amber-300 text-sm">Шаг 3. Контроль качества (Check Back)</strong>
-              <p>Обязательный опрос гостя о блюде сразу после того, как он попробовал, или во время уборки посуды («Вам понравился вкус заказанных блюд?»)[cite: 22, 26].</p>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль)</strong>
+              Опрос гостя сразу после того, как он попробовал блюдо («Вам понравился вкус заказанных блюд?»)[cite: 22, 26].
             </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-1">
-              <strong class="text-amber-300 text-sm">Шаг 4. Расчёт и прощание</strong>
-              <p>Фискальный чек в счетнице приносится не позднее 3-х минут после запроса. Сдача возвращается в течение 4 минут. Прощание у дверей, предложение вернуться снова[cite: 22, 27].</p>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">Шаг 4. Расчёт и прощание</strong>
+              Фискальный чек за 3 мин, сдача за 4 мин. Прощание у дверей, предложение вернуться снова[cite: 22, 27].
             </div>
           </div>
         </div>
 
         <!-- 4. Штрафы (Депремирование) -->
         <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
+          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
               <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
                 <tr>
-                  <th class="p-3 border-b border-slate-800">Нарушение</th>
-                  <th class="p-3 border-b border-slate-800 text-right">Сумма штрафа</th>
+                  <th class="p-3 border-b border-slate-800">Вид нарушения</th>
+                  <th class="p-3 border-b border-slate-800 text-right">Размер штрафа</th>
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-800 bg-slate-950/50">
                 <tr><td class="p-3">Опоздание (каждые 15 минут)[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">500 ₽[cite: 1]</td></tr>
                 <tr><td class="p-3">Отсутствие на рабочем месте более 20 минут[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
                 <tr><td class="p-3">Невыход на работу без уважительной причины[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽[cite: 1]</td></tr>
-                <tr><td class="p-3">Использование сотового телефона в зале[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
-                <tr><td class="p-3">Приготовление блюд без перчаток[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
-                <tr><td class="p-3">Нарушение технологии приготовления и подачи блюда[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">Оплата блюда по цене + 500 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Использование телефона / гаджетов в зале[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Приготовление или выдача блюд без перчаток[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">1 000 ₽[cite: 1]</td></tr>
+                <tr><td class="p-3">Нарушение технологии приготовления и подачи[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">Оплата блюда по цене + 500 ₽[cite: 1]</td></tr>
                 <tr><td class="p-3">Хищение / поедание продуктов[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">Сумма ущерба + штраф + увольнение[cite: 1]</td></tr>
-                <tr><td class="p-3">Отсутствие маркировки на продукции / просрочка[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽ (со смены)[cite: 1]</td></tr>
+                <tr><td class="p-3">Отсутствие маркировки / просроченная продукция[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">3 000 ₽ (со смены)[cite: 1]</td></tr>
+                <tr><td class="p-3">Открытые боксы, посторонние предметы в холодильниках[cite: 1]</td><td class="p-3 text-right font-bold text-red-400">2 000 ₽ (со смены)[cite: 1]</td></tr>
               </tbody>
             </table>
           </div>
+
           <div class="p-4 rounded-xl bg-red-950/40 border border-red-900/60 text-xs text-red-300 space-y-1">
-            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и приводит к немедленному увольнению:</strong>
+            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и влечет немедленное увольнение:</strong>
             <ul class="list-disc pl-4 space-y-1">
               <li>Присутствие на рабочем месте под воздействием алкоголя или наркотических средств[cite: 1].</li>
               <li>Приносить на работу продукты, продаваемые в заведении[cite: 1].</li>
-              <li>Выносить имущество заведения! (ст. 158 УК РФ)[cite: 1].</li>
+              <li>Выносить имущество заведения (ст. 158 УК РФ)[cite: 1].</li>
               <li>Покидать рабочее место без разрешения администратора[cite: 1].</li>
             </ul>
           </div>
@@ -251,12 +251,12 @@
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
-            <h2 class="text-xl font-extrabold text-white">🎲 Генератор случайных тестов для стажёров</h2>
-            <p class="text-sm text-slate-400 mt-1">Рандомные вопросы по меню, стандартам подачи и правилам сервиса Кафе «Папино».</p>
+            <h2 class="text-xl font-extrabold text-white">🎲 Генератор тестов по меню и стандартам</h2>
+            <p class="text-sm text-slate-400 mt-1">Проверка знаний составов блюд, правил подачи и регламента Кафе «Папино».</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="quiz-cat-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
-              <option value="ALL">Все категории меню</option>
+              <option value="ALL">Вся база (169 позиций)</option>
             </select>
             <select id="quiz-count-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
               <option value="10">10 вопросов</option>
@@ -277,8 +277,8 @@
           </div>
 
           <div id="quiz-question-card" class="bg-slate-950 p-5 sm:p-6 rounded-2xl border border-slate-800">
-            <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 mb-3">Тип вопроса</div>
-            <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-white mb-5">Текст вопроса...</h3>
+            <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 mb-3">Категория</div>
+            <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-white mb-5">Загрузка вопроса...</h3>
             <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
             <div id="quiz-feedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
             <div class="mt-5 flex justify-end">
@@ -294,7 +294,7 @@
           <button onclick="startNewRandomQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow transition">Пройти ещё раз</button>
 
           <div id="quiz-mistakes-box" class="hidden mt-8 text-left max-w-3xl mx-auto">
-            <h4 class="text-sm font-bold uppercase tracking-wider text-red-400 mb-3">Разбор ошибок:</h4>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-red-400 mb-3">Разбор допущенных ошибок:</h4>
             <div id="quiz-mistakes-list" class="space-y-3"></div>
           </div>
         </div>
@@ -304,28 +304,28 @@
     <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ -->
     <section id="section-admin" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
-        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Добавление новой позиции (включая напитки)</h2>
-        <p class="text-xs text-slate-400 mb-5">Сохраняется в памяти вашего браузера и сразу попадает в поиск и тесты.</p>
+        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Добавление новой позиции (включая бар и напитки)</h2>
+        <p class="text-xs text-slate-400 mb-5">Блюдо или напиток сохраняется в браузере и сразу доступно стажёрам в поиске и тестах.</p>
         <form id="add-item-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Категория</label>
-            <input type="text" id="new-cat" required placeholder="Например: Напитки / Кофе" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-cat" required placeholder="Например: Бар / Кофе / Лимонады" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Название позиции</label>
-            <input type="text" id="new-name" required placeholder="Лимонад Манго-Маракуйя" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-name" required placeholder="Раф Лаванда" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
             <label class="block text-xs font-bold text-slate-400 mb-1">Состав / Описание</label>
-            <input type="text" id="new-ing" required placeholder="Ингредиенты через запятую" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-ing" required placeholder="Эспрессо, сливки, лавандовый сироп" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Выход (г / мл)</label>
-            <input type="text" id="new-weight" required placeholder="400 мл" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-weight" required placeholder="300 мл" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Цена (₽)</label>
-            <input type="number" id="new-price" required placeholder="299" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="number" id="new-price" required placeholder="290" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
             <label class="block text-xs font-bold text-slate-400 mb-1">Особенности подачи</label>
@@ -342,7 +342,7 @@
 
   <script>
     const INITIAL_MENU = [
-      // Роллы и прочее меню (169 позиций)
+      // База из 169 позиций меню Кафе «Папино»
       { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "110 г", price: 329, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
       { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, имбирь маринованный, васаби" },
       { id: "CR-03", category: "Классические роллы", name: "Ролл с копченой курицей", weight: "110 г", price: 209, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, куриное филе копченое, имбирь маринованный, васаби" },
@@ -622,7 +622,7 @@
         }">${cat} <span class="opacity-60 ml-1">(${count})</span></button>`;
       }).join('');
 
-      quizSelect.innerHTML = `<option value="ALL">Все категории меню (${menuData.length} блюд)</option>` +
+      quizSelect.innerHTML = `<option value="ALL">Вся база (${menuData.length} позиций)</option>` +
         cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
