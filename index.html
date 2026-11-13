@@ -14,6 +14,12 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     mark { background-color: #f59e0b; color: #0f172a; padding: 0 3px; border-radius: 4px; font-weight: 700; }
+    
+    /* Стили для 3D-переворота флеш-карточек */
+    .perspective { perspective: 1000px; }
+    .transform-style-3d { transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+    .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .rotate-y-180 { transform: rotateY(180deg); }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
@@ -65,6 +71,7 @@
 
       <nav class="flex items-center gap-1 bg-slate-950 p-1 rounded-xl overflow-x-auto border border-slate-800">
         <button onclick="switchTab('menu')" id="tab-menu" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition">📖 Меню</button>
+        <button onclick="switchTab('cards')" id="tab-cards" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🃏 Карточки</button>
         <button onclick="switchTab('rules')" id="tab-rules" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">📜 Устав</button>
         <button onclick="switchTab('quiz')" id="tab-quiz" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">🎓 Тренажёр</button>
         <button onclick="switchTab('admin')" id="tab-admin" class="hidden px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition">⚙️ Админка</button>
@@ -109,7 +116,71 @@
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
-    <!-- ВКЛАДКА 2: УСТАВ И РЕГЛАМЕНТ (ПОЛНЫЙ ТЕКСТ) -->
+    <!-- ВКЛАДКА 2: ФЛЕШ-КАРТОЧКИ («УЧИТЬ МЕНЮ») -->
+    <section id="section-cards" class="hidden space-y-6">
+      <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">🃏 Флеш-карточки для запоминания меню</h2>
+            <p class="text-sm text-slate-400 mt-1">Нажмите на карточку, чтобы перевернуть её и проверить состав, выход и подачу.</p>
+          </div>
+          <div class="flex flex-wrap items-center gap-3">
+            <select id="fc-cat-select" onchange="initFlashcards()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+              <option value="ALL">Все категории</option>
+            </select>
+            <button onclick="shuffleFlashcards()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold rounded-xl text-xs sm:text-sm border border-slate-700 transition">🔀 Перемешать</button>
+          </div>
+        </div>
+
+        <div class="mt-6 max-w-xl mx-auto">
+          <div class="flex items-center justify-between text-xs font-semibold text-slate-400 mb-3 px-1">
+            <span id="fc-counter" class="text-amber-400 uppercase tracking-wider font-bold">Карточка 1 из 100</span>
+            <span id="fc-stats">✅ Знаю: 0 | 🔁 Повторить: 0</span>
+          </div>
+
+          <!-- 3D Карточка -->
+          <div onclick="flipFlashcard()" class="perspective cursor-pointer select-none h-72 sm:h-80 w-full">
+            <div id="fc-inner" class="relative w-full h-full transform-style-3d">
+              
+              <!-- Лицевая сторона -->
+              <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-slate-800 hover:border-amber-500/60 rounded-2xl p-6 flex flex-col items-center justify-center text-center backface-hidden shadow-xl transition">
+                <span id="fc-front-cat" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">Категория</span>
+                <h3 id="fc-front-name" class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Название блюда</h3>
+                <p id="fc-front-weight" class="text-sm font-semibold text-slate-400">Выход: —</p>
+                <span class="mt-8 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав</span>
+              </div>
+
+              <!-- Обратная сторона -->
+              <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-amber-500/60 rounded-2xl p-6 flex flex-col justify-between text-left backface-hidden rotate-y-180 shadow-xl">
+                <div>
+                  <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
+                    <h4 id="fc-back-name" class="text-lg font-extrabold text-amber-400">Название блюда</h4>
+                    <span id="fc-back-price" class="text-sm font-black text-white bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">0 ₽</span>
+                  </div>
+                  <p class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Состав:</p>
+                  <p id="fc-back-ing" class="text-sm sm:text-base text-slate-100 leading-relaxed font-medium mb-4">Состав блюда...</p>
+                </div>
+                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+                  <span id="fc-back-serve" class="font-semibold text-emerald-400 bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-900/50">🍽️ Стандартная подача</span>
+                  <span id="fc-back-weight" class="text-slate-400 font-semibold">0 г</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Кнопки управления карточками -->
+          <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+            <button onclick="prevFlashcard()" class="py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-xs sm:text-sm transition">← Назад</button>
+            <button onclick="markFlashcard(false)" class="py-3 px-4 rounded-xl bg-red-950/50 hover:bg-red-900/60 border border-red-900/60 text-red-300 font-bold text-xs sm:text-sm transition">🔁 Повторить</button>
+            <button onclick="markFlashcard(true)" class="py-3 px-4 rounded-xl bg-emerald-950/50 hover:bg-emerald-900/60 border border-emerald-900/60 text-emerald-300 font-bold text-xs sm:text-sm transition">✅ Знаю</button>
+            <button onclick="nextFlashcard()" class="py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-xs sm:text-sm transition">Далее →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВКЛАДКА 3: УСТАВ И РЕГЛАМЕНТ -->
     <section id="section-rules" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
@@ -243,13 +314,13 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 3: ТРЕНАЖЁР И ЭКЗАМЕН -->
+    <!-- ВКЛАДКА 4: ТРЕНАЖЁР И ЭКЗАМЕН -->
     <section id="section-quiz" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
             <h2 class="text-xl font-extrabold text-white">🎲 Генератор тестов и экзаменов</h2>
-            <p class="text-sm text-slate-400 mt-1">Экспресс-тесты (10–20 вопросов) и строгий экзамен по всей базе (30 вопросов) с ручным вводом.</p>
+            <p class="text-sm text-slate-400 mt-1">Экспресс-тесты (10–20 вопросов) и строгий экзамен по всей базе (30 вопросов, 20 минут, защита от списывания).</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="quiz-cat-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
@@ -262,6 +333,12 @@
             </select>
             <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Новый тест</button>
           </div>
+        </div>
+
+        <!-- Баннер блокировки при активном экзамене -->
+        <div id="exam-lock-banner" class="hidden mt-4 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex flex-wrap items-center justify-between gap-2 text-xs text-amber-300">
+          <span>🔒 <strong>Режим экзамена активен:</strong> вкладки «Меню», «Карточки» и «Устав» заблокированы до завершения сдачи.</span>
+          <span id="exam-timer-badge" class="font-mono font-extrabold text-sm bg-slate-950 px-3 py-1 rounded-lg text-amber-400 border border-amber-500/40">⏱️ 20:00</span>
         </div>
 
         <div id="quiz-active-area" class="mt-6">
@@ -309,7 +386,7 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 4: АДМИН-ПАНЕЛЬ -->
+    <!-- ВКЛАДКА 5: АДМИН-ПАНЕЛЬ -->
     <section id="section-admin" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Панель управления (Менеджер)</h2>
@@ -596,9 +673,20 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v12')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v13')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
+
+    // Переменные состояния экзамена и таймера
+    let isExamInProgress = false;
+    let examTimerInterval = null;
+    let examSecondsLeft = 1200; // 20 минут
+
+    // Переменные флеш-карточек
+    let fcDeck = [];
+    let fcIndex = 0;
+    let fcKnown = 0;
+    let fcRepeat = 0;
 
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -634,17 +722,29 @@
     }
 
     function logout() {
+      if (isExamInProgress) {
+        alert('Нельзя выйти из аккаунта во время активного экзамена! Завершите экзамен.');
+        return;
+      }
       document.getElementById('login-screen').classList.remove('hidden');
       document.getElementById('login-pass').value = '';
       document.getElementById('login-user').value = '';
     }
 
     function switchTab(tab) {
-      ['menu', 'rules', 'quiz', 'admin'].forEach(t => {
+      // Защита от списывания: блокировка переключения вкладок во время активного экзамена
+      if (isExamInProgress && tab !== 'quiz') {
+        alert('🔒 Во время сдачи экзамена (30 вопросов) переход в разделы «Меню», «Карточки» и «Устав» заблокирован!');
+        return;
+      }
+
+      ['menu', 'cards', 'rules', 'quiz', 'admin'].forEach(t => {
         const sec = document.getElementById('section-' + t);
         if (sec) sec.classList.add('hidden');
         const btn = document.getElementById('tab-' + t);
-        if (btn) btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
+        if (btn && (t !== 'admin' || (currentStaff && currentStaff.role === 'admin'))) {
+          btn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition';
+        }
       });
       const activeSec = document.getElementById('section-' + tab);
       if (activeSec) activeSec.classList.remove('hidden');
@@ -663,6 +763,7 @@
     function renderCategories() {
       const container = document.getElementById('category-tabs');
       const quizSelect = document.getElementById('quiz-cat-select');
+      const fcSelect = document.getElementById('fc-cat-select');
       const cats = getCategories();
 
       container.innerHTML = cats.map(cat => {
@@ -674,8 +775,11 @@
       }).join('');
 
       const nonSauceCount = menuData.filter(i => i.category !== 'Соуса').length;
-      quizSelect.innerHTML = `<option value="ALL">Вся база (${nonSauceCount} поз. без соусов)</option>` +
+      const optionsHtml = `<option value="ALL">Вся база (${nonSauceCount} поз. без соусов)</option>` +
         cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => `<option value="${c}">${c}</option>`).join('');
+
+      quizSelect.innerHTML = optionsHtml;
+      if (fcSelect) fcSelect.innerHTML = optionsHtml;
     }
 
     function selectCategory(cat) {
@@ -742,6 +846,69 @@
       `).join('');
     }
 
+    // ================= ЛОГИКА ФЛЕШ-КАРТОЧЕК =================
+    function initFlashcards() {
+      const cat = document.getElementById('fc-cat-select').value;
+      let pool = menuData.filter(i => i.category !== 'Соуса');
+      if (cat !== 'ALL') {
+        pool = pool.filter(i => i.category === cat);
+      }
+      fcDeck = [...pool];
+      fcIndex = 0;
+      fcKnown = 0;
+      fcRepeat = 0;
+      renderFlashcard();
+    }
+
+    function shuffleFlashcards() {
+      fcDeck = shuffleArray(fcDeck);
+      fcIndex = 0;
+      renderFlashcard();
+    }
+
+    function renderFlashcard() {
+      if (fcDeck.length === 0) return;
+      const card = fcDeck[fcIndex];
+      const inner = document.getElementById('fc-inner');
+      inner.classList.remove('rotate-y-180');
+
+      document.getElementById('fc-counter').textContent = `Карточка ${fcIndex + 1} из ${fcDeck.length}`;
+      document.getElementById('fc-stats').textContent = `✅ Знаю: ${fcKnown} | 🔁 Повторить: ${fcRepeat}`;
+
+      document.getElementById('fc-front-cat').textContent = card.category;
+      document.getElementById('fc-front-name').textContent = card.name;
+      document.getElementById('fc-front-weight').textContent = `Выход: ${card.weight}`;
+
+      document.getElementById('fc-back-name').textContent = card.name;
+      document.getElementById('fc-back-price').textContent = `${card.price} ₽`;
+      document.getElementById('fc-back-ing').textContent = card.ingredients;
+      document.getElementById('fc-back-serve').textContent = `🍽️ ${card.serving}`;
+      document.getElementById('fc-back-weight').textContent = card.weight;
+    }
+
+    function flipFlashcard() {
+      document.getElementById('fc-inner').classList.toggle('rotate-y-180');
+    }
+
+    function nextFlashcard() {
+      if (fcDeck.length === 0) return;
+      fcIndex = (fcIndex + 1) % fcDeck.length;
+      renderFlashcard();
+    }
+
+    function prevFlashcard() {
+      if (fcDeck.length === 0) return;
+      fcIndex = (fcIndex - 1 + fcDeck.length) % fcDeck.length;
+      renderFlashcard();
+    }
+
+    function markFlashcard(known) {
+      if (known) fcKnown++;
+      else fcRepeat++;
+      nextFlashcard();
+    }
+
+    // ================= ЛОГИКА ТЕСТОВ И ЭКЗАМЕНА =================
     let quizQuestions = [];
     let currentQIndex = 0;
     let quizScore = 0;
@@ -757,7 +924,6 @@
       return copy;
     }
 
-    // Автоматическое переключение на всю базу при выборе Экзамена (30 вопросов)
     function handleQuizCountChange() {
       const countSelect = document.getElementById('quiz-count-select');
       const catSelect = document.getElementById('quiz-cat-select');
@@ -774,9 +940,54 @@
       startNewRandomQuiz();
     }
 
+    function startExamTimer() {
+      clearInterval(examTimerInterval);
+      examSecondsLeft = 20 * 60; // 20 минут на 30 вопросов
+      updateTimerDisplay();
+
+      examTimerInterval = setInterval(() => {
+        examSecondsLeft--;
+        updateTimerDisplay();
+        if (examSecondsLeft <= 0) {
+          clearInterval(examTimerInterval);
+          alert('⏰ Время экзамена (20 минут) вышло! Результаты будут отправлены в текущем виде.');
+          showQuizResults();
+        }
+      }, 1000);
+    }
+
+    function stopExamTimer() {
+      clearInterval(examTimerInterval);
+      examTimerInterval = null;
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(examSecondsLeft / 60);
+      const secs = examSecondsLeft % 60;
+      const badge = document.getElementById('exam-timer-badge');
+      if (badge) {
+        badge.textContent = `⏱️ ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        if (examSecondsLeft <= 180) {
+          badge.classList.add('text-red-400', 'border-red-500');
+        } else {
+          badge.classList.remove('text-red-400', 'border-red-500');
+        }
+      }
+    }
+
+    function setNavigationLock(locked) {
+      isExamInProgress = locked;
+      const banner = document.getElementById('exam-lock-banner');
+      if (locked) {
+        banner.classList.remove('hidden');
+      } else {
+        banner.classList.add('hidden');
+        stopExamTimer();
+      }
+    }
+
     function generateRandomQuestions(count, categoryFilter) {
       const isExam = (count >= 30);
-      // Если экзамен (30 вопросов) — всегда принудительно берём всю базу без соусов
       const effectiveCat = isExam ? 'ALL' : categoryFilter;
 
       let pool = menuData.filter(i => i.category !== 'Соуса');
@@ -844,9 +1055,12 @@
         catSelect.value = 'ALL';
         catSelect.disabled = true;
         catSelect.classList.add('opacity-50', 'cursor-not-allowed');
+        setNavigationLock(true);
+        startExamTimer();
       } else {
         catSelect.disabled = false;
         catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
+        setNavigationLock(false);
       }
 
       const cat = count >= 30 ? 'ALL' : catSelect.value;
@@ -961,6 +1175,8 @@
     }
 
     function showQuizResults() {
+      setNavigationLock(false); // Снимаем блокировку вкладок и останавливаем таймер
+
       document.getElementById('quiz-active-area').classList.add('hidden');
       const resArea = document.getElementById('quiz-result-area');
       resArea.classList.remove('hidden');
@@ -1034,10 +1250,11 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v12', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v13', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
+        initFlashcards();
         alert(`Позиция «${newItem.name}» успешно добавлена!`);
       });
     }
@@ -1045,6 +1262,7 @@
     function initApp() {
       renderCategories();
       renderMenu();
+      initFlashcards();
       startNewRandomQuiz();
     }
   </script>
