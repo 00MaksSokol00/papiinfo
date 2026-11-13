@@ -249,13 +249,13 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
             <h2 class="text-xl font-extrabold text-white">🎲 Генератор тестов и экзаменов</h2>
-            <p class="text-sm text-slate-400 mt-1">Экспресс-тесты (10–20 вопросов) и строгий экзамен (30 вопросов) с ручным вводом.</p>
+            <p class="text-sm text-slate-400 mt-1">Экспресс-тесты (10–20 вопросов) и строгий экзамен по всей базе (30 вопросов) с ручным вводом.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
-            <select id="quiz-cat-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+            <select id="quiz-cat-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
               <option value="ALL">Вся база</option>
             </select>
-            <select id="quiz-count-select" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
+            <select id="quiz-count-select" onchange="handleQuizCountChange()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
               <option value="10">10 вопросов (Экспресс)</option>
               <option value="20">20 вопросов (Стандарт)</option>
               <option value="30">30 вопросов (Экзамен ✍️)</option>
@@ -596,7 +596,7 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v11')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v12')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -673,7 +673,8 @@
         }">${cat} <span class="opacity-60 ml-1">(${count})</span></button>`;
       }).join('');
 
-      quizSelect.innerHTML = `<option value="ALL">Вся база (${menuData.length} позиций)</option>` +
+      const nonSauceCount = menuData.filter(i => i.category !== 'Соуса').length;
+      quizSelect.innerHTML = `<option value="ALL">Вся база (${nonSauceCount} поз. без соусов)</option>` +
         cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => `<option value="${c}">${c}</option>`).join('');
     }
 
@@ -756,16 +757,36 @@
       return copy;
     }
 
+    // Автоматическое переключение на всю базу при выборе Экзамена (30 вопросов)
+    function handleQuizCountChange() {
+      const countSelect = document.getElementById('quiz-count-select');
+      const catSelect = document.getElementById('quiz-cat-select');
+      const count = parseInt(countSelect.value, 10) || 10;
+
+      if (count >= 30) {
+        catSelect.value = 'ALL';
+        catSelect.disabled = true;
+        catSelect.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        catSelect.disabled = false;
+        catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+      startNewRandomQuiz();
+    }
+
     function generateRandomQuestions(count, categoryFilter) {
+      const isExam = (count >= 30);
+      // Если экзамен (30 вопросов) — всегда принудительно берём всю базу без соусов
+      const effectiveCat = isExam ? 'ALL' : categoryFilter;
+
       let pool = menuData.filter(i => i.category !== 'Соуса');
-      if (categoryFilter !== 'ALL') {
-        pool = pool.filter(i => i.category === categoryFilter);
+      if (effectiveCat !== 'ALL') {
+        pool = pool.filter(i => i.category === effectiveCat);
       }
       if (pool.length < 4) pool = menuData.filter(i => i.category !== 'Соуса');
 
       const generated = [];
       const shuffledPool = shuffleArray(pool);
-      const isExam = (count >= 30);
 
       for (let i = 0; i < count; i++) {
         const target = shuffledPool[i % shuffledPool.length];
@@ -815,8 +836,20 @@
     }
 
     function startNewRandomQuiz() {
-      const count = parseInt(document.getElementById('quiz-count-select').value, 10) || 10;
-      const cat = document.getElementById('quiz-cat-select').value;
+      const countSelect = document.getElementById('quiz-count-select');
+      const catSelect = document.getElementById('quiz-cat-select');
+      const count = parseInt(countSelect.value, 10) || 10;
+
+      if (count >= 30) {
+        catSelect.value = 'ALL';
+        catSelect.disabled = true;
+        catSelect.classList.add('opacity-50', 'cursor-not-allowed');
+      } else {
+        catSelect.disabled = false;
+        catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+
+      const cat = count >= 30 ? 'ALL' : catSelect.value;
       quizQuestions = generateRandomQuestions(count, cat);
       currentQIndex = 0;
       quizScore = 0;
@@ -1001,7 +1034,7 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v11', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v12', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
