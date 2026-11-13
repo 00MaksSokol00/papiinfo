@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru" class="dark">
 <head>
-  <link rel="manifest" href="manifest.json" />
-<meta name="theme-color" content="#0f172a" />
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Кафе «Папино» — Портал обучения</title>
@@ -83,7 +81,7 @@
       <div class="bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-800 space-y-3">
         <div class="flex flex-col sm:flex-row gap-3">
           <div class="relative flex-1">
-            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по блюду, составу или приборам (миски, перчатки, кинза, дорблю)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
+            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по блюду, составу, допродаже или приборам (миски, перчатки, кинза, дорблю)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
             <span class="absolute left-3.5 top-3.5 text-slate-500">🔍</span>
           </div>
           <button onclick="resetFilters()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition shrink-0 border border-slate-700">Сбросить</button>
@@ -104,7 +102,7 @@
 
       <div class="flex items-center justify-between text-xs text-slate-400 px-1">
         <span id="items-count">Показано позиций: 0</span>
-        <span>Точная сервировка и приборы по стандартам «Папино»</span>
+        <span>Точная сервировка, приборы и допродажи по стандартам «Папино»</span>
       </div>
 
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -183,7 +181,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
             <h2 class="text-xl font-extrabold text-white">🃏 Флеш-карточки для запоминания меню</h2>
-            <p class="text-sm text-slate-400 mt-1">Нажмите на карточку, чтобы перевернуть её и проверить состав и сервировку.</p>
+            <p class="text-sm text-slate-400 mt-1">Нажмите на карточку, чтобы перевернуть её и проверить состав, сервировку и допродажу.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="fc-cat-select" onchange="initFlashcards()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
@@ -199,23 +197,25 @@
             <span id="fc-stats">✅ Знаю: 0 | 🔁 Повторить: 0</span>
           </div>
 
-          <div onclick="flipFlashcard()" class="perspective cursor-pointer select-none h-72 sm:h-80 w-full">
+          <div onclick="flipFlashcard()" class="perspective cursor-pointer select-none h-80 sm:h-96 w-full">
             <div id="fc-inner" class="relative w-full h-full transform-style-3d">
               <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-slate-800 hover:border-amber-500/60 rounded-2xl p-6 flex flex-col items-center justify-center text-center backface-hidden shadow-xl transition">
-                <span id="fc-front-cat" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">Категория</span>
+                <img id="fc-front-img" src="" alt="" class="hidden w-48 aspect-video object-cover rounded-xl mb-3 border border-slate-800 shadow" onload="this.classList.remove('hidden')" onerror="this.classList.add('hidden')" />
+                <span id="fc-front-cat" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-3">Категория</span>
                 <h3 id="fc-front-name" class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Название блюда</h3>
                 <p id="fc-front-weight" class="text-sm font-semibold text-slate-400">Выход: —</p>
-                <span class="mt-8 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав и приборы</span>
+                <span class="mt-6 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав, приборы и допродажу</span>
               </div>
 
               <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-amber-500/60 rounded-2xl p-6 flex flex-col justify-between text-left backface-hidden rotate-y-180 shadow-xl">
                 <div>
-                  <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
+                  <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-3">
                     <h4 id="fc-back-name" class="text-lg font-extrabold text-amber-400">Название блюда</h4>
                     <span id="fc-back-price" class="text-sm font-black text-white bg-slate-900 px-3 py-1 rounded-lg border border-slate-800">0 ₽</span>
                   </div>
                   <p class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Состав:</p>
-                  <p id="fc-back-ing" class="text-sm sm:text-base text-slate-100 leading-relaxed font-medium mb-4">Состав блюда...</p>
+                  <p id="fc-back-ing" class="text-sm text-slate-100 leading-relaxed font-medium mb-3">Состав блюда...</p>
+                  <div id="fc-back-upsell" class="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-300"></div>
                 </div>
                 <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs gap-2">
                   <span id="fc-back-serve" class="font-semibold text-emerald-400 bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-900/50">🍽️ Приборы</span>
@@ -491,11 +491,17 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 6: АДМИН-ПАНЕЛЬ -->
+    <!-- ВКЛАДКА 6: АДМИН-ПАНЕЛЬ (ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ И ЖУРНАЛ ОЦЕНОК) -->
     <section id="section-admin" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
-        <h2 class="text-xl font-extrabold text-white mb-1">⚙️ Панель управления (Менеджер)</h2>
-        <p class="text-xs text-slate-400 mb-5">Добавление новых позиций, напитков и блюд в общую базу.</p>
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="text-xl font-extrabold text-white">⚙️ Панель управления (Менеджер)</h2>
+            <p class="text-xs text-slate-400">Добавление новых позиций в единую облачную базу Google Таблицы для всех сотрудников.</p>
+          </div>
+          <span id="cloud-sync-badge" class="text-xs font-semibold px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800">☁️ Облако активно</span>
+        </div>
+
         <form id="add-item-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Категория</label>
@@ -517,14 +523,51 @@
             <label class="block text-xs font-bold text-slate-400 mb-1">Цена (₽)</label>
             <input type="number" id="new-price" required placeholder="490" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
-          <div class="sm:col-span-2">
+          <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Сервировка и приборы</label>
             <input type="text" id="new-serve" value="Сервировка: вилка и нож" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
+          <div>
+            <label class="block text-xs font-bold text-amber-400 mb-1">💡 С чем предложить (Допродажа / Up-sell)</label>
+            <input type="text" id="new-upsell" placeholder="Например: Предложить сырный соус (70 ₽) или лимонад" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+          </div>
           <div class="sm:col-span-2">
-            <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm shadow transition">+ Добавить в меню</button>
+            <label class="block text-xs font-bold text-slate-400 mb-1">Ссылка на фото (URL или путь, например: images/NEW-01.jpg)</label>
+            <input type="text" id="new-image" placeholder="https://... (необязательно)" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+          </div>
+          <div class="sm:col-span-2 flex flex-wrap items-center gap-3">
+            <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm shadow transition">+ Добавить в облачное меню</button>
+            <span id="add-item-status" class="text-xs text-slate-400"></span>
           </div>
         </form>
+      </div>
+
+      <!-- ЖУРНАЛ РЕЗУЛЬТАТОВ ТЕСТОВ ИЗ GOOGLE ТАБЛИЦЫ -->
+      <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 class="text-lg font-extrabold text-white">📊 Журнал аттестации сотрудников</h3>
+            <p class="text-xs text-slate-400">Последние результаты тестов и экзаменов из Google Таблицы.</p>
+          </div>
+          <button onclick="syncWithCloud(true)" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-amber-400 font-bold rounded-xl text-xs border border-slate-700 transition">🔄 Обновить из облака</button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
+            <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
+              <tr>
+                <th class="p-3 border-b border-slate-800">Дата</th>
+                <th class="p-3 border-b border-slate-800">Сотрудник</th>
+                <th class="p-3 border-b border-slate-800">Режим</th>
+                <th class="p-3 border-b border-slate-800">Раздел</th>
+                <th class="p-3 border-b border-slate-800 text-right">Результат</th>
+              </tr>
+            </thead>
+            <tbody id="admin-results-tbody" class="divide-y divide-slate-800 bg-slate-950/50">
+              <tr><td colspan="5" class="p-4 text-center text-slate-500">Нажмите «Обновить из облака» после обновления скрипта Google Таблицы.</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
 
@@ -548,7 +591,7 @@
       "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр", pass: "4727" }
     };
 
-    // ПОЛНАЯ БАЗА МЕНЮ КАФЕ «ПАПИНО» С ОБНОВЛЕННОЙ ТОЧНОЙ СЕРВИРОВКОЙ
+    // ПОЛНАЯ БАЗА МЕНЮ КАФЕ «ПАПИНО»
     const INITIAL_MENU = [
       // Классические роллы
       { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "120 г", price: 329, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, угорь, соус «Унаги», белый кунжут" },
@@ -956,8 +999,7 @@
       { kw: 'сухари', label: 'без сухарей (в салате/супе)' }
     ];
 
-    // Обновляем ключ хранилища v17, чтобы у всех сразу подтянулась новая сервировка
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v17')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v18')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -972,6 +1014,8 @@
     let fcIndex = 0;
     let fcKnown = 0;
     let fcRepeat = 0;
+
+    let cloudResults = [];
 
     document.getElementById('login-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -1030,6 +1074,185 @@
       if (activeBtn) activeBtn.className = 'px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-500 text-slate-950 transition';
     }
 
+    // ================= УМНЫЕ ДОПРОДАЖИ (UP-SELL) К КАЖДОМУ БЛЮДУ =================
+    function getUpsellSuggestion(item) {
+      if (item.upsell && item.upsell.trim() !== "") return item.upsell;
+
+      const cat = item.category;
+      const name = item.name.toLowerCase();
+      const ing = item.ingredients.toLowerCase();
+
+      if (cat === "Пицца" || cat === "Мини пицца 20 см") {
+        if (name.includes("сент-луис") || name.includes("4 сыра")) {
+          return "К сырной пицце предложить авторский чай / белое вино + Сырный соус (70 ₽) к бортикам";
+        }
+        return "К бортикам пиццы предложить: Сырный соус (70 ₽), Соус Ранч (70 ₽) или Соус BBQ (70 ₽)";
+      }
+
+      if (cat === "Бургеры и Сендвичи") {
+        if (ing.includes("картофель фри")) {
+          return "Фри уже входит в подачу! Предложить к нему Сырный соус (70 ₽), Кетчуп (70 ₽) или лимонад / пиво";
+        }
+        return "Предложить на гарнир Картошку фри (299 ₽) или Картошку по-деревенски (299 ₽) + Сырный соус (70 ₽)";
+      }
+
+      if (cat === "Пасты") {
+        if (name.includes("креветк") || name.includes("лосос")) {
+          return "Предложить Чесночные гренки (249 ₽), овощной салат или бокал белого вина";
+        }
+        return "Предложить тёплые Чесночные гренки (249 ₽) или освежающий лимонад";
+      }
+
+      if (cat === "Супы") {
+        if (name.includes("том ям")) {
+          return "Предложить Чесночные гренки (249 ₽) или классический Ролл с лососем / авокадо в стол";
+        }
+        return "Предложить к супу тёплые Чесночные гренки из бородинского хлеба (249 ₽) или Сметану (70 ₽)";
+      }
+
+      if (cat === "Классические роллы") {
+        return "Предложить в пару фирменный ролл («Филадельфия» / «Канада») или острый соус Спайси (70 ₽)";
+      }
+
+      if (cat === "Роллы фирменные" || cat === "Запечённые роллы" || cat === "Горячие роллы" || cat === "Суши") {
+        return "Предложить доп. порцию соуса Спайси (70 ₽), Ореховый соус (70 ₽) или выгодный Сет на компанию";
+      }
+
+      if (cat === "Сеты") {
+        return "На компанию предложить дополнительные порции Соевого соуса (70 ₽), соуса Спайси (70 ₽) и чайник чая / лимонад";
+      }
+
+      if (cat === "Салаты") {
+        return "К салату предложить горячее блюдо (стейк / пасту) или Мини-пиццу 20 см в центр стола";
+      }
+
+      if (cat === "Горячие блюда") {
+        if (!ing.includes("картоф") && !ing.includes("рис") && !ing.includes("брокколи")) {
+          return "Блюдо без тяжёлого гарнира — предложить Овощи гриль (519 ₽) или Картофель по-деревенски (299 ₽)";
+        }
+        return "Предложить дополнительный соус (Тар-тар / BBQ / Терияки — 70 ₽) и напиток";
+      }
+
+      if (cat === "Закуски") {
+        if (name.includes("пивн") || name.includes("крылья") || name.includes("кольца") || name.includes("палочки") || name.includes("фри")) {
+          return "Обязательно предложить соусы на выбор: Сырный, Тар-тар, BBQ или Кисло-сладкий (по 70 ₽)";
+        }
+        return "Предложить соус на выбор (70 ₽) или пенные напитки";
+      }
+
+      if (cat === "Поке" || cat === "Воки") {
+        return "Предложить Ореховый соус (70 ₽), соус Спайси для остроты или салат Чука (289 ₽) на старт";
+      }
+
+      if (cat === "Детское меню") {
+        return "Предложить ребёнку Детский «Салат Фруктовый» (319 ₽), Сырники с апельсином (389 ₽) или сок";
+      }
+
+      return "";
+    }
+
+    // ================= БЛОК ФОТОГРАФИЙ 16:9 С ПОЛНОЭКРАННЫМ ЗУМОМ =================
+    function getDishImageHtml(item, heightClass = "aspect-video") {
+      const src = item.image ? item.image : `images/${item.id}.jpg`;
+      const safeName = item.name.replace(/'/g, "\\'");
+      return `
+        <div class="hidden relative w-full ${heightClass} mb-3 rounded-xl overflow-hidden bg-slate-950 border border-slate-800/80">
+          <img 
+            src="${src}" 
+            alt="${item.name}" 
+            loading="lazy"
+            onload="this.parentElement.classList.remove('hidden')"
+            onerror="this.parentElement.classList.add('hidden')"
+            class="w-full h-full object-cover object-center transition-transform duration-300 hover:scale-105 cursor-zoom-in"
+            onclick="openImageModal(this.src, '${safeName}')"
+          />
+        </div>
+      `;
+    }
+
+    function openImageModal(src, title) {
+      let modal = document.getElementById('img-zoom-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'img-zoom-modal';
+        modal.className = 'fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out hidden';
+        modal.onclick = () => modal.classList.add('hidden');
+        modal.innerHTML = `
+          <div class="max-w-3xl w-full bg-slate-900 p-3 rounded-2xl border border-slate-800 shadow-2xl text-center">
+            <img id="img-zoom-target" src="" class="w-full max-h-[75vh] object-contain rounded-xl bg-white mx-auto" />
+            <p id="img-zoom-title" class="text-sm font-bold text-white mt-3"></p>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+      document.getElementById('img-zoom-target').src = src;
+      document.getElementById('img-zoom-title').textContent = title;
+      modal.classList.remove('hidden');
+    }
+
+    // ================= ОБЛАЧНАЯ СИНХРОНИЗАЦИЯ С GOOGLE ТАБЛИЦЕЙ =================
+    function syncWithCloud(showAlert = false) {
+      const badge = document.getElementById('cloud-sync-badge');
+      if (badge) badge.textContent = "⏳ Синхронизация...";
+
+      fetch(GOOGLE_SCRIPT_URL)
+        .then(res => res.json())
+        .then(data => {
+          if (data.customMenu && Array.isArray(data.customMenu)) {
+            const combined = [...INITIAL_MENU];
+            data.customMenu.forEach(cloudItem => {
+              if (!combined.some(x => x.id === cloudItem.id || x.name.toLowerCase() === cloudItem.name.toLowerCase())) {
+                combined.push(cloudItem);
+              }
+            });
+            menuData = combined;
+            localStorage.setItem('papino_menu_complete_v18', JSON.stringify(menuData));
+            renderCategories();
+            renderMenu();
+            renderAllergens();
+            initFlashcards();
+          }
+
+          if (data.results && Array.isArray(data.results)) {
+            cloudResults = data.results;
+            renderAdminResultsTable();
+          }
+
+          if (badge) badge.textContent = `☁️ Синхронизировано (${menuData.length} поз.)`;
+          if (showAlert) alert("Данные успешно обновлены из Google Таблицы!");
+        })
+        .catch(() => {
+          if (badge) badge.textContent = "☁️ Локальный кэш";
+        });
+    }
+
+    function renderAdminResultsTable() {
+      const tbody = document.getElementById('admin-results-tbody');
+      if (!tbody) return;
+      if (!cloudResults || cloudResults.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">Записей об аттестации пока нет.</td></tr>`;
+        return;
+      }
+      tbody.innerHTML = cloudResults.map(r => {
+        const badgeColor = r.pct >= 85
+          ? 'text-emerald-400 bg-emerald-950/60 border-emerald-800'
+          : r.pct >= 60
+            ? 'text-amber-400 bg-amber-950/60 border-amber-800'
+            : 'text-red-400 bg-red-950/60 border-red-800';
+        return `
+          <tr>
+            <td class="p-3 text-slate-400 whitespace-nowrap">${r.date}</td>
+            <td class="p-3 font-bold text-white">${r.name} <span class="text-slate-500 font-normal">(${r.title})</span></td>
+            <td class="p-3">${r.mode}</td>
+            <td class="p-3 text-slate-300">${r.category}</td>
+            <td class="p-3 text-right">
+              <span class="px-2.5 py-1 rounded-lg border font-bold ${badgeColor}">${r.score} (${r.pct}%)</span>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
     function getCategories() {
       const cats = ['Все'];
       menuData.forEach(item => {
@@ -1059,10 +1282,10 @@
         return `<option value="${c}">${c} (${catCount})</option>`;
       }).join('');
 
-      // В селектор тренажёра добавляем специальные режимы: Сервировка и Конфликтные ситуации
       quizSelect.innerHTML =
         `<option value="ALL">📖 Вся база меню (${nonSauceCount} поз.)</option>` +
         `<option value="SERVING_ONLY">🍽️ Только сервировка и приборы</option>` +
+        `<option value="UPSELL_ONLY">💰 Допродажи (Up-sell) и повышение чека</option>` +
         `<option value="CONFLICTS_ONLY">⚡ Конфликтные ситуации и сервис</option>` +
         catOptions;
 
@@ -1105,11 +1328,13 @@
     function renderMenu() {
       const query = document.getElementById('search-input').value.trim().toLowerCase();
       const filtered = menuData.filter(item => {
+        const upsell = getUpsellSuggestion(item).toLowerCase();
         const matchCat = currentCategory === 'Все' || item.category === currentCategory;
         const matchQuery = !query ||
           item.name.toLowerCase().includes(query) ||
           item.ingredients.toLowerCase().includes(query) ||
-          item.serving.toLowerCase().includes(query);
+          item.serving.toLowerCase().includes(query) ||
+          upsell.includes(query);
         return matchCat && matchQuery;
       });
 
@@ -1121,22 +1346,30 @@
         return;
       }
 
-      grid.innerHTML = filtered.map(item => `
+      grid.innerHTML = filtered.map(item => {
+        const upsellText = getUpsellSuggestion(item);
+        return `
         <div class="bg-slate-900 rounded-2xl p-5 shadow-sm border border-slate-800 hover:border-amber-500/50 transition flex flex-col justify-between">
           <div>
+            ${getDishImageHtml(item)}
             <div class="flex items-start justify-between gap-2 mb-2">
               <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">${item.category}</span>
               <span class="text-xs font-semibold text-slate-400">${item.weight}</span>
             </div>
             <h3 class="text-base font-extrabold text-white mb-2">${highlightText(item.name, query)}</h3>
-            <p class="text-xs text-slate-300 leading-relaxed mb-4"><strong class="text-slate-200">Состав:</strong> ${highlightText(item.ingredients, query)}</p>
+            <p class="text-xs text-slate-300 leading-relaxed mb-3"><strong class="text-slate-200">Состав:</strong> ${highlightText(item.ingredients, query)}</p>
+            ${upsellText ? `
+              <div class="mb-4 p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 leading-snug">
+                <strong class="text-amber-400">💡 Допродажа:</strong> ${highlightText(upsellText, query)}
+              </div>
+            ` : ''}
           </div>
           <div class="pt-3 border-t border-slate-800 flex items-center justify-between gap-2">
             <span class="text-[11px] font-semibold text-emerald-400 bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-emerald-900/50">🍽️ ${highlightText(item.serving, query)}</span>
             <span class="text-base font-black text-white shrink-0">${item.price} ₽</span>
           </div>
         </div>
-      `).join('');
+      `}).join('');
     }
 
     // ================= ЛОГИКА ВКЛАДКИ АЛЛЕРГЕНОВ =================
@@ -1257,6 +1490,7 @@
         return `
           <div class="bg-slate-900 rounded-2xl p-5 shadow-sm border ${check.hasAllergen ? 'border-red-500/50' : 'border-slate-800 hover:border-emerald-500/50'} transition flex flex-col justify-between space-y-3">
             <div>
+              ${getDishImageHtml(item)}
               <div class="flex items-start justify-between gap-2 mb-2">
                 <span class="text-[11px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-slate-800 text-slate-300 border border-slate-700">${item.category}</span>
                 <span class="text-xs font-semibold text-slate-400">${item.weight} • ${item.price} ₽</span>
@@ -1309,6 +1543,10 @@
       document.getElementById('fc-counter').textContent = `Карточка ${fcIndex + 1} из ${fcDeck.length}`;
       document.getElementById('fc-stats').textContent = `✅ Знаю: ${fcKnown} | 🔁 Повторить: ${fcRepeat}`;
 
+      const frontImg = document.getElementById('fc-front-img');
+      frontImg.classList.add('hidden');
+      frontImg.src = card.image ? card.image : `images/${card.id}.jpg`;
+
       document.getElementById('fc-front-cat').textContent = card.category;
       document.getElementById('fc-front-name').textContent = card.name;
       document.getElementById('fc-front-weight').textContent = `Выход: ${card.weight}`;
@@ -1318,6 +1556,15 @@
       document.getElementById('fc-back-ing').textContent = card.ingredients;
       document.getElementById('fc-back-serve').textContent = `🍽️ ${card.serving}`;
       document.getElementById('fc-back-weight').textContent = card.weight;
+
+      const upsellEl = document.getElementById('fc-back-upsell');
+      const upsellText = getUpsellSuggestion(card);
+      if (upsellText) {
+        upsellEl.innerHTML = `<strong class="text-amber-400">💡 Допродажа:</strong> ${upsellText}`;
+        upsellEl.classList.remove('hidden');
+      } else {
+        upsellEl.classList.add('hidden');
+      }
     }
 
     function flipFlashcard() {
@@ -1342,7 +1589,7 @@
       nextFlashcard();
     }
 
-    // ================= ЛОГИКА ТЕСТОВ И ЭКЗАМЕНА (БЕЗ ГРАММОВОК, СО СКРЫТИЕМ ОТВЕТОВ И УМНОЙ ПРОВЕРКОЙ) =================
+    // ================= ЛОГИКА ТЕСТОВ И ЭКЗАМЕНА =================
     let quizQuestions = [];
     let currentQIndex = 0;
     let quizScore = 0;
@@ -1403,16 +1650,13 @@
       }
     }
 
-    // Умная проверка ингредиентов на экзамене (выделяет названные и забытые позиции)
     function evaluateManualIngredients(userText, targetIngredients) {
       const userLower = userText.toLowerCase();
-      // Разбиваем эталонный состав по запятым на отдельные ингредиенты
       const rawItems = targetIngredients.split(',').map(s => s.trim()).filter(Boolean);
       const foundList = [];
       const missingList = [];
 
       rawItems.forEach(ing => {
-        // Извлекаем ключевые слова ингредиента (без кавычек и предлогов)
         const cleanWords = ing.toLowerCase()
           .replace(/[«»"()]/g, ' ')
           .split(/\s+/)
@@ -1422,7 +1666,6 @@
           ? cleanWords
           : ing.toLowerCase().replace(/[«»"()]/g, ' ').split(/\s+/).filter(w => w.length > 1);
 
-        // Проверяем совпадение по корню/основе слова (первые 4-5 букв для учёта падежей)
         const isMatched = checkWords.some(w => {
           const stem = w.length > 4 ? w.slice(0, -1) : w;
           return userLower.includes(stem);
@@ -1436,7 +1679,6 @@
       });
 
       const ratio = foundList.length / Math.max(1, rawItems.length);
-      // Засчитываем ответ как верный, если названо не менее 60% ингредиентов блюда
       const isPassed = ratio >= 0.6;
 
       return {
@@ -1482,7 +1724,28 @@
         return generated;
       }
 
-      // 3. Тесты и Экзамен по меню (без граммовок!)
+      // 3. Отдельный тренажёр по Допродажам (Up-sell)
+      if (categoryFilter === 'UPSELL_ONLY') {
+        const pool = shuffleArray(menuData.filter(i => i.category !== 'Соуса'));
+        const allUpsells = Array.from(new Set(pool.map(i => getUpsellSuggestion(i)).filter(Boolean)));
+        const generated = [];
+        for (let i = 0; i < count; i++) {
+          const target = pool[i % pool.length];
+          const correctUpsell = getUpsellSuggestion(target);
+          const wrongUpsells = shuffleArray(allUpsells.filter(u => u !== correctUpsell)).slice(0, 3);
+          generated.push({
+            badge: `Допродажа (Up-sell) • ${target.category}`,
+            question: `Гость заказал «${target.name}» (${target.category}). Что лучше всего предложить в качестве допродажи?`,
+            type: 'choice',
+            options: shuffleArray([correctUpsell, ...wrongUpsells]),
+            correct: correctUpsell,
+            item: target
+          });
+        }
+        return generated;
+      }
+
+      // 4. Тесты и Экзамен по меню
       const isExam = (count >= 30);
       let pool = menuData.filter(i => i.category !== 'Соуса');
       if (categoryFilter !== 'ALL') {
@@ -1511,7 +1774,6 @@
             item: target
           });
         } else {
-          // 4 типа вопросов для официантов (вопросы на граммовку полностью убраны)
           const qTypes = ['GUESS_NAME_BY_ING', 'GUESS_ING_BY_NAME', 'SERVING_RULE', 'INGREDIENT_CONTAINS'];
           const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
@@ -1571,8 +1833,7 @@
       const count = parseInt(countSelect.value, 10) || 10;
       const cat = catSelect.value;
 
-      // Если выбран режим 30 вопросов (Экзамен) для меню — включаем таймер и защиту от списывания
-      if (count >= 30 && cat !== 'CONFLICTS_ONLY' && cat !== 'SERVING_ONLY') {
+      if (count >= 30 && !['CONFLICTS_ONLY', 'SERVING_ONLY', 'UPSELL_ONLY'].includes(cat)) {
         setNavigationLock(true);
         startExamTimer();
       } else {
@@ -1618,7 +1879,6 @@
       }
     }
 
-    // Выбор ответа в тесте: НЕ показываем ошибку сразу, сразу переходим к следующему вопросу!
     function selectQuizOption(idx) {
       const q = quizQuestions[currentQIndex];
       const chosen = q.options[idx];
@@ -1639,7 +1899,6 @@
       nextQuizQuestion();
     }
 
-    // Умная проверка ручного ввода на экзамене (тоже без мгновенного спойлера — разбор в конце)
     function submitManualAnswer() {
       const userInput = document.getElementById('quiz-manual-input').value.trim();
       if (!userInput) {
@@ -1654,7 +1913,6 @@
         quizScore++;
       }
 
-      // Если ответ неверный ИЛИ сотрудник забыл дописать какие-то ингредиенты — добавляем в финальный разбор
       if (!evalResult.isPassed || !evalResult.isPerfect) {
         quizMistakes.push({
           type: 'manual',
@@ -1695,6 +1953,7 @@
 
       let categoryLabel = 'Вся база';
       if (selectedCatValue === 'SERVING_ONLY') categoryLabel = '🍽️ Сервировка и приборы';
+      else if (selectedCatValue === 'UPSELL_ONLY') categoryLabel = '💰 Допродажи (Up-sell)';
       else if (selectedCatValue === 'CONFLICTS_ONLY') categoryLabel = '⚡ Конфликтные ситуации';
       else if (selectedCatValue !== 'ALL') categoryLabel = selectedCatValue;
 
@@ -1711,7 +1970,7 @@
         name: currentStaff ? currentStaff.name : "Гость",
         title: currentStaff ? currentStaff.title : "Сотрудник",
         id: currentStaff ? currentStaff.id : "—",
-        mode: (countVal >= 30 && selectedCatValue !== 'CONFLICTS_ONLY' && selectedCatValue !== 'SERVING_ONLY') ? "Экзамен ✍️" : `Тест (${total} вопр.)`,
+        mode: (countVal >= 30 && !['CONFLICTS_ONLY', 'SERVING_ONLY', 'UPSELL_ONLY'].includes(selectedCatValue)) ? "Экзамен ✍️" : `Тест (${total} вопр.)`,
         category: categoryLabel,
         score: `${quizScore} / ${total}`,
         pct: pct
@@ -1773,6 +2032,7 @@
       .then(() => {
         syncStatus.textContent = "✅ Результат успешно отправлен в Google Таблицу!";
         syncStatus.className = "text-xs text-emerald-400 mb-5 font-medium";
+        setTimeout(() => syncWithCloud(false), 1500);
       })
       .catch(err => {
         console.error("Ошибка отправки в таблицу:", err);
@@ -1785,6 +2045,7 @@
     if (addItemForm) {
       addItemForm.addEventListener('submit', function(e) {
         e.preventDefault();
+        const statusEl = document.getElementById('add-item-status');
         const newItem = {
           id: 'NEW-' + Date.now(),
           category: document.getElementById('new-cat').value.trim(),
@@ -1792,16 +2053,31 @@
           ingredients: document.getElementById('new-ing').value.trim(),
           weight: document.getElementById('new-weight').value.trim(),
           price: parseInt(document.getElementById('new-price').value, 10) || 0,
-          serving: document.getElementById('new-serve').value.trim() || 'Сервировка: вилка и нож'
+          serving: document.getElementById('new-serve').value.trim() || 'Сервировка: вилка и нож',
+          upsell: document.getElementById('new-upsell').value.trim(),
+          image: document.getElementById('new-image').value.trim()
         };
+
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v17', JSON.stringify(menuData));
-        this.reset();
+        localStorage.setItem('papino_menu_complete_v18', JSON.stringify(menuData));
         renderCategories();
         renderMenu();
         renderAllergens();
         initFlashcards();
-        alert(`Позиция «${newItem.name}» успешно добавлена!`);
+
+        if (statusEl) statusEl.textContent = "⏳ Сохранение в облачную таблицу...";
+
+        fetch(GOOGLE_SCRIPT_URL, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ action: "add_menu_item", item: newItem })
+        }).then(() => {
+          if (statusEl) statusEl.textContent = `✅ «${newItem.name}» добавлено в общую базу!`;
+          this.reset();
+        }).catch(() => {
+          if (statusEl) statusEl.textContent = `⚠️ Сохранено локально (проверьте интернет).`;
+        });
       });
     }
 
@@ -1812,6 +2088,7 @@
       renderAllergens();
       initFlashcards();
       startNewRandomQuiz();
+      syncWithCloud(false);
     }
   </script>
 </body>
