@@ -110,7 +110,6 @@
 
     <!-- ВКЛАДКА 2: АЛЛЕРГЕНЫ И СТОП-ИНГРЕДИЕНТЫ -->
     <section id="section-allergens" class="hidden space-y-6">
-      <!-- Памятка скрытых аллергенов -->
       <div class="bg-slate-900 p-5 sm:p-6 rounded-2xl shadow-sm border border-slate-800 space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-4">
           <div>
@@ -174,7 +173,6 @@
         </div>
       </div>
 
-      <!-- Сетка отфильтрованных блюд -->
       <div id="allergen-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
     </section>
 
@@ -200,11 +198,8 @@
             <span id="fc-stats">✅ Знаю: 0 | 🔁 Повторить: 0</span>
           </div>
 
-          <!-- 3D Карточка -->
           <div onclick="flipFlashcard()" class="perspective cursor-pointer select-none h-72 sm:h-80 w-full">
             <div id="fc-inner" class="relative w-full h-full transform-style-3d">
-              
-              <!-- Лицевая сторона -->
               <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-slate-800 hover:border-amber-500/60 rounded-2xl p-6 flex flex-col items-center justify-center text-center backface-hidden shadow-xl transition">
                 <span id="fc-front-cat" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">Категория</span>
                 <h3 id="fc-front-name" class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Название блюда</h3>
@@ -212,7 +207,6 @@
                 <span class="mt-8 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав</span>
               </div>
 
-              <!-- Обратная сторона -->
               <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-amber-500/60 rounded-2xl p-6 flex flex-col justify-between text-left backface-hidden rotate-y-180 shadow-xl">
                 <div>
                   <div class="flex items-center justify-between gap-2 border-b border-slate-800 pb-3 mb-4">
@@ -227,11 +221,9 @@
                   <span id="fc-back-weight" class="text-slate-400 font-semibold">0 г</span>
                 </div>
               </div>
-
             </div>
           </div>
 
-          <!-- Кнопки управления карточками -->
           <div class="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
             <button onclick="prevFlashcard()" class="py-3 px-4 rounded-xl bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 font-semibold text-xs sm:text-sm transition">← Назад</button>
             <button onclick="markFlashcard(false)" class="py-3 px-4 rounded-xl bg-red-950/50 hover:bg-red-900/60 border border-red-900/60 text-red-300 font-bold text-xs sm:text-sm transition">🔁 Повторить</button>
@@ -257,7 +249,6 @@
           <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы и Санкции</a>
         </div>
 
-        <!-- 1. Ценности -->
         <div id="rule-corp" class="space-y-4 pt-2">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
@@ -287,7 +278,6 @@
           </div>
         </div>
 
-        <!-- 2. Внешний вид и запреты -->
         <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> 2. Стандарты внешнего вида, гигиены и запреты</h3>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
@@ -315,7 +305,6 @@
           </div>
         </div>
 
-        <!-- 3. Шаги обслуживания -->
         <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 3. Шаги обслуживания и тайминги</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
@@ -338,7 +327,6 @@
           </div>
         </div>
 
-        <!-- 4. Штрафы (Депремирование) -->
         <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
           <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
           <div class="overflow-x-auto">
@@ -382,13 +370,13 @@
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
             <h2 class="text-xl font-extrabold text-white">🎲 Генератор тестов и экзаменов</h2>
-            <p class="text-sm text-slate-400 mt-1">Экспресс-тесты (10–20 вопросов) и строгий экзамен по всей базе (30 вопросов, 20 минут, защита от списывания).</p>
+            <p class="text-sm text-slate-400 mt-1">Выберите всю базу или отдельную категорию для экспресс-теста (10–20 вопросов) или экзамена с ручным вводом (30 вопросов).</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="quiz-cat-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
               <option value="ALL">Вся база</option>
             </select>
-            <select id="quiz-count-select" onchange="handleQuizCountChange()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
+            <select id="quiz-count-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
               <option value="10">10 вопросов (Экспресс)</option>
               <option value="20">20 вопросов (Стандарт)</option>
               <option value="30">30 вопросов (Экзамен ✍️)</option>
@@ -735,7 +723,6 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    // Группы аллергенов для умного фильтра
     const ALLERGEN_GROUPS = [
       { id: 'nuts', label: '🥜 Орехи и Песто', keywords: ['орех', 'песто'] },
       { id: 'sesame', label: '🌾 Кунжут', keywords: ['кунжут'] },
@@ -749,7 +736,6 @@
       { id: 'gluten', label: '🍞 Глютен (мука / кляр / паста)', keywords: ['мука', 'сухари', 'кляр', 'панировк', 'удон', 'спагетти', 'феттучини', 'макарон', 'булка', 'хлеб', 'гренки', 'тесто'] }
     ];
 
-    // Ингредиенты, которые кухня может легко не класть при сборке/отдаче
     const REMOVABLE_HINTS = [
       { kw: 'кинза', label: 'без кинзы' },
       { kw: 'лук зеленый', label: 'без зелёного лука' },
@@ -765,20 +751,17 @@
       { kw: 'сухари', label: 'без сухарей (в салате/супе)' }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v15')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v16')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
-    // Состояние вкладки аллергенов
     let selectedAllergens = [];
-    let allergenMode = 'safe'; // 'safe' (что можно) или 'danger' (где содержится)
+    let allergenMode = 'safe';
 
-    // Переменные состояния экзамена и таймера
     let isExamInProgress = false;
     let examTimerInterval = null;
     let examSecondsLeft = 1200; // 20 минут
 
-    // Переменные флеш-карточек
     let fcDeck = [];
     let fcIndex = 0;
     let fcKnown = 0;
@@ -822,7 +805,6 @@
     }
 
     function switchTab(tab) {
-      // Защита от списывания: блокировка переключения вкладок во время активного экзамена
       if (isExamInProgress && tab !== 'quiz') {
         alert('🔒 Во время сдачи экзамена (30 вопросов) переход в разделы «Меню», «Аллергены», «Карточки» и «Устав» заблокирован!');
         return;
@@ -867,7 +849,10 @@
 
       const nonSauceCount = menuData.filter(i => i.category !== 'Соуса').length;
       const optionsHtml = `<option value="ALL">Вся база (${nonSauceCount} поз. без соусов)</option>` +
-        cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => `<option value="${c}">${c}</option>`).join('');
+        cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => {
+          const catCount = menuData.filter(i => i.category === c).length;
+          return `<option value="${c}">${c} (${catCount})</option>`;
+        }).join('');
 
       quizSelect.innerHTML = optionsHtml;
       if (fcSelect) fcSelect.innerHTML = optionsHtml;
@@ -1006,7 +991,6 @@
 
     function getRemovableTips(item) {
       const ingLower = item.ingredients.toLowerCase();
-      // В роллах и суши кунжут или огурец часто внутри/снаружи по техкарте, но в воках, супах, салатах и горячем посыпка легко убирается
       const tips = [];
       REMOVABLE_HINTS.forEach(h => {
         if (ingLower.includes(h.kw) && !tips.includes(h.label)) {
@@ -1161,25 +1145,9 @@
       return copy;
     }
 
-    function handleQuizCountChange() {
-      const countSelect = document.getElementById('quiz-count-select');
-      const catSelect = document.getElementById('quiz-cat-select');
-      const count = parseInt(countSelect.value, 10) || 10;
-
-      if (count >= 30) {
-        catSelect.value = 'ALL';
-        catSelect.disabled = true;
-        catSelect.classList.add('opacity-50', 'cursor-not-allowed');
-      } else {
-        catSelect.disabled = false;
-        catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
-      }
-      startNewRandomQuiz();
-    }
-
     function startExamTimer() {
       clearInterval(examTimerInterval);
-      examSecondsLeft = 20 * 60; // 20 минут на 30 вопросов
+      examSecondsLeft = 20 * 60; // 20 минут
       updateTimerDisplay();
 
       examTimerInterval = setInterval(() => {
@@ -1225,18 +1193,21 @@
 
     function generateRandomQuestions(count, categoryFilter) {
       const isExam = (count >= 30);
-      const effectiveCat = isExam ? 'ALL' : categoryFilter;
 
       let pool = menuData.filter(i => i.category !== 'Соуса');
-      if (effectiveCat !== 'ALL') {
-        pool = pool.filter(i => i.category === effectiveCat);
+      if (categoryFilter !== 'ALL') {
+        pool = pool.filter(i => i.category === categoryFilter);
       }
-      if (pool.length < 4) pool = menuData.filter(i => i.category !== 'Соуса');
+      if (pool.length === 0) pool = menuData.filter(i => i.category !== 'Соуса');
+
+      // Если выбрана отдельная категория, в которой меньше блюд, чем выбрано вопросов (например, 12 горячих роллов при экзамене),
+      // ограничиваем длину экзамена количеством блюд в этой категории, чтобы не спрашивать одно и то же блюдо дважды!
+      const actualCount = (categoryFilter !== 'ALL' && pool.length < count) ? pool.length : count;
 
       const generated = [];
       const shuffledPool = shuffleArray(pool);
 
-      for (let i = 0; i < count; i++) {
+      for (let i = 0; i < actualCount; i++) {
         const target = shuffledPool[i % shuffledPool.length];
         let sameCat = pool.filter(x => x.id !== target.id && x.category === target.category);
         if (sameCat.length < 3) {
@@ -1287,20 +1258,19 @@
       const countSelect = document.getElementById('quiz-count-select');
       const catSelect = document.getElementById('quiz-cat-select');
       const count = parseInt(countSelect.value, 10) || 10;
+      const cat = catSelect.value;
+
+      // Разрешаем выбор любой категории даже на экзамене (30 вопросов)
+      catSelect.disabled = false;
+      catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
 
       if (count >= 30) {
-        catSelect.value = 'ALL';
-        catSelect.disabled = true;
-        catSelect.classList.add('opacity-50', 'cursor-not-allowed');
         setNavigationLock(true);
         startExamTimer();
       } else {
-        catSelect.disabled = false;
-        catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
         setNavigationLock(false);
       }
 
-      const cat = count >= 30 ? 'ALL' : catSelect.value;
       quizQuestions = generateRandomQuestions(count, cat);
       currentQIndex = 0;
       quizScore = 0;
@@ -1412,7 +1382,7 @@
     }
 
     function showQuizResults() {
-      setNavigationLock(false); // Снимаем блокировку вкладок и останавливаем таймер
+      setNavigationLock(false);
 
       document.getElementById('quiz-active-area').classList.add('hidden');
       const resArea = document.getElementById('quiz-result-area');
@@ -1420,6 +1390,8 @@
 
       const total = quizQuestions.length;
       const pct = Math.round((quizScore / total) * 100);
+      const selectedCat = document.getElementById('quiz-cat-select').value;
+      const countVal = parseInt(document.getElementById('quiz-count-select').value, 10) || 10;
 
       document.getElementById('quiz-result-emoji').textContent = pct >= 85 ? '🏆' : pct >= 60 ? '👍' : '📚';
       document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
@@ -1430,6 +1402,8 @@
         name: currentStaff ? currentStaff.name : "Гость",
         title: currentStaff ? currentStaff.title : "Сотрудник",
         id: currentStaff ? currentStaff.id : "—",
+        mode: countVal >= 30 ? "Экзамен ✍️" : `Тест (${total} вопр.)`,
+        category: selectedCat === 'ALL' ? 'Вся база' : selectedCat,
         score: `${quizScore} / ${total}`,
         pct: pct
       });
@@ -1451,24 +1425,29 @@
       }
     }
 
+    // Надежная отправка в Google Apps Script без блокировки CORS (text/plain)
     function sendResultToGoogleSheets(data) {
       const syncStatus = document.getElementById('sync-status');
       syncStatus.textContent = "Сохранение результата в Google Таблицу...";
       syncStatus.className = "text-xs text-amber-400 mb-4 font-medium";
-      
+
+      const payload = JSON.stringify(data);
+
       fetch(GOOGLE_SCRIPT_URL, {
         method: "POST",
         mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: payload
       })
       .then(() => {
-        syncStatus.textContent = "✅ Результат успешно сохранен в Google Таблицу!";
+        syncStatus.textContent = "✅ Результат успешно отправлен в Google Таблицу!";
         syncStatus.className = "text-xs text-emerald-400 mb-4 font-medium";
       })
       .catch(err => {
-        console.error(err);
-        syncStatus.textContent = "⚠️ Ошибка синхронизации с таблицей.";
+        console.error("Ошибка отправки в таблицу:", err);
+        syncStatus.textContent = "⚠️ Ошибка синхронизации с таблицей. Проверьте доступ к веб-скрипту.";
         syncStatus.className = "text-xs text-red-400 mb-4 font-medium";
       });
     }
@@ -1487,7 +1466,7 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v15', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v16', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
