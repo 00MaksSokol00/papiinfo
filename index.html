@@ -81,7 +81,7 @@
       <div class="bg-slate-900 p-4 rounded-2xl shadow-sm border border-slate-800 space-y-3">
         <div class="flex flex-col sm:flex-row gap-3">
           <div class="relative flex-1">
-            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по блюду, составу или аллергенам (кинза, угорь, дорблю, песто)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
+            <input type="text" id="search-input" oninput="renderMenu()" placeholder="Поиск по блюду, составу или приборам (миски, перчатки, кинза, дорблю)..." class="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm" />
             <span class="absolute left-3.5 top-3.5 text-slate-500">🔍</span>
           </div>
           <button onclick="resetFilters()" class="px-4 py-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold transition shrink-0 border border-slate-700">Сбросить</button>
@@ -93,8 +93,8 @@
           <button onclick="setQuickSearch('орех')" class="text-xs px-2.5 py-1 rounded-lg bg-amber-950/60 text-amber-400 hover:bg-amber-900/60 font-medium border border-amber-900/50">🥜 Орехи</button>
           <button onclick="setQuickSearch('мед')" class="text-xs px-2.5 py-1 rounded-lg bg-yellow-950/60 text-yellow-400 hover:bg-yellow-900/60 font-medium border border-yellow-900/50">🍯 Мёд</button>
           <button onclick="setQuickSearch('остр')" class="text-xs px-2.5 py-1 rounded-lg bg-red-950/60 text-red-400 hover:bg-red-900/60 font-medium border border-red-900/50">🌶️ Острое</button>
-          <button onclick="setQuickSearch('чеснок')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-950/60 text-purple-400 hover:bg-purple-900/60 font-medium border border-purple-900/50">🧄 Чеснок</button>
-          <button onclick="setQuickSearch('креветк')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-950/60 text-sky-400 hover:bg-sky-900/60 font-medium border border-sky-900/50">🦐 Креветки</button>
+          <button onclick="setQuickSearch('перчатки')" class="text-xs px-2.5 py-1 rounded-lg bg-purple-950/60 text-purple-400 hover:bg-purple-900/60 font-medium border border-purple-900/50">🧤 Перчатки</button>
+          <button onclick="setQuickSearch('миски')" class="text-xs px-2.5 py-1 rounded-lg bg-sky-950/60 text-sky-400 hover:bg-sky-900/60 font-medium border border-sky-900/50">🥣 Две миски</button>
         </div>
       </div>
 
@@ -102,7 +102,7 @@
 
       <div class="flex items-center justify-between text-xs text-slate-400 px-1">
         <span id="items-count">Показано позиций: 0</span>
-        <span>Палочки, перчатки и оливковое масло учтены</span>
+        <span>Точная сервировка и приборы по стандартам «Папино»</span>
       </div>
 
       <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"></div>
@@ -149,7 +149,6 @@
         </div>
       </div>
 
-      <!-- Панель выбора аллергенов -->
       <div class="bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-800 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center gap-2 flex-wrap">
@@ -182,7 +181,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
             <h2 class="text-xl font-extrabold text-white">🃏 Флеш-карточки для запоминания меню</h2>
-            <p class="text-sm text-slate-400 mt-1">Нажмите на карточку, чтобы перевернуть её и проверить состав, выход и подачу.</p>
+            <p class="text-sm text-slate-400 mt-1">Нажмите на карточку, чтобы перевернуть её и проверить состав и сервировку.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="fc-cat-select" onchange="initFlashcards()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white">
@@ -204,7 +203,7 @@
                 <span id="fc-front-cat" class="text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-4">Категория</span>
                 <h3 id="fc-front-name" class="text-2xl sm:text-3xl font-extrabold text-white mb-2">Название блюда</h3>
                 <p id="fc-front-weight" class="text-sm font-semibold text-slate-400">Выход: —</p>
-                <span class="mt-8 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав</span>
+                <span class="mt-8 text-xs text-slate-500 flex items-center gap-1.5">👆 Нажмите, чтобы увидеть состав и приборы</span>
               </div>
 
               <div class="absolute inset-0 w-full h-full bg-slate-950 border-2 border-amber-500/60 rounded-2xl p-6 flex flex-col justify-between text-left backface-hidden rotate-y-180 shadow-xl">
@@ -216,9 +215,9 @@
                   <p class="text-xs uppercase tracking-wider text-slate-400 font-bold mb-1">Состав:</p>
                   <p id="fc-back-ing" class="text-sm sm:text-base text-slate-100 leading-relaxed font-medium mb-4">Состав блюда...</p>
                 </div>
-                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
-                  <span id="fc-back-serve" class="font-semibold text-emerald-400 bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-900/50">🍽️ Стандартная подача</span>
-                  <span id="fc-back-weight" class="text-slate-400 font-semibold">0 г</span>
+                <div class="pt-3 border-t border-slate-800 flex items-center justify-between text-xs gap-2">
+                  <span id="fc-back-serve" class="font-semibold text-emerald-400 bg-emerald-950/60 px-3 py-1.5 rounded-lg border border-emerald-900/50">🍽️ Приборы</span>
+                  <span id="fc-back-weight" class="text-slate-400 font-semibold shrink-0">0 г</span>
                 </div>
               </div>
             </div>
@@ -234,31 +233,33 @@
       </div>
     </section>
 
-    <!-- ВКЛАДКА 4: УСТАВ И РЕГЛАМЕНТ -->
+    <!-- ВКЛАДКА 4: УСТАВ, СЕРВИРОВКА И КОНФЛИКТНЫЕ СИТУАЦИИ -->
     <section id="section-rules" class="hidden space-y-6">
       <div class="bg-slate-900 p-6 sm:p-8 rounded-2xl shadow-sm border border-slate-800 space-y-8">
         <div class="border-b border-slate-800 pb-4">
           <h2 class="text-2xl font-extrabold text-white">📜 Официальный регламент и устав Кафе «Папино»</h2>
-          <p class="text-sm text-slate-400 mt-1">Полный свод правил, стандартов сервиса, гигиены и ответственности сотрудников (ИП Лотфуллин М.М.)</p>
+          <p class="text-sm text-slate-400 mt-1">Полный свод правил сервиса, сервировки приборов, решения конфликтов и ответственности сотрудников (ИП Лотфуллин М.М.)</p>
         </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности и Гость</a>
-          <a href="#rule-conduct" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">👤 Внешний вид и Запреты</a>
-          <a href="#rule-steps" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🚶‍♂️ Шаги обслуживания</a>
-          <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы и Санкции</a>
+        <div class="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          <a href="#rule-corp" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🌟 Ценности</a>
+          <a href="#rule-cutlery" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-emerald-400 transition">🍽️ Сервировка</a>
+          <a href="#rule-conflicts" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-sky-400 transition">⚡ Конфликты</a>
+          <a href="#rule-steps" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-amber-400 transition">🚶‍♂️ Тайминги</a>
+          <a href="#rule-penalties" class="p-3 bg-slate-950 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-semibold text-center text-red-400 transition">⚠️ Штрафы</a>
         </div>
 
+        <!-- 1. Ценности -->
         <div id="rule-corp" class="space-y-4 pt-2">
           <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>💎</span> 1. Корпоративные ценности и понятие «Гость»</h3>
           <p class="text-sm text-slate-300 leading-relaxed">
-            Ресторан — это необычное государство со своей историей и традициями. Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
+            Наша главная задача — создать для Гостей особую атмосферу уюта, спокойствия и безопасности. В нашей работе мы <strong>никогда не используем слова «клиент», «посетитель»</strong>. Мы используем исключительно понятия <strong>«Гость»</strong> и <strong>«Гостеприимство»</strong>.
           </p>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
               <strong class="text-white block text-sm">7 правил создания атмосферы:</strong>
               <ul class="list-disc pl-4 space-y-1">
-                <li>Радушно приветствуем каждого Гостя!</li>
+                <li>Радушно приветствуем каждого Гостя в первые 30–60 секунд!</li>
                 <li>Проявляем внимание к КАЖДОМУ гостю, даже если он за чужим столом.</li>
                 <li>Официант отлично знает меню и предлагает блюда под потребности гостя.</li>
                 <li>Обеспечиваем радушный и заботливый сервис.</li>
@@ -268,67 +269,131 @@
               </ul>
             </div>
             <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-300 space-y-2">
-              <strong class="text-white block text-sm">Золотые правила официанта:</strong>
+              <strong class="text-white block text-sm">Внешний вид и запреты в зале:</strong>
               <ul class="list-disc pl-4 space-y-1">
-                <li><strong>Правило без слова «нет»:</strong> если блюда нет, предлагаем достойную альтернативу.</li>
-                <li><strong>Командная работа:</strong> помогать коллегам и просить помощи при запарке.</li>
-                <li><strong>Двойная роль:</strong> быть одновременно радушным хозяином и профессиональным продавцом.</li>
+                <li>Чистая отутюженная форма, волосы собраны, закрытая черная обувь и черные носки, бейдж слева.</li>
+                <li>Запрещены кольца (кроме обручального), браслеты, часы, серьги с камнями.</li>
+                <li><strong>Строго запрещено в зале:</strong> пользоваться телефоном (кроме iiko waiter), жевать жвачку, держать руки в карманах, облокачиваться на стены/бар, сидеть в зале или ходить в гостевой туалет.</li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div id="rule-conduct" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>👔</span> 2. Стандарты внешнего вида, гигиены и запреты</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs text-slate-300">
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-white block text-sm">Требования к внешнему виду:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li>Чистая, отутюженная униформа.</li>
-                <li>Волосы чистые, собраны в хвост или убранные с лица.</li>
-                <li>Закрытая черная обувь, черные носки.</li>
-                <li>Умеренный парфюм, неброский макияж, ухоженные ногти средней длины.</li>
-                <li>Бейдж на груди слева.</li>
-                <li><strong>Строго запрещены</strong> кольца (кроме обручального), браслеты, часы и серьги с камнями.</li>
-              </ul>
+        <!-- 2. Стандарты сервировки и приборов -->
+        <div id="rule-cutlery" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-emerald-400 flex items-center gap-2"><span>🍽️</span> 2. Стандарты сервировки и подачи приборов по категориям</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 text-xs text-slate-300">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍝 Пасты</strong>
+              Сервируются <strong>вилкой и столовой ложкой</strong>.
             </div>
-            <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 space-y-2">
-              <strong class="text-red-400 block text-sm">Категорические запреты в зале:</strong>
-              <ul class="list-disc pl-4 space-y-1">
-                <li>Пользоваться мобильным телефоном в зале (кроме iiko waiter).</li>
-                <li>Жевать жвачку в зале и на кухне.</li>
-                <li>Держать руки в карманах, облокачиваться на стены и барную стойку.</li>
-                <li>Пользоваться гостевым туалетом.</li>
-                <li>Сидеть на стульях, диванах и подлокотниках.</li>
-              </ul>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍜 Супы (включая Том ям и Рамен)</strong>
+              Сервируются только <strong>столовой ложкой</strong> (палочки к супам не подаются).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍕 Пицца и Мини-пицца 20 см</strong>
+              Подаётся <strong>оливковое масло, вилка и нож</strong> (лопатки для пиццы нет).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍔 Бургеры и все Сендвичи</strong>
+              Подаются <strong>перчатки</strong> (включая сендвичи с ростбифом, курицей и детский).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🦐 Пивные креветки (обж./отв.)</strong>
+              Подаются <strong>2 круглые белые миски</strong>: одна с водой для рук, одна пустая под очистки.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍟 Остальные закуски</strong>
+              Подаются <strong>без приборов</strong> (приборы выносятся только по просьбе гостя).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🥩 Горячие блюда, Стейки, Салаты</strong>
+              Сервируются стандартной <strong>вилкой и ножом</strong>.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🥢 Поке и Воки</strong>
+              Сервируются <strong>палочками или вилкой</strong> (на выбор гостя).
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-emerald-300 block mb-1">🍣 Роллы, Суши и Сеты</strong>
+              Классические, фирменные, запечённые, суши, сеты: <strong>палочки, соевый соус, имбирь, васаби</strong>.<br>
+              Горячие роллы: <strong>палочки, соевый соус, соус спайси</strong>.
             </div>
           </div>
         </div>
 
+        <!-- 3. Выход из конфликтных ситуаций -->
+        <div id="rule-conflicts" class="space-y-4 pt-4 border-t border-slate-800">
+          <h3 class="text-lg font-bold text-sky-400 flex items-center gap-2"><span>⚡</span> 3. Базовые правила решения конфликтных ситуаций (Алгоритм LAST)</h3>
+          <p class="text-xs sm:text-sm text-slate-300">
+            Любая жалоба Гостя — это возможность исправить ошибку и сохранить лояльность. Официант <strong>никогда не спорит с Гостем</strong>, не оправдывается («на кухне запарка», «повар новенький») и не перекладывает вину на коллег.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+            <div class="p-4 rounded-xl bg-slate-950 border border-sky-900/50 space-y-1">
+              <strong class="text-sky-300 block text-sm">1. L — Listen (Выслушайте)</strong>
+              Внимательно выслушайте Гостя до конца, не перебивая. Установите зрительный контакт, кивайте, покажите, что проблема для вас важна.
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-sky-900/50 space-y-1">
+              <strong class="text-sky-300 block text-sm">2. A — Apologize (Извинитесь)</strong>
+              Принесите искренние извинения от лица заведения: <em>«Приношу искренние извинения за эту ситуацию, мне очень жаль, что мы вас расстроили»</em>.
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-sky-900/50 space-y-1">
+              <strong class="text-sky-300 block text-sm">3. S — Solve (Решите и позовите менеджера)</strong>
+              Немедленно уберите некачественное блюдо со стола, предложите переделать или заменить его и <strong>обязательно сообщите менеджеру смены</strong>.
+            </div>
+            <div class="p-4 rounded-xl bg-slate-950 border border-sky-900/50 space-y-1">
+              <strong class="text-sky-300 block text-sm">4. T — Thank (Поблагодарите)</strong>
+              Поблагодарите Гостя за то, что он указал на недочёт: <em>«Спасибо, что сказали нам об этом, вы помогаете нам становиться лучше»</em>.
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs text-slate-300 pt-2">
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">⏳ Ситуация: Блюдо задерживается дольше тайминга</strong>
+              Не ждите, пока Гость сам начнёт искать официанта! Подойдите первым, предупредите о небольшой задержке, извинитесь и при необходимости предложите напиток/обновить воду.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">🚫 Ситуация: Блюдо в стоп-листе («Правило без слова НЕТ»)</strong>
+              Никогда не говорите сухое «Этого нет». Используйте связку: <em>«К сожалению, [Блюдо] сегодня закончилось, но я с радостью рекомендую попробовать [Похожее блюдо по составу]»</em>.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">🍲 Ситуация: Волос / инородный предмет / холодное блюдо</strong>
+              Мгновенно и без споров унесите блюдо со стола, принесите извинения, сразу поставьте в известность менеджера (Полина, Оля, Ангелина) для замены блюда или комплимента от заведения.
+            </div>
+            <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
+              <strong class="text-amber-300 block mb-1">🧾 Ситуация: Ошибка в пречеке или недовольство при расчёте</strong>
+              Спокойно извинитесь, заберите чек и немедленно обратитесь к менеджеру смены для корректировки счёта.
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Шаги обслуживания -->
         <div id="rule-steps" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 3. Шаги обслуживания и тайминги</h3>
+          <h3 class="text-lg font-bold text-amber-400 flex items-center gap-2"><span>🚶‍♂️</span> 4. Шаги обслуживания и тайминги</h3>
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-300">
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <strong class="text-amber-300 block mb-1">Шаг 1. Встреча и приветствие</strong>
               Приветствие в первые 30–60 сек. Уточнение брони, выбор зала. Подача меню в открытом виде.
             </div>
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа</strong>
-              Использование «Сетки меню». Тайминги: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин.
+              <strong class="text-amber-300 block mb-1">Шаг 2. Принятие заказа и тайминги отдачи</strong>
+              Тайминги подачи: салаты 15–20 мин, горячее 15–25 мин, десерты 5–10 мин. Повторение заказа гостю.
             </div>
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
-              <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль)</strong>
-              Опрос гостя сразу после того, как он попробовал блюдо («Вам понравился вкус заказанных блюд?»).
+              <strong class="text-amber-300 block mb-1">Шаг 3. Check Back (Контроль качества)</strong>
+              Опрос гостя после первых кусочков блюда («Вам понравился вкус заказанных блюд?»). Это позволяет вовремя выявить проблему до конца трапезы.
             </div>
             <div class="p-3.5 rounded-xl bg-slate-950 border border-slate-800">
               <strong class="text-amber-300 block mb-1">Шаг 4. Расчёт и прощание</strong>
-              Фискальный чек за 3 мин, сдача за 4 мин. Прощание у дверей, предложение вернуться снова.
+              Фискальный чек за 3 мин, сдача за 4 мин. Прощание со всем коллективом, приглашение зайти снова.
             </div>
           </div>
         </div>
 
+        <!-- 5. Штрафы (Депремирование) -->
         <div id="rule-penalties" class="space-y-4 pt-4 border-t border-slate-800">
-          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 4. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
+          <h3 class="text-lg font-bold text-red-400 flex items-center gap-2"><span>⚠️</span> 5. Система депремирования (Штрафы ИП Лотфуллин М.М.)</h3>
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs text-slate-300 border border-slate-800 rounded-xl overflow-hidden">
               <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
@@ -350,16 +415,6 @@
               </tbody>
             </table>
           </div>
-
-          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900/60 text-xs text-red-300 space-y-1">
-            <strong class="text-white block font-bold mb-1">🔥 Категорически запрещается и влечет немедленное увольнение:</strong>
-            <ul class="list-disc pl-4 space-y-1">
-              <li>Присутствие на рабочем месте под воздействием алкоголя или наркотических средств.</li>
-              <li>Приносить на работу продукты, продаваемые в заведении.</li>
-              <li>Выносить имущество заведения (ст. 158 УК РФ).</li>
-              <li>Покидать рабочее место без разрешения администратора.</li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
@@ -369,19 +424,19 @@
       <div class="bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-800">
         <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-800">
           <div>
-            <h2 class="text-xl font-extrabold text-white">🎲 Генератор тестов и экзаменов</h2>
-            <p class="text-sm text-slate-400 mt-1">Выберите всю базу или отдельную категорию для экспресс-теста (10–20 вопросов) или экзамена с ручным вводом (30 вопросов).</p>
+            <h2 class="text-xl font-extrabold text-white">🎲 Тренажёр и аттестация сотрудников</h2>
+            <p class="text-sm text-slate-400 mt-1">Ответы проверяются в режиме «без подсказок» — полный разбор ошибок и забытых ингредиентов выводится в конце теста.</p>
           </div>
           <div class="flex flex-wrap items-center gap-3">
             <select id="quiz-cat-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
-              <option value="ALL">Вся база</option>
+              <option value="ALL">Вся база меню</option>
             </select>
             <select id="quiz-count-select" onchange="startNewRandomQuiz()" class="px-3 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm font-medium text-white transition">
               <option value="10">10 вопросов (Экспресс)</option>
               <option value="20">20 вопросов (Стандарт)</option>
               <option value="30">30 вопросов (Экзамен ✍️)</option>
             </select>
-            <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Новый тест</button>
+            <button onclick="startNewRandomQuiz()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-xs sm:text-sm shadow transition">🔄 Начать заново</button>
           </div>
         </div>
 
@@ -394,7 +449,7 @@
         <div id="quiz-active-area" class="mt-6">
           <div class="flex items-center justify-between mb-3">
             <span id="quiz-progress-text" class="text-xs font-bold uppercase tracking-wider text-amber-400">Вопрос 1 из 10</span>
-            <span id="quiz-score-live" class="text-xs font-semibold text-slate-400">Правильных: 0</span>
+            <span class="text-xs font-medium text-slate-500">Разбор ответов откроется после завершения</span>
           </div>
           <div class="w-full h-2 bg-slate-950 rounded-full overflow-hidden mb-6 border border-slate-800">
             <div id="quiz-progress-bar" class="h-full bg-amber-500 transition-all duration-300" style="width: 10%"></div>
@@ -404,32 +459,30 @@
             <div id="quiz-q-badge" class="inline-block text-[11px] font-bold px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 mb-3">Категория</div>
             <h3 id="quiz-q-title" class="text-base sm:text-lg font-bold text-white mb-5">Загрузка вопроса...</h3>
             
-            <!-- Варианты ответа для тестов 10/20 -->
+            <!-- Варианты ответа для тестов -->
             <div id="quiz-options" class="grid grid-cols-1 gap-3"></div>
             
-            <!-- Блок ручного ввода для экзамена (30 вопросов) с нейтральным примером -->
+            <!-- Блок ручного ввода для экзамена (30 вопросов) -->
             <div id="quiz-manual-container" class="hidden space-y-3">
-              <textarea id="quiz-manual-input" rows="3" placeholder="Перечислите основные ингредиенты через запятую..." class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm"></textarea>
+              <textarea id="quiz-manual-input" rows="3" placeholder="Перечислите ингредиенты через запятую..." class="w-full p-4 rounded-xl bg-slate-900 border border-slate-700 text-white placeholder-slate-500 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none text-sm"></textarea>
               <p class="text-xs text-slate-400 italic">💡 Пример формата записи: Рис, нори, сливочный сыр, огурец, лосось, соус...</p>
-              <button onclick="submitManualAnswer()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition shadow">Ответить</button>
-            </div>
-
-            <div id="quiz-feedback" class="hidden mt-4 p-4 rounded-xl text-sm font-medium"></div>
-            <div class="mt-5 flex justify-end">
-              <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden px-6 py-2.5 bg-white hover:bg-slate-200 text-slate-950 font-semibold rounded-xl text-sm transition">Следующий →</button>
+              <div class="flex justify-end">
+                <button onclick="submitManualAnswer()" class="px-6 py-2.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition shadow">Принять ответ и далее →</button>
+              </div>
             </div>
           </div>
         </div>
 
+        <!-- Финальный экран результатов и умного разбора -->
         <div id="quiz-result-area" class="hidden mt-6 text-center py-6">
           <div id="quiz-result-emoji" class="text-5xl mb-3">🏆</div>
           <h3 id="quiz-result-title" class="text-2xl font-extrabold text-white">Результат теста</h3>
           <p id="quiz-result-subtitle" class="text-slate-400 mt-1 mb-6"></p>
-          <div id="sync-status" class="text-xs text-amber-400 mb-4 font-medium">Отправка результата в Google Таблицу...</div>
+          <div id="sync-status" class="text-xs text-amber-400 mb-5 font-medium">Отправка результата в Google Таблицу...</div>
           <button onclick="startNewRandomQuiz()" class="px-6 py-3 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow transition">Пройти ещё раз</button>
 
           <div id="quiz-mistakes-box" class="hidden mt-8 text-left max-w-3xl mx-auto">
-            <h4 class="text-sm font-bold uppercase tracking-wider text-red-400 mb-3">Разбор допущенных ошибок:</h4>
+            <h4 class="text-sm font-bold uppercase tracking-wider text-amber-400 mb-3">📋 Детальный разбор ответов (ошибки и забытые ингредиенты):</h4>
             <div id="quiz-mistakes-list" class="space-y-3"></div>
           </div>
         </div>
@@ -444,27 +497,27 @@
         <form id="add-item-form" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Категория</label>
-            <input type="text" id="new-cat" required placeholder="Например: Бар / Кофе / Лимонады" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-cat" required placeholder="Например: Пасты / Горячие блюда" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Название позиции</label>
-            <input type="text" id="new-name" required placeholder="Раф Лаванда" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-name" required placeholder="Название блюда" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
             <label class="block text-xs font-bold text-slate-400 mb-1">Состав / Описание</label>
-            <input type="text" id="new-ing" required placeholder="Эспрессо, сливки, лавандовый сироп" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-ing" required placeholder="Перечислите ингредиенты через запятую" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Выход (г / мл)</label>
-            <input type="text" id="new-weight" required placeholder="300 мл" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="text" id="new-weight" required placeholder="250 г" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-400 mb-1">Цена (₽)</label>
-            <input type="number" id="new-price" required placeholder="290" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <input type="number" id="new-price" required placeholder="490" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-xs font-bold text-slate-400 mb-1">Особенности подачи</label>
-            <input type="text" id="new-serve" value="Стандартная подача" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
+            <label class="block text-xs font-bold text-slate-400 mb-1">Сервировка и приборы</label>
+            <input type="text" id="new-serve" value="Сервировка: вилка и нож" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-sm" />
           </div>
           <div class="sm:col-span-2">
             <button type="submit" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm shadow transition">+ Добавить в меню</button>
@@ -493,172 +546,172 @@
       "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр", pass: "4727" }
     };
 
-    // ПОЛНАЯ БАЗА МЕНЮ КАФЕ «ПАПИНО» (ВСЕ КАТЕГОРИИ БЕЗ СОКРАЩЕНИЙ)
+    // ПОЛНАЯ БАЗА МЕНЮ КАФЕ «ПАПИНО» С ОБНОВЛЕННОЙ ТОЧНОЙ СЕРВИРОВКОЙ
     const INITIAL_MENU = [
       // Классические роллы
-      { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "120 г", price: 329, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, угорь, соус «Унаги», белый кунжут" },
-      { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "120 г", price: 209, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "Рис, нори, авокадо" },
-      { id: "CR-03", category: "Классические роллы", name: "Ролл с копченой курицей", weight: "120 г", price: 209, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, копченная курица" },
-      { id: "CR-04", category: "Классические роллы", name: "Ролл с креветкой", weight: "120 г", price: 279, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, тигровая креветка" },
-      { id: "CR-05", category: "Классические роллы", name: "Ролл с лососем", weight: "120 г", price: 309, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, лосось" },
-      { id: "CR-06", category: "Классические роллы", name: "Ролл с огурцом", weight: "120 г", price: 199, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, огурец свежий" },
-      { id: "CR-07", category: "Классические роллы", name: "Ролл с тунцом", weight: "120 г", price: 289, serving: "К роллам подаётся имбирь, васаби и соевый соус", ingredients: "рис, нори, тунец" },
+      { id: "CR-01", category: "Классические роллы", name: "Ролл с угрём", weight: "120 г", price: 329, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, угорь, соус «Унаги», белый кунжут" },
+      { id: "CR-02", category: "Классические роллы", name: "Ролл с авокадо", weight: "120 г", price: 209, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, авокадо" },
+      { id: "CR-03", category: "Классические роллы", name: "Ролл с копченой курицей", weight: "120 г", price: 209, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, копченная курица" },
+      { id: "CR-04", category: "Классические роллы", name: "Ролл с креветкой", weight: "120 г", price: 279, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, тигровая креветка" },
+      { id: "CR-05", category: "Классические роллы", name: "Ролл с лососем", weight: "120 г", price: 309, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, лосось" },
+      { id: "CR-06", category: "Классические роллы", name: "Ролл с огурцом", weight: "120 г", price: 199, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, огурец свежий" },
+      { id: "CR-07", category: "Классические роллы", name: "Ролл с тунцом", weight: "120 г", price: 289, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, нори, тунец" },
 
       // Роллы фирменные
-      { id: "PR-01", category: "Роллы фирменные", name: "Асахи", weight: "220 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-02", category: "Роллы фирменные", name: "Инь-Ян", weight: "200 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, лосось, угорь, огурец, имбирь маринованный, васаби" },
-      { id: "PR-03", category: "Роллы фирменные", name: "Кайто", weight: "220 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, кукуруза консервированная, болгарский перец, огурец, ореховый соус, имбирь маринованный, васаби" },
-      { id: "PR-04", category: "Роллы фирменные", name: "Калифорния с имитацией краба", weight: "240 г", price: 499, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, огурец, имитация краба, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-05", category: "Роллы фирменные", name: "Калифорния с креветкой и авокадо", weight: "230 г", price: 559, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, авокадо, огурец, креветка тигровая, майонез, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-06", category: "Роллы фирменные", name: "Калифорния с креветкой и томатом", weight: "220 г", price: 559, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, томат, креветка тигровая, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-07", category: "Роллы фирменные", name: "Кама", weight: "200 г", price: 479, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, салат «Айсберг», перец «Халапеньо», креветка тигровая в кляре, икра масаго, соус «Спайси», имбирь маринованный, васаби" },
-      { id: "PR-08", category: "Роллы фирменные", name: "Канада", weight: "235 г", price: 729, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, огурец, авокадо, лосось терияки, угорь, белый кунжут, соус «Унаги», имбирь маринованный, васаби" },
-      { id: "PR-09", category: "Роллы фирменные", name: "Мидори", weight: "240 г", price: 549, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, икра масаго, сыр сливочный, огурец, лосось, имбирь маринованный, васаби" },
-      { id: "PR-10", category: "Роллы фирменные", name: "Микадо", weight: "240 г", price: 709, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, авокадо, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
-      { id: "PR-11", category: "Роллы фирменные", name: "Монреаль", weight: "240 г", price: 659, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, огурец, угорь, креветка тигровая, имбирь маринованный, васаби" },
-      { id: "PR-12", category: "Роллы фирменные", name: "Океан", weight: "210 г", price: 519, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, креветка тигровая, сыр сливочный, соус «кимчи», соус спайси, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-13", category: "Роллы фирменные", name: "Окинава", weight: "190 г", price: 399, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, имитация краба, имбирь маринованный, васаби" },
-      { id: "PR-14", category: "Роллы фирменные", name: "Ринка", weight: "240 г", price: 699, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, огурец, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
-      { id: "PR-15", category: "Роллы фирменные", name: "Сайко", weight: "220 г", price: 569, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, паста «том ям», креветка тигровая, зеленый лук, икра масаго, имбирь маринованный, васаби" },
-      { id: "PR-16", category: "Роллы фирменные", name: "Сакура", weight: "230 г", price: 649, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, креветка тигровая, огурец, угорь, сыр сливочный, имбирь маринованный, васаби" },
-      { id: "PR-17", category: "Роллы фирменные", name: "Токай", weight: "185 г", price: 549, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, лосось терияки, огурец, стружка тунца, имбирь маринованный, васаби" },
-      { id: "PR-18", category: "Роллы фирменные", name: "Торо", weight: "240 г", price: 689, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, огурец, икра масаго, лосось, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
-      { id: "PR-19", category: "Роллы фирменные", name: "Филадельфия с авокадо", weight: "240 г", price: 719, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, лосось, сыр сливочный, авокадо, имбирь маринованный, васаби" },
-      { id: "PR-20", category: "Роллы фирменные", name: "Филадельфия с огурцом", weight: "240 г", price: 689, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, лосось, сыр сливочный, огурец, имбирь маринованный, васаби" },
-      { id: "PR-21", category: "Роллы фирменные", name: "Филадельфия с тигровой креветкой", weight: "250 г", price: 779, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, лосось, сыр сливочный, креветка тигровая, имбирь маринованный, васаби" },
-      { id: "PR-22", category: "Роллы фирменные", name: "Хороми", weight: "190 г", price: 469, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, огурец, лосось, имитация краба, креветка тигровая, имбирь маринованный, васаби" },
-      { id: "PR-23", category: "Роллы фирменные", name: "Шанхай", weight: "220 г", price: 419, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, омлет, огурец, авокадо, сыр сливочный, имбирь маринованный, васаби" },
-      { id: "PR-24", category: "Роллы фирменные", name: "Юки", weight: "190 г", price: 489, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сливочный сыр, тунец, кальмар, огурец, имбирь маринованный, васаби" },
-      { id: "PR-25", category: "Роллы фирменные", name: "Ямайка", weight: "240 г", price: 499, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, огурец, сыр «чеддер», имбирь маринованный, васаби" },
-      { id: "PR-26", category: "Роллы фирменные", name: "Ятоми", weight: "220 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, томаты, салат «Айсберг», сыр «Чеддер», соус «Цезарь», имбирь маринованный, васаби" },
+      { id: "PR-01", category: "Роллы фирменные", name: "Асахи", weight: "220 г", price: 519, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-02", category: "Роллы фирменные", name: "Инь-Ян", weight: "200 г", price: 519, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, лосось, угорь, огурец, имбирь маринованный, васаби" },
+      { id: "PR-03", category: "Роллы фирменные", name: "Кайто", weight: "220 г", price: 449, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, кукуруза консервированная, болгарский перец, огурец, ореховый соус, имбирь маринованный, васаби" },
+      { id: "PR-04", category: "Роллы фирменные", name: "Калифорния с имитацией краба", weight: "240 г", price: 499, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, авокадо, огурец, имитация краба, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-05", category: "Роллы фирменные", name: "Калифорния с креветкой и авокадо", weight: "230 г", price: 559, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, авокадо, огурец, креветка тигровая, майонез, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-06", category: "Роллы фирменные", name: "Калифорния с креветкой и томатом", weight: "220 г", price: 559, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, томат, креветка тигровая, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-07", category: "Роллы фирменные", name: "Кама", weight: "200 г", price: 479, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, салат «Айсберг», перец «Халапеньо», креветка тигровая в кляре, икра масаго, соус «Спайси», имбирь маринованный, васаби" },
+      { id: "PR-08", category: "Роллы фирменные", name: "Канада", weight: "235 г", price: 729, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, огурец, авокадо, лосось терияки, угорь, белый кунжут, соус «Унаги», имбирь маринованный, васаби" },
+      { id: "PR-09", category: "Роллы фирменные", name: "Мидори", weight: "240 г", price: 549, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, икра масаго, сыр сливочный, огурец, лосось, имбирь маринованный, васаби" },
+      { id: "PR-10", category: "Роллы фирменные", name: "Микадо", weight: "240 г", price: 709, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, авокадо, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
+      { id: "PR-11", category: "Роллы фирменные", name: "Монреаль", weight: "240 г", price: 659, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, огурец, угорь, креветка тигровая, имбирь маринованный, васаби" },
+      { id: "PR-12", category: "Роллы фирменные", name: "Океан", weight: "210 г", price: 519, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, креветка тигровая, сыр сливочный, соус «кимчи», соус спайси, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-13", category: "Роллы фирменные", name: "Окинава", weight: "190 г", price: 399, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, имитация краба, имбирь маринованный, васаби" },
+      { id: "PR-14", category: "Роллы фирменные", name: "Ринка", weight: "240 г", price: 699, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, огурец, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
+      { id: "PR-15", category: "Роллы фирменные", name: "Сайко", weight: "220 г", price: 569, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, паста «том ям», креветка тигровая, зеленый лук, икра масаго, имбирь маринованный, васаби" },
+      { id: "PR-16", category: "Роллы фирменные", name: "Сакура", weight: "230 г", price: 649, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, креветка тигровая, огурец, угорь, сыр сливочный, имбирь маринованный, васаби" },
+      { id: "PR-17", category: "Роллы фирменные", name: "Токай", weight: "185 г", price: 549, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, лосось терияки, огурец, стружка тунца, имбирь маринованный, васаби" },
+      { id: "PR-18", category: "Роллы фирменные", name: "Торо", weight: "240 г", price: 689, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, огурец, икра масаго, лосось, угорь, соус «Унаги», белый кунжут, имбирь маринованный, васаби" },
+      { id: "PR-19", category: "Роллы фирменные", name: "Филадельфия с авокадо", weight: "240 г", price: 719, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, лосось, сыр сливочный, авокадо, имбирь маринованный, васаби" },
+      { id: "PR-20", category: "Роллы фирменные", name: "Филадельфия с огурцом", weight: "240 г", price: 689, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, лосось, сыр сливочный, огурец, имбирь маринованный, васаби" },
+      { id: "PR-21", category: "Роллы фирменные", name: "Филадельфия с тигровой креветкой", weight: "250 г", price: 779, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, лосось, сыр сливочный, креветка тигровая, имбирь маринованный, васаби" },
+      { id: "PR-22", category: "Роллы фирменные", name: "Хороми", weight: "190 г", price: 469, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, огурец, лосось, имитация краба, креветка тигровая, имбирь маринованный, васаби" },
+      { id: "PR-23", category: "Роллы фирменные", name: "Шанхай", weight: "220 г", price: 419, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, омлет, огурец, авокадо, сыр сливочный, имбирь маринованный, васаби" },
+      { id: "PR-24", category: "Роллы фирменные", name: "Юки", weight: "190 г", price: 489, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сливочный сыр, тунец, кальмар, огурец, имбирь маринованный, васаби" },
+      { id: "PR-25", category: "Роллы фирменные", name: "Ямайка", weight: "240 г", price: 499, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, огурец, сыр «чеддер», имбирь маринованный, васаби" },
+      { id: "PR-26", category: "Роллы фирменные", name: "Ятоми", weight: "220 г", price: 449, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, томаты, салат «Айсберг», сыр «Чеддер», соус «Цезарь», имбирь маринованный, васаби" },
 
       // Горячие роллы
-      { id: "HR-01", category: "Горячие роллы", name: "Азуми", weight: "260 г", price: 529, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, мидии, соус «терияки», мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-02", category: "Горячие роллы", name: "Аруки маки", weight: "235 г", price: 569, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, паста «том ям», лосось, томат, лук зеленый, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-03", category: "Горячие роллы", name: "Горячий с курицей", weight: "200 г", price: 459, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, авокадо, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-04", category: "Горячие роллы", name: "Кани", weight: "220 г", price: 579, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, имитация краба, огурец, креветка тигровая, лосось терияки, соус «Терияки», мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-05", category: "Горячие роллы", name: "Киото", weight: "260 г", price: 579, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, угорь, огурец, икра масаго, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-06", category: "Горячие роллы", name: "Саюри", weight: "270 г", price: 609, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, тунец, лосось, бекон, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-07", category: "Горячие роллы", name: "Сендай", weight: "185 г", price: 579, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, лосось терияки, креветка тигровая, чука, ореховый соус, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-08", category: "Горячие роллы", name: "Сингапур", weight: "260 г", price: 539, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, сыр сливочный, креветка тигровая, огурец, икра масаго, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-09", category: "Горячие роллы", name: "Такеши", weight: "240 г", price: 539, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, лосось, болгарский перец, сыр сливочный, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-10", category: "Горячие роллы", name: "Тендо", weight: "230 г", price: 539, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, креветка тигровая, сыр «Чеддер», омлет, бекон, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-11", category: "Горячие роллы", name: "Фьюжн", weight: "250 г", price: 559, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, лосось, томат, сыр сливочный, мука, яйцо, панировочные сухари, соус спайси" },
-      { id: "HR-12", category: "Горячие роллы", name: "Цезарь ролл горячий", weight: "210 г", price: 489, serving: "Подача: соус спайси, соевый соус, палочки", ingredients: "Рис, нори, грибы шампиньоны жареные, куриное филе копченое, томаты, листовой салат, соус «Цезарь», мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-01", category: "Горячие роллы", name: "Азуми", weight: "260 г", price: 529, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, тунец, огурец, мидии, соус «терияки», мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-02", category: "Горячие роллы", name: "Аруки маки", weight: "235 г", price: 569, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, паста «том ям», лосось, томат, лук зеленый, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-03", category: "Горячие роллы", name: "Горячий с курицей", weight: "200 г", price: 459, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, авокадо, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-04", category: "Горячие роллы", name: "Кани", weight: "220 г", price: 579, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, имитация краба, огурец, креветка тигровая, лосось терияки, соус «Терияки», мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-05", category: "Горячие роллы", name: "Киото", weight: "260 г", price: 579, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, угорь, огурец, икра масаго, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-06", category: "Горячие роллы", name: "Саюри", weight: "270 г", price: 609, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, тунец, лосось, бекон, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-07", category: "Горячие роллы", name: "Сендай", weight: "185 г", price: 579, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, лосось терияки, креветка тигровая, чука, ореховый соус, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-08", category: "Горячие роллы", name: "Сингапур", weight: "260 г", price: 539, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, сыр сливочный, креветка тигровая, огурец, икра масаго, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-09", category: "Горячие роллы", name: "Такеши", weight: "240 г", price: 539, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, лосось, болгарский перец, сыр сливочный, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-10", category: "Горячие роллы", name: "Тендо", weight: "230 г", price: 539, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, креветка тигровая, сыр «Чеддер», омлет, бекон, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-11", category: "Горячие роллы", name: "Фьюжн", weight: "250 г", price: 559, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, лосось, томат, сыр сливочный, мука, яйцо, панировочные сухари, соус спайси" },
+      { id: "HR-12", category: "Горячие роллы", name: "Цезарь ролл горячий", weight: "210 г", price: 489, serving: "Палочки, соевый соус, соус спайси", ingredients: "Рис, нори, грибы шампиньоны жареные, куриное филе копченое, томаты, листовой салат, соус «Цезарь», мука, яйцо, панировочные сухари, соус спайси" },
 
       // Запечённые роллы
-      { id: "BR-01", category: "Запечённые роллы", name: "Акари", weight: "240 г", price: 629, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, угорь, креветка тигровая, стружка тунца, майонез, сыр «Пармезан», медовый соус, имбирь маринованный, васаби" },
-      { id: "BR-02", category: "Запечённые роллы", name: "Бостон", weight: "255 г", price: 569, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, креветка тигровая, сыр сливочный, огурец, икра масаго, майонез, сыр «Моцарелла», сливки 33%, медовый соус, имбирь маринованный, васаби" },
-      { id: "BR-03", category: "Запечённые роллы", name: "Вулкан", weight: "280 г", price: 659, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, паста «том ям», креветка тигровая, зеленый лук, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
-      { id: "BR-04", category: "Запечённые роллы", name: "Домбай", weight: "250 г", price: 489, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, омлет, соус спайси, черный кунжут, имбирь маринованный, васаби" },
-      { id: "BR-05", category: "Запечённые роллы", name: "Оушен", weight: "260 г", price: 579, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, омлет, креветка тигровая, майонез, сыр «Пармезан», имбирь маринованный, васаби" },
-      { id: "BR-06", category: "Запечённые роллы", name: "Сегун", weight: "260 г", price: 449, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
-      { id: "BR-07", category: "Запечённые роллы", name: "Хокку", weight: "255 г", price: 489, serving: "Палочки, имбирь маринованный, васаби, соевый соус", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, салат «Айсберг», майонез, сыр «Пармезан», имбирь маринованный, васаби" },
+      { id: "BR-01", category: "Запечённые роллы", name: "Акари", weight: "240 г", price: 629, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, угорь, креветка тигровая, стружка тунца, майонез, сыр «Пармезан», медовый соус, имбирь маринованный, васаби" },
+      { id: "BR-02", category: "Запечённые роллы", name: "Бостон", weight: "255 г", price: 569, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, креветка тигровая, сыр сливочный, огурец, икра масаго, майонез, сыр «Моцарелла», сливки 33%, медовый соус, имбирь маринованный, васаби" },
+      { id: "BR-03", category: "Запечённые роллы", name: "Вулкан", weight: "280 г", price: 659, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, паста «том ям», креветка тигровая, зеленый лук, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
+      { id: "BR-04", category: "Запечённые роллы", name: "Домбай", weight: "250 г", price: 489, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, омлет, соус спайси, черный кунжут, имбирь маринованный, васаби" },
+      { id: "BR-05", category: "Запечённые роллы", name: "Оушен", weight: "260 г", price: 579, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, омлет, креветка тигровая, майонез, сыр «Пармезан», имбирь маринованный, васаби" },
+      { id: "BR-06", category: "Запечённые роллы", name: "Сегун", weight: "260 г", price: 449, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, имитация краба, авокадо, икра масаго, сыр моцарелла, майонез, сливки 33%, имбирь маринованный, васаби" },
+      { id: "BR-07", category: "Запечённые роллы", name: "Хокку", weight: "255 г", price: 489, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, нори, сыр сливочный, куриное филе копченое, салат «Айсберг», майонез, сыр «Пармезан», имбирь маринованный, васаби" },
 
       // Суши
-      { id: "SU-01", category: "Суши", name: "Суши с лососем", weight: "40 г", price: 189, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "рис, лосось, сливочный сыр" },
-      { id: "SU-02", category: "Суши", name: "Суши с тигровой креветкой", weight: "35 г", price: 189, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "рис, тигровая креветка" },
-      { id: "SU-03", category: "Суши", name: "Суши с тунцом", weight: "40 г", price: 179, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "рис, тунец, масаго" },
-      { id: "SU-04", category: "Суши", name: "Суши с угрём", weight: "35 г", price: 239, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Рис, угорь, соус «Унаги», белый кунжут" },
+      { id: "SU-01", category: "Суши", name: "Суши с лососем", weight: "40 г", price: 189, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, лосось, сливочный сыр" },
+      { id: "SU-02", category: "Суши", name: "Суши с тигровой креветкой", weight: "35 г", price: 189, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, тигровая креветка" },
+      { id: "SU-03", category: "Суши", name: "Суши с тунцом", weight: "40 г", price: 179, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "рис, тунец, масаго" },
+      { id: "SU-04", category: "Суши", name: "Суши с угрём", weight: "35 г", price: 239, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Рис, угорь, соус «Унаги», белый кунжут" },
 
       // Сеты
-      { id: "SET-01", category: "Сеты", name: "Сет «Папино»", weight: "780 г", price: 1899, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Филадельфия с огурцом, инь-ян, классический ролл с крабом и сливочным сыром, классический ролл с копченой курицей и сливочным сыром" },
-      { id: "SET-02", category: "Сеты", name: "Сет «Самурай»", weight: "1010 г", price: 2449, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Тендо, киото, канада, монреаль" },
-      { id: "SET-03", category: "Сеты", name: "Сет «Сытно и точка»", weight: "1190 г", price: 2559, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Ятоми, сакура, токай, бостон, хокку" },
-      { id: "SET-04", category: "Сеты", name: "Сет «Якудза»", weight: "1260 г", price: 2659, serving: "Палочки, имбирь, васаби, соевый соус", ingredients: "Цезарь ролл, кани, фьюжн, сегун, акари" },
+      { id: "SET-01", category: "Сеты", name: "Сет «Папино»", weight: "780 г", price: 1899, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Филадельфия с огурцом, инь-ян, классический ролл с крабом и сливочным сыром, классический ролл с копченой курицей и сливочным сыром" },
+      { id: "SET-02", category: "Сеты", name: "Сет «Самурай»", weight: "1010 г", price: 2449, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Тендо, киото, канада, монреаль" },
+      { id: "SET-03", category: "Сеты", name: "Сет «Сытно и точка»", weight: "1190 г", price: 2559, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Ятоми, сакура, токай, бостон, хокку" },
+      { id: "SET-04", category: "Сеты", name: "Сет «Якудза»", weight: "1260 г", price: 2659, serving: "Палочки, соевый соус, имбирь, васаби", ingredients: "Цезарь ролл, кани, фьюжн, сегун, акари" },
 
       // Поке
-      { id: "PK-01", category: "Поке", name: "Поке с крабовым мясом", weight: "260 г", price: 509, serving: "Стандартная подача", ingredients: "Рис, имитация краба, авокадо, огурец, омлет, лук красный, соевый соус, соус «Сладкий чили», грецкий орех, кунжут черный/белый, нори" },
-      { id: "PK-02", category: "Поке", name: "Поке с креветкой", weight: "260 г", price: 589, serving: "Стандартная подача", ingredients: "Рис, томаты черри, огурец, кукуруза, омлет, креветки в панировке, ореховый соус, соевый соус, кунжут черный" },
-      { id: "PK-03", category: "Поке", name: "Поке с курицей", weight: "260 г", price: 509, serving: "Стандартная подача", ingredients: "Рис, куриное филе, томаты черри, огурец, кукуруза, имбирь маринованный, соевый соус, соус кимчи, соус барбекю, кунжут черный/белый, нори" },
-      { id: "PK-04", category: "Поке", name: "Поке с лососем", weight: "270 г", price: 719, serving: "Стандартная подача", ingredients: "Рис, лосось, авокадо, болгарский перец, кукуруза, огурец, соевый соус, соус терияки, кунжут белый" },
-      { id: "PK-05", category: "Поке", name: "Поке с тунцом и лососем", weight: "280 г", price: 759, serving: "Стандартная подача", ingredients: "Рис, тунец, лосось, огурец, авокадо, имбирь маринованный, соевый соус, соус терияки, соус «Шрирача», кунжутное масло, лимонный сок, кунжут черный/белый, нори" },
+      { id: "PK-01", category: "Поке", name: "Поке с крабовым мясом", weight: "260 г", price: 509, serving: "Сервировка: палочки или вилка", ingredients: "Рис, имитация краба, авокадо, огурец, омлет, лук красный, соевый соус, соус «Сладкий чили», грецкий орех, кунжут черный/белый, нори" },
+      { id: "PK-02", category: "Поке", name: "Поке с креветкой", weight: "260 г", price: 589, serving: "Сервировка: палочки или вилка", ingredients: "Рис, томаты черри, огурец, кукуруза, омлет, креветки в панировке, ореховый соус, соевый соус, кунжут черный" },
+      { id: "PK-03", category: "Поке", name: "Поке с курицей", weight: "260 г", price: 509, serving: "Сервировка: палочки или вилка", ingredients: "Рис, куриное филе, томаты черри, огурец, кукуруза, имбирь маринованный, соевый соус, соус кимчи, соус барбекю, кунжут черный/белый, нори" },
+      { id: "PK-04", category: "Поке", name: "Поке с лососем", weight: "270 г", price: 719, serving: "Сервировка: палочки или вилка", ingredients: "Рис, лосось, авокадо, болгарский перец, кукуруза, огурец, соевый соус, соус терияки, кунжут белый" },
+      { id: "PK-05", category: "Поке", name: "Поке с тунцом и лососем", weight: "280 г", price: 759, serving: "Сервировка: палочки или вилка", ingredients: "Рис, тунец, лосось, огурец, авокадо, имбирь маринованный, соевый соус, соус терияки, соус «Шрирача», кунжутное масло, лимонный сок, кунжут черный/белый, нори" },
 
       // Пицца
-      { id: "PZ-01", category: "Пицца", name: "Амаро", weight: "1000 г", price: 779, serving: "Подача с оливковым маслом", ingredients: "Соус сметанный, соус горчичный, пепперони, сыр моцарелла, лук красный, картофель по-деревенски, бекон, корнишоны, соус барбекю" },
-      { id: "PZ-02", category: "Пицца", name: "Вегетарианский микс", weight: "1000 г", price: 849, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, томаты, лук красный, маслины, сыр фета, руккола, соус песто" },
-      { id: "PZ-03", category: "Пицца", name: "Мечта мясника", weight: "527 г", price: 1129, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, томаты, ветчина, бекон, курица копченая, колбаски охотничьи, фарш говяжий, соус на выбор (барбекю/сливочный)" },
-      { id: "PZ-04", category: "Пицца", name: "Деревенская", weight: "1000 г", price: 759, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, грибы шампиньоны, томаты, курица копченая, чесночное масло, зелень" },
-      { id: "PZ-05", category: "Пицца", name: "Пицца 4 сезона", weight: "1000 г", price: 789, serving: "Подача с оливковым маслом", ingredients: "Соус томатный, сыр моцарелла, томаты, ветчина, колбаски охотничьи, курица копченая, пепперони, грибы шампиньоны, орегано" },
-      { id: "PZ-06", category: "Пицца", name: "Папино пицца", weight: "630 г", price: 789, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», ветчина, колбаски «Пепперони», томаты, перец «Халапеньо», соус «Шрирачо», орегано" },
-      { id: "PZ-07", category: "Пицца", name: "Венеция", weight: "650 г", price: 779, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», грибы шампиньоны, сливки 22%, ветчина, орегано" },
-      { id: "PZ-08", category: "Пицца", name: "Гавайская", weight: "670 г", price: 809, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», ананасы консервированные, ветчина, куриное филе копченое, орегано" },
-      { id: "PZ-09", category: "Пицца", name: "Маргарита", weight: "570 г", price: 609, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», томаты, орегано" },
-      { id: "PZ-10", category: "Пицца", name: "Пепперони", weight: "560 г", price: 709, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», колбаски «Пепперони», орегано" },
-      { id: "PZ-11", category: "Пицца", name: "Пицца 4 сыра", weight: "540 г", price: 849, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыры: «Моцарелла», «Фета», «Дорблю», «Пармезан»" },
-      { id: "PZ-12", category: "Пицца", name: "Ранчелия", weight: "620 г", price: 749, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», ветчина, куриное филе копченое, томаты, соус «Ранч»" },
-      { id: "PZ-13", category: "Пицца", name: "Сент-Луис", weight: "620 г", price: 839, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», груша, сыр «Дорблю», мед" },
-      { id: "PZ-14", category: "Пицца", name: "Сливочный цыпленок (без грибов)", weight: "610 г", price: 699, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», томаты, куриное филе копченое, сливочный соус" },
-      { id: "PZ-15", category: "Пицца", name: "Сливочный цыпленок с грибами", weight: "650 г", price: 739, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», томаты, грибы шампиньоны, куриное филе копченое, сливочный соус" },
-      { id: "PZ-16", category: "Пицца", name: "Чизбургер", weight: "690 г", price: 899, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», фарш говяжий, лук красный, корнишоны, томаты, соус «Бургер»" },
-      { id: "PZ-17", category: "Пицца", name: "Чикен Баффало", weight: "630 г", price: 739, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», куриное филе копченое, лук красный, соус «Барбекю», соус «Кимчи»" },
+      { id: "PZ-01", category: "Пицца", name: "Амаро", weight: "1000 г", price: 779, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Соус сметанный, соус горчичный, пепперони, сыр моцарелла, лук красный, картофель по-деревенски, бекон, корнишоны, соус барбекю" },
+      { id: "PZ-02", category: "Пицца", name: "Вегетарианский микс", weight: "1000 г", price: 849, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Соус томатный, сыр моцарелла, томаты, лук красный, маслины, сыр фета, руккола, соус песто" },
+      { id: "PZ-03", category: "Пицца", name: "Мечта мясника", weight: "527 г", price: 1129, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Соус томатный, сыр моцарелла, томаты, ветчина, бекон, курица копченая, колбаски охотничьи, фарш говяжий, соус на выбор (барбекю/сливочный)" },
+      { id: "PZ-04", category: "Пицца", name: "Деревенская", weight: "1000 г", price: 759, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Соус томатный, сыр моцарелла, грибы шампиньоны, томаты, курица копченая, чесночное масло, зелень" },
+      { id: "PZ-05", category: "Пицца", name: "Пицца 4 сезона", weight: "1000 г", price: 789, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Соус томатный, сыр моцарелла, томаты, ветчина, колбаски охотничьи, курица копченая, пепперони, грибы шампиньоны, орегано" },
+      { id: "PZ-06", category: "Пицца", name: "Папино пицца", weight: "630 г", price: 789, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», ветчина, колбаски «Пепперони», томаты, перец «Халапеньо», соус «Шрирачо», орегано" },
+      { id: "PZ-07", category: "Пицца", name: "Венеция", weight: "650 г", price: 779, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», грибы шампиньоны, сливки 22%, ветчина, орегано" },
+      { id: "PZ-08", category: "Пицца", name: "Гавайская", weight: "670 г", price: 809, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», ананасы консервированные, ветчина, куриное филе копченое, орегано" },
+      { id: "PZ-09", category: "Пицца", name: "Маргарита", weight: "570 г", price: 609, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», томаты, орегано" },
+      { id: "PZ-10", category: "Пицца", name: "Пепперони", weight: "560 г", price: 709, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», колбаски «Пепперони», орегано" },
+      { id: "PZ-11", category: "Пицца", name: "Пицца 4 сыра", weight: "540 г", price: 849, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыры: «Моцарелла», «Фета», «Дорблю», «Пармезан»" },
+      { id: "PZ-12", category: "Пицца", name: "Ранчелия", weight: "620 г", price: 749, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, сыр «Моцарелла», ветчина, куриное филе копченое, томаты, соус «Ранч»" },
+      { id: "PZ-13", category: "Пицца", name: "Сент-Луис", weight: "620 г", price: 839, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, сыр «Моцарелла», груша, сыр «Дорблю», мед" },
+      { id: "PZ-14", category: "Пицца", name: "Сливочный цыпленок (без грибов)", weight: "610 г", price: 699, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, сыр «Моцарелла», томаты, куриное филе копченое, сливочный соус" },
+      { id: "PZ-15", category: "Пицца", name: "Сливочный цыпленок с грибами", weight: "650 г", price: 739, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, сыр «Моцарелла», томаты, грибы шампиньоны, куриное филе копченое, сливочный соус" },
+      { id: "PZ-16", category: "Пицца", name: "Чизбургер", weight: "690 г", price: 899, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», фарш говяжий, лук красный, корнишоны, томаты, соус «Бургер»" },
+      { id: "PZ-17", category: "Пицца", name: "Чикен Баффало", weight: "630 г", price: 739, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», куриное филе копченое, лук красный, соус «Барбекю», соус «Кимчи»" },
 
       // Мини пицца 20 см
-      { id: "MPZ-01", category: "Мини пицца 20 см", name: "Мини пицца Греческая", weight: "330 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», томаты, сыр «Фета», лук красный, маслины" },
-      { id: "MPZ-02", category: "Мини пицца 20 см", name: "Мини пицца Карбонара", weight: "310 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, сыр «Моцарелла», бекон, сыр «Чеддер», томаты" },
-      { id: "MPZ-03", category: "Мини пицца 20 см", name: "Петито цезарь", weight: "310 г", price: 439, serving: "Подача с оливковым маслом", ingredients: "Сметанный соус, бекон, куриное филе копченое, сыр «Моцарелла», салат «Айсберг»" },
-      { id: "MPZ-04", category: "Мини пицца 20 см", name: "Петито пепперони", weight: "310 г", price: 429, serving: "Подача с оливковым маслом", ingredients: "Томатный соус, сыр «Моцарелла», колбаски «Пепперони», орегано" },
+      { id: "MPZ-01", category: "Мини пицца 20 см", name: "Мини пицца Греческая", weight: "330 г", price: 429, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», томаты, сыр «Фета», лук красный, маслины" },
+      { id: "MPZ-02", category: "Мини пицца 20 см", name: "Мини пицца Карбонара", weight: "310 г", price: 429, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, сыр «Моцарелла», бекон, сыр «Чеддер», томаты" },
+      { id: "MPZ-03", category: "Мини пицца 20 см", name: "Петито цезарь", weight: "310 г", price: 439, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Сметанный соус, бекон, куриное филе копченое, сыр «Моцарелла», салат «Айсберг»" },
+      { id: "MPZ-04", category: "Мини пицца 20 см", name: "Петито пепперони", weight: "310 г", price: 429, serving: "Подача: оливковое масло, вилка и нож", ingredients: "Томатный соус, сыр «Моцарелла», колбаски «Пепперони», орегано" },
 
       // Салаты
-      { id: "SAL-01", category: "Салаты", name: "Осьминожки", weight: "150 г", price: 769, serving: "Стандартная подача", ingredients: "Осьминожки бейби, огурец, лимон, белый кунжут, соус «Кимчи», соус «Шрирача», кунжутное масло, мицукан" },
-      { id: "SAL-02", category: "Салаты", name: "Чука", weight: "100 г", price: 289, serving: "Стандартная подача", ingredients: "Водоросли чука, ореховый соус, лимон, белый кунжут" },
-      { id: "SAL-03", category: "Салаты", name: "Цезарь с курицей", weight: "220 г", price: 579, serving: "Стандартная подача", ingredients: "Салат «Айсберг», листовой салат, куриное филе, томаты черри, перепелиное яйцо, соус «Цезарь», сухари, сыр «Пармезан»" },
-      { id: "SAL-04", category: "Салаты", name: "Цезарь с креветкой", weight: "220 г", price: 719, serving: "Стандартная подача", ingredients: "Салат «Айсберг», листовой салат, креветка тигровая, томаты черри, перепелиное яйцо, соус «Цезарь», сухари, сыр «Пармезан»" },
-      { id: "SAL-05", category: "Салаты", name: "Греческий", weight: "160 г", price: 539, serving: "Стандартная подача", ingredients: "Листовой салат, томаты черри, огурец, болгарский перец, сыр «Фета», лук красный, оливковое масло, грецкий орех, соевый соус, маслины" },
-      { id: "SAL-06", category: "Салаты", name: "Зеленый салат с фасолью", weight: "210 г", price: 489, serving: "Стандартная подача", ingredients: "Салат «Айсберг», листовой салат, маслины, красный лук, огурец, томаты, яйцо куриное, фасоль консервированная, чесночное масло, соевый соус" },
-      { id: "SAL-07", category: "Салаты", name: "Салат из баклажанов", weight: "200 г", price: 489, serving: "Стандартная подача", ingredients: "Баклажан, томаты, сливочный сыр, соус «Сладкий чили», соус «Терияки», кинза, крахмал, белый кунжут" },
-      { id: "SAL-08", category: "Салаты", name: "Салат с креветками и манговым соусом", weight: "240 г", price: 729, serving: "Стандартная подача", ingredients: "Руккола, салат «Айсберг», листовой салат, огурец, цуккини, креветка тигровая, чесночное масло, оливковое масло, пюре манго, авокадо, белый кунжут" },
-      { id: "SAL-09", category: "Салаты", name: "Салат с ростбифом", weight: "160 г", price: 769, serving: "Стандартная подача", ingredients: "Руккола, томаты черри, сыр «Моцарелла», ростбиф, бальзамический соус, мед, горчица зернистая, оливковое масло, соль, лимонный сок" },
-      { id: "SAL-10", category: "Салаты", name: "Салат с тунцом и ананасами", weight: "160 г", price: 699, serving: "Стандартная подача", ingredients: "Руккола, авокадо, ананас консервированный, тунец, бальзамический соус, горчица зернистая, мед, оливковое масло, соль, лимонный сок, соевый соус" },
-      { id: "SAL-11", category: "Салаты", name: "Салат фитнес", weight: "150 г", price: 639, serving: "Стандартная подача", ingredients: "Руккола, авокадо, огурец, креветки тигровые, лук зеленый, лимонный сок, оливковое масло, соль, соевый соус" },
-      { id: "SAL-12", category: "Салаты", name: "Теплый салат с курицей", weight: "150 г", price: 519, serving: "Стандартная подача", ingredients: "Куриное филе, листовой салат, цуккини, брокколи, болгарский перец, томаты черри, масло подсолнечное, соевый соус, соус «Терияки», белый кунжут" },
+      { id: "SAL-01", category: "Салаты", name: "Осьминожки", weight: "150 г", price: 769, serving: "Сервировка: вилка и нож", ingredients: "Осьминожки бейби, огурец, лимон, белый кунжут, соус «Кимчи», соус «Шрирача», кунжутное масло, мицукан" },
+      { id: "SAL-02", category: "Салаты", name: "Чука", weight: "100 г", price: 289, serving: "Сервировка: вилка и нож", ingredients: "Водоросли чука, ореховый соус, лимон, белый кунжут" },
+      { id: "SAL-03", category: "Салаты", name: "Цезарь с курицей", weight: "220 г", price: 579, serving: "Сервировка: вилка и нож", ingredients: "Салат «Айсберг», листовой салат, куриное филе, томаты черри, перепелиное яйцо, соус «Цезарь», сухари, сыр «Пармезан»" },
+      { id: "SAL-04", category: "Салаты", name: "Цезарь с креветкой", weight: "220 г", price: 719, serving: "Сервировка: вилка и нож", ingredients: "Салат «Айсберг», листовой салат, креветка тигровая, томаты черри, перепелиное яйцо, соус «Цезарь», сухари, сыр «Пармезан»" },
+      { id: "SAL-05", category: "Салаты", name: "Греческий", weight: "160 г", price: 539, serving: "Сервировка: вилка и нож", ingredients: "Листовой салат, томаты черри, огурец, болгарский перец, сыр «Фета», лук красный, оливковое масло, грецкий орех, соевый соус, маслины" },
+      { id: "SAL-06", category: "Салаты", name: "Зеленый салат с фасолью", weight: "210 г", price: 489, serving: "Сервировка: вилка и нож", ingredients: "Салат «Айсберг», листовой салат, маслины, красный лук, огурец, томаты, яйцо куриное, фасоль консервированная, чесночное масло, соевый соус" },
+      { id: "SAL-07", category: "Салаты", name: "Салат из баклажанов", weight: "200 г", price: 489, serving: "Сервировка: вилка и нож", ingredients: "Баклажан, томаты, сливочный сыр, соус «Сладкий чили», соус «Терияки», кинза, крахмал, белый кунжут" },
+      { id: "SAL-08", category: "Салаты", name: "Салат с креветками и манговым соусом", weight: "240 г", price: 729, serving: "Сервировка: вилка и нож", ingredients: "Руккола, салат «Айсберг», листовой салат, огурец, цуккини, креветка тигровая, чесночное масло, оливковое масло, пюре манго, авокадо, белый кунжут" },
+      { id: "SAL-09", category: "Салаты", name: "Салат с ростбифом", weight: "160 г", price: 769, serving: "Сервировка: вилка и нож", ingredients: "Руккола, томаты черри, сыр «Моцарелла», ростбиф, бальзамический соус, мед, горчица зернистая, оливковое масло, соль, лимонный сок" },
+      { id: "SAL-10", category: "Салаты", name: "Салат с тунцом и ананасами", weight: "160 г", price: 699, serving: "Сервировка: вилка и нож", ingredients: "Руккола, авокадо, ананас консервированный, тунец, бальзамический соус, горчица зернистая, мед, оливковое масло, соль, лимонный сок, соевый соус" },
+      { id: "SAL-11", category: "Салаты", name: "Салат фитнес", weight: "150 г", price: 639, serving: "Сервировка: вилка и нож", ingredients: "Руккола, авокадо, огурец, креветки тигровые, лук зеленый, лимонный сок, оливковое масло, соль, соевый соус" },
+      { id: "SAL-12", category: "Салаты", name: "Теплый салат с курицей", weight: "150 г", price: 519, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, листовой салат, цуккини, брокколи, болгарский перец, томаты черри, масло подсолнечное, соевый соус, соус «Терияки», белый кунжут" },
 
       // Супы
-      { id: "S-01", category: "Супы", name: "Том ям", weight: "300 г", price: 569, serving: "Стандартная подача", ingredients: "Бульон том ям, кокосовое молоко, кальмар, мидии, креветки тигровые, кинза, мята, лайм, кунжут белый, масло растительное, перец чили, грибы шампиньоны" },
-      { id: "S-02", category: "Супы", name: "Сливочный суп с морепродуктами", weight: "300 г", price: 799, serving: "Стандартная подача", ingredients: "Лосось, креветки тигровые, кальмар, мидии, куриный бульон, сливки 22%, устричный соус, сыр «Пармезан», соус «Песто», соль, перец, орегано" },
-      { id: "S-03", category: "Супы", name: "Юкедян", weight: "300 г", price: 549, serving: "Стандартная подача", ingredients: "Свинина карбонат, куриный бульон, цуккини, грибы шитаке, лук репчатый, имбирь, соевый соус, паста «Кочудян», масло растительное, соль, перец, сыр «Чеддер», яйцо куриное, зелень" },
-      { id: "S-04", category: "Супы", name: "Юкедян острый", weight: "300 г", price: 549, serving: "Стандартная подача", ingredients: "Свинина карбонат, кабачок, грибы шитаке, лук репчатый, имбирь, соевый соус, паста «Кочудян», соус «Кимчи», куриный бульон, масло растительное, соль, перец, сыр «Чеддер», яйцо куриное, зелень" },
-      { id: "S-05", category: "Супы", name: "Суп лапша", weight: "280 г", price: 329, serving: "Стандартная подача", ingredients: "Куриный бульон, лапша домашняя, куриное филе, зелень" },
-      { id: "S-06", category: "Супы", name: "Крем суп из шампиньонов", weight: "260 г", price: 409, serving: "Стандартная подача", ingredients: "Белые грибы, грибы шампиньоны, куриный бульон, картофель, лук репчатый, сливки 22%, зелень, сухари" },
-      { id: "S-07", category: "Супы", name: "Рамен", weight: "300 г", price: 519, serving: "Стандартная подача", ingredients: "Куриный бульон, лапша удон, куриное филе копченое, сливки 22%, грибы шиитаке, яйцо куриное, кунжут белый/черный, мисо паста светлая, устричный соус, лук зеленый, кинза" },
-      { id: "S-08", category: "Супы", name: "Пельмени", weight: "420 г", price: 499, serving: "Стандартная подача", ingredients: "Куриный бульон, тесто, говяжий фарш, зелень" },
+      { id: "S-01", category: "Супы", name: "Том ям", weight: "300 г", price: 569, serving: "Сервировка: столовая ложка", ingredients: "Бульон том ям, кокосовое молоко, кальмар, мидии, креветки тигровые, кинза, мята, лайм, кунжут белый, масло растительное, перец чили, грибы шампиньоны" },
+      { id: "S-02", category: "Супы", name: "Сливочный суп с морепродуктами", weight: "300 г", price: 799, serving: "Сервировка: столовая ложка", ingredients: "Лосось, креветки тигровые, кальмар, мидии, куриный бульон, сливки 22%, устричный соус, сыр «Пармезан», соус «Песто», соль, перец, орегано" },
+      { id: "S-03", category: "Супы", name: "Юкедян", weight: "300 г", price: 549, serving: "Сервировка: столовая ложка", ingredients: "Свинина карбонат, куриный бульон, цуккини, грибы шитаке, лук репчатый, имбирь, соевый соус, паста «Кочудян», масло растительное, соль, перец, сыр «Чеддер», яйцо куриное, зелень" },
+      { id: "S-04", category: "Супы", name: "Юкедян острый", weight: "300 г", price: 549, serving: "Сервировка: столовая ложка", ingredients: "Свинина карбонат, кабачок, грибы шитаке, лук репчатый, имбирь, соевый соус, паста «Кочудян», соус «Кимчи», куриный бульон, масло растительное, соль, перец, сыр «Чеддер», яйцо куриное, зелень" },
+      { id: "S-05", category: "Супы", name: "Суп лапша", weight: "280 г", price: 329, serving: "Сервировка: столовая ложка", ingredients: "Куриный бульон, лапша домашняя, куриное филе, зелень" },
+      { id: "S-06", category: "Супы", name: "Крем суп из шампиньонов", weight: "260 г", price: 409, serving: "Сервировка: столовая ложка", ingredients: "Белые грибы, грибы шампиньоны, куриный бульон, картофель, лук репчатый, сливки 22%, зелень, сухари" },
+      { id: "S-07", category: "Супы", name: "Рамен", weight: "300 г", price: 519, serving: "Сервировка: столовая ложка", ingredients: "Куриный бульон, лапша удон, куриное филе копченое, сливки 22%, грибы шиитаке, яйцо куриное, кунжут белый/черный, мисо паста светлая, устричный соус, лук зеленый, кинза" },
+      { id: "S-08", category: "Супы", name: "Пельмени", weight: "420 г", price: 499, serving: "Сервировка: столовая ложка", ingredients: "Куриный бульон, тесто, говяжий фарш, зелень" },
 
       // Воки
-      { id: "W-01", category: "Воки", name: "Вок с говядиной", weight: "250 г", price: 699, serving: "Стандартная подача", ingredients: "Удон, говяжья вырезка, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Кисло-сладкий», паста «Том ям», соевый соус, кинза, кунжут белый" },
-      { id: "W-02", category: "Воки", name: "Вок с креветками", weight: "250 г", price: 649, serving: "Стандартная подача", ingredients: "Лапша удон, креветки тигровые, лук репчатый, болгарский перец, имбирь свежий, чесночное масло, соус «Кисло-сладкий», соус «Кимчи», соевый соус, кунжут белый, зеленый лук" },
-      { id: "W-03", category: "Воки", name: "Вок с курицей", weight: "250 г", price: 549, serving: "Стандартная подача", ingredients: "Лапша удон, куриное филе, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Терияки», устричный соус, лук зеленый, кунжут белый" },
-      { id: "W-04", category: "Воки", name: "Вок со свининой", weight: "250 г", price: 549, serving: "Стандартная подача", ingredients: "Лапша удон, карбонад свинины, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, устричный соус, соус «Кисло-сладкий», кинза, кунжут белый" },
+      { id: "W-01", category: "Воки", name: "Вок с говядиной", weight: "250 г", price: 699, serving: "Сервировка: палочки или вилка", ingredients: "Удон, говяжья вырезка, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Кисло-сладкий», паста «Том ям», соевый соус, кинза, кунжут белый" },
+      { id: "W-02", category: "Воки", name: "Вок с креветками", weight: "250 г", price: 649, serving: "Сервировка: палочки или вилка", ingredients: "Лапша удон, креветки тигровые, лук репчатый, болгарский перец, имбирь свежий, чесночное масло, соус «Кисло-сладкий», соус «Кимчи», соевый соус, кунжут белый, зеленый лук" },
+      { id: "W-03", category: "Воки", name: "Вок с курицей", weight: "250 г", price: 549, serving: "Сервировка: палочки или вилка", ingredients: "Лапша удон, куриное филе, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, соус «Терияки», устричный соус, лук зеленый, кунжут белый" },
+      { id: "W-04", category: "Воки", name: "Вок со свининой", weight: "250 г", price: 549, serving: "Сервировка: палочки или вилка", ingredients: "Лапша удон, карбонад свинины, лук репчатый, перец болгарский, имбирь свежий, чесночное масло, устричный соус, соус «Кисло-сладкий», кинза, кунжут белый" },
 
       // Пасты
-      { id: "P-01", category: "Пасты", name: "Альфредо", weight: "320 г", price: 559, serving: "Стандартная подача", ingredients: "Куриное филе, грибы шампиньоны, лук репчатый, куриный бульон, сыр «Пармезан», сливки 22%, томаты черри, спагетти, петрушка" },
-      { id: "P-02", category: "Пасты", name: "Карбонара", weight: "310 г", price: 599, serving: "Стандартная подача", ingredients: "Бекон, лук репчатый, сыр «Пармезан», томаты черри, спагетти, яичный желток, петрушка, куриный бульон" },
-      { id: "P-03", category: "Пасты", name: "Паста с лососем", weight: "300 г", price: 839, serving: "Стандартная подача", ingredients: "Феттучини, лосось, цуккини, сливки 22%, сыр «Пармезан», томаты черри, петрушка, куриный бульон" },
-      { id: "P-04", category: "Пасты", name: "Паста с креветками", weight: "250 г", price: 749, serving: "Стандартная подача", ingredients: "Феттучини, креветки тигровые, томаты черри, соус «Песто», сыр «Пармезан», кинза" },
-      { id: "P-05", category: "Пасты", name: "Тальятеле с курицей и говядиной", weight: "350 г", price: 749, serving: "Стандартная подача", ingredients: "Феттучини, куриное филе, вырезка говяжья, цуккини, перец болгарский, лук репчатый, томаты, сыр «Пармезан», чесночное масло, соус кимчи, томаты черри, сливки 22%, петрушка, масло растительное" },
-      { id: "P-06", category: "Пасты", name: "Болоньезе", weight: "320 г", price: 639, serving: "Стандартная подача", ingredients: "Спагетти, фарш говяжий, перец болгарский, лук репчатый, соус томатный, сыр «Пармезан», томаты черри, кинза, чесночное масло" },
+      { id: "P-01", category: "Пасты", name: "Альфредо", weight: "320 г", price: 559, serving: "Сервировка: вилка и столовая ложка", ingredients: "Куриное филе, грибы шампиньоны, лук репчатый, куриный бульон, сыр «Пармезан», сливки 22%, томаты черри, спагетти, петрушка" },
+      { id: "P-02", category: "Пасты", name: "Карбонара", weight: "310 г", price: 599, serving: "Сервировка: вилка и столовая ложка", ingredients: "Бекон, лук репчатый, сыр «Пармезан», томаты черри, спагетти, яичный желток, петрушка, куриный бульон" },
+      { id: "P-03", category: "Пасты", name: "Паста с лососем", weight: "300 г", price: 839, serving: "Сервировка: вилка и столовая ложка", ingredients: "Феттучини, лосось, цуккини, сливки 22%, сыр «Пармезан», томаты черри, петрушка, куриный бульон" },
+      { id: "P-04", category: "Пасты", name: "Паста с креветками", weight: "250 г", price: 749, serving: "Сервировка: вилка и столовая ложка", ingredients: "Феттучини, креветки тигровые, томаты черри, соус «Песто», сыр «Пармезан», кинза" },
+      { id: "P-05", category: "Пасты", name: "Тальятеле с курицей и говядиной", weight: "350 г", price: 749, serving: "Сервировка: вилка и столовая ложка", ingredients: "Феттучини, куриное филе, вырезка говяжья, цуккини, перец болгарский, лук репчатый, томаты, сыр «Пармезан», чесночное масло, соус кимчи, томаты черри, сливки 22%, петрушка, масло растительное" },
+      { id: "P-06", category: "Пасты", name: "Болоньезе", weight: "320 г", price: 639, serving: "Сервировка: вилка и столовая ложка", ingredients: "Спагетти, фарш говяжий, перец болгарский, лук репчатый, соус томатный, сыр «Пармезан», томаты черри, кинза, чесночное масло" },
 
       // Горячие блюда
-      { id: "H-01", category: "Горячие блюда", name: "Кур. грудка обж. с брокколи в сливочном соусе", weight: "369.1 г", price: 749, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», брокколи, сливки, соус «Терияки», кетчуп, соевый соус" },
-      { id: "H-02", category: "Горячие блюда", name: "Кур. грудка обж. с карт. по-деревенски", weight: "317 г", price: 669, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», картофель по-деревенски, соус «Терияки», кетчуп" },
-      { id: "H-03", category: "Горячие блюда", name: "Кур. грудка обж. с овощами в соусе терияки", weight: "366.1 г", price: 709, serving: "Стандартная подача", ingredients: "Куриное филе, салат «Айсберг», брокколи, болгарский перец, грибы шампиньоны, лук репчатый, кунжут белый, соус «Терияки», кетчуп, соевый соус" },
-      { id: "H-04", category: "Горячие блюда", name: "Лосось обж. с брокколи в сливочном соусе", weight: "300 г", price: 1399, serving: "Стандартная подача", ingredients: "Лосось, лимон, брокколи, сливки, соевый соус, соус «Тар-тар», соус «Песто»" },
-      { id: "H-05", category: "Горячие блюда", name: "Лосось обж. с карт. по-деревенски", weight: "300 г", price: 1359, serving: "Стандартная подача", ingredients: "Лосось, картофель по-деревенски, лимон, соус «Тар-тар», соус «Песто»" },
-      { id: "H-06", category: "Горячие блюда", name: "Лосось обж. с листьями салата", weight: "220 г", price: 1359, serving: "Стандартная подача", ingredients: "Лосось, салат «Айсберг», листовой салат, томаты черри, бальзамический уксус, маслины, лимон" },
-      { id: "H-07", category: "Горячие блюда", name: "Лосось обж. с овощами в соусе терияки", weight: "300 г", price: 1379, serving: "Стандартная подача", ingredients: "Лосось, лимон, брокколи, болгарский перец, грибы шампиньоны, лук репчатый, кунжут белый, соус «Терияки», соевый соус, соус «Тар-тар», соус «Песто»" },
-      { id: "H-08", category: "Горячие блюда", name: "Говядина по китайски", weight: "210 г", price: 789, serving: "Стандартная подача", ingredients: "Говяжья вырезка, морковь, лук репчатый, болгарский перец, цуккини, сахар, фирменный соус вок, соль, перец, растительное масло, кунжут черный/белый, зеленый лук" },
-      { id: "H-09", category: "Горячие блюда", name: "Говядина с овощами", weight: "250 г", price: 959, serving: "Стандартная подача", ingredients: "Говяжья вырезка, цуккини, болгарский перец, грибы шампиньоны, сливки 22%, соевый соус, зелень" },
-      { id: "H-10", category: "Горячие блюда", name: "Жаркое из говядины", weight: "230 г", price: 819, serving: "Стандартная подача", ingredients: "Говяжья вырезка, лук репчатый, грибы шампиньоны, томаты, картофельные дольки, соевый соус, чесночное масло, сливки 22%, куриный бульон, соль, смесь перецев, растительное масло, сыр «Пармезан», зелень" },
-      { id: "H-11", category: "Горячие блюда", name: "Жаркое из свинины", weight: "180 г", price: 549, serving: "Стандартная подача", ingredients: "Свинина карбонат, грибы шампиньоны, лук репчатый, болгарский перец, картофельные дольки, соевый соус, чесночное масло, куриный бульон, растительное масло, соль, смесь перецев" },
-      { id: "H-12", category: "Горячие блюда", name: "Купаты с картофелем", weight: "350 г", price: 639, serving: "Стандартная подача", ingredients: "Купаты куриные, картофель по-деревенски, грибы шампиньоны, горчица, кетчуп, зелень" },
-      { id: "H-13", category: "Горячие блюда", name: "Куриное филе с сыром чеддер", weight: "340 г", price: 719, serving: "Стандартная подача", ingredients: "Куриное филе, сыр «Чеддер», листовой салата, болгарский перец, цуккини, томаты черри, соус «Сальса»" },
-      { id: "H-14", category: "Горячие блюда", name: "Куриная грудка в кляре", weight: "425.5 г", price: 629, serving: "Стандартная подача", ingredients: "Куриное филе, картофель фри, соус «Кисло-сладкий», кляр, панировочные сухари" },
-      { id: "H-15", category: "Горячие блюда", name: "Курица по корейски", weight: "160 г", price: 549, serving: "Стандартная подача", ingredients: "Куриное филе, лук репчатый, болгарский перец, огурец, уксус, сахар, фирменный соус вок, соль, перец, растительное масло, кунжут черный/белый, зеленый лук" },
-      { id: "H-16", category: "Горячие блюда", name: "Окунь в кляре", weight: "380 г", price: 669, serving: "Стандартная подача", ingredients: "Окунь, картофель фри, лимон, соус «Тар-тар», кетчуп, кляр" },
-      { id: "H-17", category: "Горячие блюда", name: "Свинина с гриб. с карт дольками", weight: "300 г", price: 709, serving: "Стандартная подача", ingredients: "Свинина, грибы шампиньоны, лук красный, корнишоны, картофельные дольки, соус кимчи, сливки 22%, кунжутное масло, уксус, соль, сахар, зелень" },
-      { id: "H-18", category: "Горячие блюда", name: "Сливочный окунь с пряными специями", weight: "230 г", price: 589, serving: "Стандартная подача", ingredients: "Окунь, сливки 22%, куриный бульон, соль, смесь перецев, орегано, мускатный орех, кукурма, рис" },
-      { id: "H-19", category: "Горячие блюда", name: "Стейк из говядины", weight: "250 г", price: 1609, serving: "Стандартная подача", ingredients: "Говяжья вырезка, масло сливочное, масло растительное, розмарин, бальзамический уксус, соевый соус, соль, смесь перецев, листовой салат, салат «Айсберг», томаты черри, чесночное масло, мед" },
-      { id: "H-20", category: "Горячие блюда", name: "Стейк со свининой", weight: "270 г", price: 699, serving: "Стандартная подача", ingredients: "Свинина карбонат, соевый соус, лимон, горчица, баклажан, томат, корнишоны, лук красный, уксус, сахар" },
-      { id: "H-21", category: "Горячие блюда", name: "Стейк со свининой в пасте кочудян", weight: "270 г", price: 709, serving: "Стандартная подача", ingredients: "Свина карбонат, соевый соус, имбирь, паста «Кочудян», баклажан, томаты, корнишоны, лук красный, уксус, сахар" },
+      { id: "H-01", category: "Горячие блюда", name: "Кур. грудка обж. с брокколи в сливочном соусе", weight: "369.1 г", price: 749, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, салат «Айсберг», брокколи, сливки, соус «Терияки», кетчуп, соевый соус" },
+      { id: "H-02", category: "Горячие блюда", name: "Кур. грудка обж. с карт. по-деревенски", weight: "317 г", price: 669, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, салат «Айсберг», картофель по-деревенски, соус «Терияки», кетчуп" },
+      { id: "H-03", category: "Горячие блюда", name: "Кур. грудка обж. с овощами в соусе терияки", weight: "366.1 г", price: 709, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, салат «Айсберг», брокколи, болгарский перец, грибы шампиньоны, лук репчатый, кунжут белый, соус «Терияки», кетчуп, соевый соус" },
+      { id: "H-04", category: "Горячие блюда", name: "Лосось обж. с брокколи в сливочном соусе", weight: "300 г", price: 1399, serving: "Сервировка: вилка и нож", ingredients: "Лосось, лимон, брокколи, сливки, соевый соус, соус «Тар-тар», соус «Песто»" },
+      { id: "H-05", category: "Горячие блюда", name: "Лосось обж. с карт. по-деревенски", weight: "300 г", price: 1359, serving: "Сервировка: вилка и нож", ingredients: "Лосось, картофель по-деревенски, лимон, соус «Тар-тар», соус «Песто»" },
+      { id: "H-06", category: "Горячие блюда", name: "Лосось обж. с листьями салата", weight: "220 г", price: 1359, serving: "Сервировка: вилка и нож", ingredients: "Лосось, салат «Айсберг», листовой салат, томаты черри, бальзамический уксус, маслины, лимон" },
+      { id: "H-07", category: "Горячие блюда", name: "Лосось обж. с овощами в соусе терияки", weight: "300 г", price: 1379, serving: "Сервировка: вилка и нож", ingredients: "Лосось, лимон, брокколи, болгарский перец, грибы шампиньоны, лук репчатый, кунжут белый, соус «Терияки», соевый соус, соус «Тар-тар», соус «Песто»" },
+      { id: "H-08", category: "Горячие блюда", name: "Говядина по китайски", weight: "210 г", price: 789, serving: "Сервировка: вилка и нож", ingredients: "Говяжья вырезка, морковь, лук репчатый, болгарский перец, цуккини, сахар, фирменный соус вок, соль, перец, растительное масло, кунжут черный/белый, зеленый лук" },
+      { id: "H-09", category: "Горячие блюда", name: "Говядина с овощами", weight: "250 г", price: 959, serving: "Сервировка: вилка и нож", ingredients: "Говяжья вырезка, цуккини, болгарский перец, грибы шампиньоны, сливки 22%, соевый соус, зелень" },
+      { id: "H-10", category: "Горячие блюда", name: "Жаркое из говядины", weight: "230 г", price: 819, serving: "Сервировка: вилка и нож", ingredients: "Говяжья вырезка, лук репчатый, грибы шампиньоны, томаты, картофельные дольки, соевый соус, чесночное масло, сливки 22%, куриный бульон, соль, смесь перецев, растительное масло, сыр «Пармезан», зелень" },
+      { id: "H-11", category: "Горячие блюда", name: "Жаркое из свинины", weight: "180 г", price: 549, serving: "Сервировка: вилка и нож", ingredients: "Свинина карбонат, грибы шампиньоны, лук репчатый, болгарский перец, картофельные дольки, соевый соус, чесночное масло, куриный бульон, растительное масло, соль, смесь перецев" },
+      { id: "H-12", category: "Горячие блюда", name: "Купаты с картофелем", weight: "350 г", price: 639, serving: "Сервировка: вилка и нож", ingredients: "Купаты куриные, картофель по-деревенски, грибы шампиньоны, горчица, кетчуп, зелень" },
+      { id: "H-13", category: "Горячие блюда", name: "Куриное филе с сыром чеддер", weight: "340 г", price: 719, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, сыр «Чеддер», листовой салата, болгарский перец, цуккини, томаты черри, соус «Сальса»" },
+      { id: "H-14", category: "Горячие блюда", name: "Куриная грудка в кляре", weight: "425.5 г", price: 629, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, картофель фри, соус «Кисло-сладкий», кляр, панировочные сухари" },
+      { id: "H-15", category: "Горячие блюда", name: "Курица по корейски", weight: "160 г", price: 549, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе, лук репчатый, болгарский перец, огурец, уксус, сахар, фирменный соус вок, соль, перец, растительное масло, кунжут черный/белый, зеленый лук" },
+      { id: "H-16", category: "Горячие блюда", name: "Окунь в кляре", weight: "380 г", price: 669, serving: "Сервировка: вилка и нож", ingredients: "Окунь, картофель фри, лимон, соус «Тар-тар», кетчуп, кляр" },
+      { id: "H-17", category: "Горячие блюда", name: "Свинина с гриб. с карт дольками", weight: "300 г", price: 709, serving: "Сервировка: вилка и нож", ingredients: "Свинина, грибы шампиньоны, лук красный, корнишоны, картофельные дольки, соус кимчи, сливки 22%, кунжутное масло, уксус, соль, сахар, зелень" },
+      { id: "H-18", category: "Горячие блюда", name: "Сливочный окунь с пряными специями", weight: "230 г", price: 589, serving: "Сервировка: вилка и нож", ingredients: "Окунь, сливки 22%, куриный бульон, соль, смесь перецев, орегано, мускатный орех, кукурма, рис" },
+      { id: "H-19", category: "Горячие блюда", name: "Стейк из говядины", weight: "250 г", price: 1609, serving: "Сервировка: вилка и нож", ingredients: "Говяжья вырезка, масло сливочное, масло растительное, розмарин, бальзамический уксус, соевый соус, соль, смесь перецев, листовой салат, салат «Айсберг», томаты черри, чесночное масло, мед" },
+      { id: "H-20", category: "Горячие блюда", name: "Стейк со свининой", weight: "270 г", price: 699, serving: "Сервировка: вилка и нож", ingredients: "Свинина карбонат, соевый соус, лимон, горчица, баклажан, томат, корнишоны, лук красный, уксус, сахар" },
+      { id: "H-21", category: "Горячие блюда", name: "Стейк со свининой в пасте кочудян", weight: "270 г", price: 709, serving: "Сервировка: вилка и нож", ingredients: "Свина карбонат, соевый соус, имбирь, паста «Кочудян», баклажан, томаты, корнишоны, лук красный, уксус, сахар" },
 
       // Бургеры и Сендвичи
       { id: "BS-01", category: "Бургеры и Сендвичи", name: "Бургер «Делюкс»", weight: "350 г", price: 789, serving: "Подача: перчатки", ingredients: "Булка, говяжья котлета, сыр «Чеддер», лук красный, соус «Бургер», томаты, огурец маринованный, салат «Айсберг»" },
@@ -670,41 +723,41 @@
       { id: "BS-07", category: "Бургеры и Сендвичи", name: "Папи Чикен «Большой»", weight: "220 г", price: 379, serving: "Подача: перчатки", ingredients: "Булка, куриное филе в панировке, салат «Айсберг», майонез" },
       { id: "BS-08", category: "Бургеры и Сендвичи", name: "Папи Тейсти", weight: "300 г", price: 739, serving: "Подача: перчатки", ingredients: "Булка, говяжья котлета, салат айсберг, томаты, лук красный, сыр чеддер, соус тейсти" },
       { id: "BS-09", category: "Бургеры и Сендвичи", name: "Папи Чикен «Малый»", weight: "110 г", price: 269, serving: "Подача: перчатки", ingredients: "Булка, куриное филе в панировке, салат «Айсберг», майонез" },
-      { id: "BS-10", category: "Бургеры и Сендвичи", name: "Сендвич с ростбифом", weight: "300 г", price: 799, serving: "Стандартная подача (с картофелем фри)", ingredients: "Хлеб тостовый, ростбиф, огурцы маринованные, лук красный, листовой салат, томаты, сыр «Чеддер», соус «Бургер», картофель фри" },
-      { id: "BS-11", category: "Бургеры и Сендвичи", name: "Сендвич с курицей", weight: "300 г", price: 699, serving: "Стандартная подача (с картофелем фри)", ingredients: "Хлеб тостовый, куриное филе, огурцы, лук красный, салат латук, томаты, сыр «Чеддер», соус бургер, картофель фри" },
+      { id: "BS-10", category: "Бургеры и Сендвичи", name: "Сендвич с ростбифом", weight: "300 г", price: 799, serving: "Подача: перчатки", ingredients: "Хлеб тостовый, ростбиф, огурцы маринованные, лук красный, листовой салат, томаты, сыр «Чеддер», соус «Бургер», картофель фри" },
+      { id: "BS-11", category: "Бургеры и Сендвичи", name: "Сендвич с курицей", weight: "300 г", price: 699, serving: "Подача: перчатки", ingredients: "Хлеб тостовый, куриное филе, огурцы, лук красный, салат латук, томаты, сыр «Чеддер», соус бургер, картофель фри" },
 
       // Детское меню
-      { id: "D-01", category: "Детское меню", name: "Детские пельмени", weight: "225 г", price: 329, serving: "Стандартная подача", ingredients: "Мини-пельмени, куриный бульон, зелень, сметана" },
-      { id: "D-02", category: "Детское меню", name: "Детский «Салат Фруктовый»", weight: "195 г", price: 319, serving: "Стандартная подача", ingredients: "Банан, мандарин, киви, йогурт, грецкий орех, гранат" },
-      { id: "D-03", category: "Детское меню", name: "Детский суп", weight: "350 г", price: 339, serving: "Стандартная подача", ingredients: "Макароны-фигурки, фрикадельки, куриный бульон, зелень" },
-      { id: "D-04", category: "Детское меню", name: "Не хочу", weight: "270 г", price: 479, serving: "Стандартная подача", ingredients: "Картофель фри, драник, наггетсы 3 шт, соус кисло-сладкий" },
-      { id: "D-05", category: "Детское меню", name: "Сендвич детский", weight: "190 г", price: 339, serving: "Стандартная подача", ingredients: "Хлеб тостовый, куриное филе копченое, майонез, кетчуп, томаты, картофель фри, сырный соус" },
-      { id: "D-06", category: "Детское меню", name: "Сосиски с бейби картофелем", weight: "170 г", price: 339, serving: "Стандартная подача", ingredients: "Сосиски-мини, томаты, бейби картофель, салат «Айсберг», кетчуп" },
-      { id: "D-07", category: "Детское меню", name: "Стрипсы с бейби картофелем", weight: "265 г", price: 379, serving: "Стандартная подача", ingredients: "Куриное филе в панировке, огурец, бейби картофель, салат «Айсберг», соус сырный" },
-      { id: "D-08", category: "Детское меню", name: "Сырники с апельсином", weight: "160 г", price: 389, serving: "Стандартная подача", ingredients: "Сырники творожные, апельсин" },
-      { id: "D-09", category: "Детское меню", name: "Хрустики с карт. шариками", weight: "270 г", price: 499, serving: "Стандартная подача", ingredients: "Картофельные шарики, наггетсы 5 шт, картофель фри, сырный соус" },
-      { id: "D-10", category: "Детское меню", name: "Хрустики с палочками", weight: "270 г", price: 499, serving: "Стандартная подача", ingredients: "Сырные палочки 3 шт, наггетсы 5 шт, картофель фри, сырный соус" },
-      { id: "D-11", category: "Детское меню", name: "Я не голодный", weight: "220 г", price: 309, serving: "Стандартная подача", ingredients: "Макароны спагетти, куриное филе в панировке, огурец, кетчуп, зелень" },
+      { id: "D-01", category: "Детское меню", name: "Детские пельмени", weight: "225 г", price: 329, serving: "Сервировка: столовая ложка", ingredients: "Мини-пельмени, куриный бульон, зелень, сметана" },
+      { id: "D-02", category: "Детское меню", name: "Детский «Салат Фруктовый»", weight: "195 г", price: 319, serving: "Сервировка: вилка и ложка", ingredients: "Банан, мандарин, киви, йогурт, грецкий орех, гранат" },
+      { id: "D-03", category: "Детское меню", name: "Детский суп", weight: "350 г", price: 339, serving: "Сервировка: столовая ложка", ingredients: "Макароны-фигурки, фрикадельки, куриный бульон, зелень" },
+      { id: "D-04", category: "Детское меню", name: "Не хочу", weight: "270 г", price: 479, serving: "Сервировка: вилка и нож", ingredients: "Картофель фри, драник, наггетсы 3 шт, соус кисло-сладкий" },
+      { id: "D-05", category: "Детское меню", name: "Сендвич детский", weight: "190 г", price: 339, serving: "Подача: перчатки", ingredients: "Хлеб тостовый, куриное филе копченое, майонез, кетчуп, томаты, картофель фри, сырный соус" },
+      { id: "D-06", category: "Детское меню", name: "Сосиски с бейби картофелем", weight: "170 г", price: 339, serving: "Сервировка: вилка и нож", ingredients: "Сосиски-мини, томаты, бейби картофель, салат «Айсберг», кетчуп" },
+      { id: "D-07", category: "Детское меню", name: "Стрипсы с бейби картофелем", weight: "265 г", price: 379, serving: "Сервировка: вилка и нож", ingredients: "Куриное филе в панировке, огурец, бейби картофель, салат «Айсберг», соус сырный" },
+      { id: "D-08", category: "Детское меню", name: "Сырники с апельсином", weight: "160 г", price: 389, serving: "Сервировка: вилка и нож", ingredients: "Сырники творожные, апельсин" },
+      { id: "D-09", category: "Детское меню", name: "Хрустики с карт. шариками", weight: "270 г", price: 499, serving: "Без приборов (только по просьбе гостя)", ingredients: "Картофельные шарики, наггетсы 5 шт, картофель фри, сырный соус" },
+      { id: "D-10", category: "Детское меню", name: "Хрустики с палочками", weight: "270 г", price: 499, serving: "Без приборов (только по просьбе гостя)", ingredients: "Сырные палочки 3 шт, наггетсы 5 шт, картофель фри, сырный соус" },
+      { id: "D-11", category: "Детское меню", name: "Я не голодный", weight: "220 г", price: 309, serving: "Сервировка: вилка и столовая ложка", ingredients: "Макароны спагетти, куриное филе в панировке, огурец, кетчуп, зелень" },
 
       // Закуски
-      { id: "SN-01", category: "Закуски", name: "Картофельные шарики", weight: "150 г", price: 339, serving: "Стандартная подача", ingredients: "Картофель, соль" },
-      { id: "SN-02", category: "Закуски", name: "Картошка по-деревенски", weight: "140 г", price: 299, serving: "Стандартная подача", ingredients: "Картофель, соль" },
-      { id: "SN-03", category: "Закуски", name: "Картошка фри", weight: "130 г", price: 299, serving: "Стандартная подача", ingredients: "Картофель, соль" },
-      { id: "SN-04", category: "Закуски", name: "Кольца кальмара в кляре 6 шт", weight: "150 г", price: 569, serving: "Стандартная подача", ingredients: "Кальмар, кляр" },
-      { id: "SN-05", category: "Закуски", name: "Куриные крылья 5 шт", weight: "170 г", price: 559, serving: "Стандартная подача", ingredients: "Куриные крылья, соль, красный перец, крахмал картофельный, крахмал кукурузный, паприка" },
-      { id: "SN-06", category: "Закуски", name: "Луковые кольца 10 шт", weight: "120 г", price: 459, serving: "Стандартная подача", ingredients: "Лук, кляр" },
-      { id: "SN-07", category: "Закуски", name: "Луковые кольца 5 шт", weight: "60 г", price: 269, serving: "Стандартная подача", ingredients: "Лук, кляр" },
-      { id: "SN-08", category: "Закуски", name: "Наггетсы 10 шт", weight: "220 г", price: 479, serving: "Стандартная подача", ingredients: "Курица, мука, кукурузная мука, соль, манная крупа" },
-      { id: "SN-09", category: "Закуски", name: "Наггетсы 5 шт", weight: "100 г", price: 279, serving: "Стандартная подача", ingredients: "Курица, мука, кукурузная мука, соль, манная крупа" },
-      { id: "SN-10", category: "Закуски", name: "Овощи гриль", weight: "220 г", price: 519, serving: "Стандартная подача", ingredients: "Листовой салат, грибы шампиньоны, цуккини, перец болгарский, брокколи, прованские травы, суммаха" },
-      { id: "SN-11", category: "Закуски", name: "Пивная тарелка Баден-Баден", weight: "450 г", price: 1260, serving: "Стандартная подача", ingredients: "Картофель фри, луковые кольца 10 шт, куриные крылья 5 шт, соус сырный" },
-      { id: "SN-12", category: "Закуски", name: "Пивная тарелка Берлин", weight: "630 г", price: 1409, serving: "Стандартная подача", ingredients: "Чесночные гренки, сырные палочки 5 шт, луковые кольца 5 шт, куриные крылья 5 шт, картофель по-деревенски, соус сырный, соус кисло-сладкий" },
-      { id: "SN-13", category: "Закуски", name: "Пивная тарелка Кёльн", weight: "430 г", price: 1609, serving: "Стандартная подача", ingredients: "Чесночные гренки, ростбиф, куриное филе в кляре, корнишоны, соус «Кисло-сладкий»" },
-      { id: "SN-14", category: "Закуски", name: "Пивные креветки обжаренные", weight: "200 г", price: 909, serving: "Стандартная подача", ingredients: "Креветки пивные, соевый соус, чесночное масло, лимон" },
-      { id: "SN-15", category: "Закуски", name: "Пивные креветки отварные", weight: "190 г", price: 909, serving: "Стандартная подача", ingredients: "Креветки пивные, соевый соус, чесночное масло, лимон" },
-      { id: "SN-16", category: "Закуски", name: "Ростбиф с грибным соусом", weight: "175 г", price: 1209, serving: "Стандартная подача", ingredients: "Ростбиф, руккола, томаты черри, грибы шампиньоны, лук репчатый, чеснок, сливки 22%, смесь перцев, масло подсолнечное" },
-      { id: "SN-17", category: "Закуски", name: "Сырные палочки 5 шт", weight: "110 г", price: 369, serving: "Стандартная подача", ingredients: "Панировочные сухари, крахмал кукурузный, сыр «Моцарелла»" },
-      { id: "SN-18", category: "Закуски", name: "Чесночные гренки", weight: "85 г", price: 249, serving: "Стандартная подача", ingredients: "Хлеб бородинский, чесночное масло, соль" },
+      { id: "SN-01", category: "Закуски", name: "Картофельные шарики", weight: "150 г", price: 339, serving: "Без приборов (только по просьбе гостя)", ingredients: "Картофель, соль" },
+      { id: "SN-02", category: "Закуски", name: "Картошка по-деревенски", weight: "140 г", price: 299, serving: "Без приборов (только по просьбе гостя)", ingredients: "Картофель, соль" },
+      { id: "SN-03", category: "Закуски", name: "Картошка фри", weight: "130 г", price: 299, serving: "Без приборов (только по просьбе гостя)", ingredients: "Картофель, соль" },
+      { id: "SN-04", category: "Закуски", name: "Кольца кальмара в кляре 6 шт", weight: "150 г", price: 569, serving: "Без приборов (только по просьбе гостя)", ingredients: "Кальмар, кляр" },
+      { id: "SN-05", category: "Закуски", name: "Куриные крылья 5 шт", weight: "170 г", price: 559, serving: "Без приборов (только по просьбе гостя)", ingredients: "Куриные крылья, соль, красный перец, крахмал картофельный, крахмал кукурузный, паприка" },
+      { id: "SN-06", category: "Закуски", name: "Луковые кольца 10 шт", weight: "120 г", price: 459, serving: "Без приборов (только по просьбе гостя)", ingredients: "Лук, кляр" },
+      { id: "SN-07", category: "Закуски", name: "Луковые кольца 5 шт", weight: "60 г", price: 269, serving: "Без приборов (только по просьбе гостя)", ingredients: "Лук, кляр" },
+      { id: "SN-08", category: "Закуски", name: "Наггетсы 10 шт", weight: "220 г", price: 479, serving: "Без приборов (только по просьбе гостя)", ingredients: "Курица, мука, кукурузная мука, соль, манная крупа" },
+      { id: "SN-09", category: "Закуски", name: "Наггетсы 5 шт", weight: "100 г", price: 279, serving: "Без приборов (только по просьбе гостя)", ingredients: "Курица, мука, кукурузная мука, соль, манная крупа" },
+      { id: "SN-10", category: "Закуски", name: "Овощи гриль", weight: "220 г", price: 519, serving: "Без приборов (только по просьбе гостя)", ingredients: "Листовой салат, грибы шампиньоны, цуккини, перец болгарский, брокколи, прованские травы, суммаха" },
+      { id: "SN-11", category: "Закуски", name: "Пивная тарелка Баден-Баден", weight: "450 г", price: 1260, serving: "Без приборов (только по просьбе гостя)", ingredients: "Картофель фри, луковые кольца 10 шт, куриные крылья 5 шт, соус сырный" },
+      { id: "SN-12", category: "Закуски", name: "Пивная тарелка Берлин", weight: "630 г", price: 1409, serving: "Без приборов (только по просьбе гостя)", ingredients: "Чесночные гренки, сырные палочки 5 шт, луковые кольца 5 шт, куриные крылья 5 шт, картофель по-деревенски, соус сырный, соус кисло-сладкий" },
+      { id: "SN-13", category: "Закуски", name: "Пивная тарелка Кёльн", weight: "430 г", price: 1609, serving: "Без приборов (только по просьбе гостя)", ingredients: "Чесночные гренки, ростбиф, куриное филе в кляре, корнишоны, соус «Кисло-сладкий»" },
+      { id: "SN-14", category: "Закуски", name: "Пивные креветки обжаренные", weight: "200 г", price: 909, serving: "2 круглые белые миски (одна с водой, одна пустая)", ingredients: "Креветки пивные, соевый соус, чесночное масло, лимон" },
+      { id: "SN-15", category: "Закуски", name: "Пивные креветки отварные", weight: "190 г", price: 909, serving: "2 круглые белые миски (одна с водой, одна пустая)", ingredients: "Креветки пивные, соевый соус, чесночное масло, лимон" },
+      { id: "SN-16", category: "Закуски", name: "Ростбиф с грибным соусом", weight: "175 г", price: 1209, serving: "Без приборов (только по просьбе гостя)", ingredients: "Ростбиф, руккола, томаты черри, грибы шампиньоны, лук репчатый, чеснок, сливки 22%, смесь перцев, масло подсолнечное" },
+      { id: "SN-17", category: "Закуски", name: "Сырные палочки 5 шт", weight: "110 г", price: 369, serving: "Без приборов (только по просьбе гостя)", ingredients: "Панировочные сухари, крахмал кукурузный, сыр «Моцарелла»" },
+      { id: "SN-18", category: "Закуски", name: "Чесночные гренки", weight: "85 г", price: 249, serving: "Без приборов (только по просьбе гостя)", ingredients: "Хлеб бородинский, чесночное масло, соль" },
 
       // Соуса
       { id: "SOU-01", category: "Соуса", name: "Горчичный соус", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Горчичный соус" },
@@ -721,6 +774,156 @@
       { id: "SOU-12", category: "Соуса", name: "Соус BBQ", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Соус Барбекю" },
       { id: "SOU-13", category: "Соуса", name: "Соевый соус", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Соевый соус" },
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
+    ];
+
+    // БАЗА ВОПРОСОВ ПО КОНФЛИКТНЫМ СИТУАЦИЯМ И СЕРВИСУ
+    const CONFLICT_QUESTIONS_BANK = [
+      {
+        badge: "Конфликтные ситуации • LAST",
+        question: "Гость жалуется, что паста «Карбонара» подана еле тёплой. Каковы ваши первые действия?",
+        correct: "Выслушать без споров, искренне извиниться от лица кафе, сразу убрать блюдо со стола и позвать менеджера для переделки",
+        options: [
+          "Выслушать без споров, искренне извиниться от лица кафе, сразу убрать блюдо со стола и позвать менеджера для переделки",
+          "Объяснить гостю, что в зале полная посадка и блюдо просто остыло на раздаче",
+          "Сказать гостю, что Карбонара по технологии не должна быть слишком горячей из-за желтка",
+          "Предложить гостю разогреть эту же тарелку в микроволновке на баре"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Стоп-лист",
+        question: "Гость заказывает «Салат с ростбифом», но ростбиф на стопе. Как правильно ответить по стандарту «Без слова НЕТ»?",
+        correct: "Извиниться, сообщить что позиция закончилась, и сразу предложить близкую альтернативу (например, «Тёплый салат с курицей» или «Салат с тунцом»)",
+        options: [
+          "Извиниться, сообщить что позиция закончилась, и сразу предложить близкую альтернативу (например, «Тёплый салат с курицей» или «Салат с тунцом»)",
+          "Сказать: «Нет, ростбифа сегодня нет, выберите другой салат из меню»",
+          "Принять заказ, а через 10 минут вернуться и сказать, что повар не сможет его приготовить",
+          "Сказать, что кухня сегодня плохо подготовилась к смене"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Тайминги",
+        question: "Вы видите, что горячее блюдо гостя задерживается на кухне уже дольше 25 минут. Что нужно сделать?",
+        correct: "Не ждать жалобы: подойти к гостю первым, предупредить о небольшой задержке, извиниться и сориентировать по времени",
+        options: [
+          "Не ждать жалобы: подойти к гостю первым, предупредить о небольшой задержке, извиниться и сориентировать по времени",
+          "Стараться не проходить мимо этого стола, пока блюдо не отдадут на раздаче",
+          "Сказать гостю, что во всём виноват медленный повар горячего цеха",
+          "Ничего не говорить, если сам гость пока молчит"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Качество",
+        question: "Гость обнаружил в блюде посторонний предмет (волос). Что категорически ЗАПРЕЩЕНО делать официанту?",
+        correct: "Спорить с гостем, разглядывать блюдо при госте или пытаться доказать, что это волос самого гостя",
+        options: [
+          "Спорить с гостем, разглядывать блюдо при госте или пытаться доказать, что это волос самого гостя",
+          "Мгновенно унести блюдо со стола и принести искренние извинения",
+          "Немедленно сообщить менеджеру смены для удаления блюда из счёта и комплимента",
+          "Предложить гостю заменить блюдо на любое другое за счёт заведения"
+        ]
+      },
+      {
+        badge: "Стандарты сервиса • Check Back",
+        question: "Для чего официант проводит Check Back (подходит к столу через пару минут после подачи блюда)?",
+        correct: "Чтобы убедиться, что гостю нравится вкус блюда, и вовремя исправить ситуацию, если что-то не так, не дожидаясь конца ужина",
+        options: [
+          "Чтобы убедиться, что гостю нравится вкус блюда, и вовремя исправить ситуацию, если что-то не так, не дожидаясь конца ужина",
+          "Чтобы быстрее забрать пустую посуду и освободить стол",
+          "Чтобы сразу положить на стол пречек для оплаты",
+          "Только для того, чтобы проверить, не испачкал ли гость салфетки"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Аллергия",
+        question: "Гость при заказе предупредил об аллергии на орехи и выбрал «Пасту с креветками». Ваши действия?",
+        correct: "Предупредить гостя, что в состав пасты входит соус «Песто» (содержит орехи), и предложить безопасную замену или уточнить на кухне подачу без Песто",
+        options: [
+          "Предупредить гостя, что в состав пасты входит соус «Песто» (содержит орехи), и предложить безопасную замену или уточнить на кухне подачу без Песто",
+          "Молча пробить заказ в iiko, ведь в названии пасты нет слова «орехи»",
+          "Сказать гостю, что в нашем меню вообще нет блюд с орехами",
+          "Посоветовать гостю вместо пасты взять ролл «Кайто»"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Расчёт",
+        question: "При оплате счёта гость возмущён тем, что в пречеке пробито лишнее блюдо. Как поступить?",
+        correct: "Спокойно извиниться, забрать пречек и сразу обратиться к менеджеру смены для проверки и удаления лишней позиции",
+        options: [
+          "Спокойно извиниться, забрать пречек и сразу обратиться к менеджеру смены для проверки и удаления лишней позиции",
+          "Заставить гостя оплатить весь чек, так как в iiko уже нельзя ничего отменить",
+          "Начать спорить с гостем при всём зале, доказывая, что он сам это заказывал",
+          "Предложить гостю забрать это блюдо с собой в контейнере за полную стоимость"
+        ]
+      },
+      {
+        badge: "Стандарты сервиса • Терминология",
+        question: "Какие слова СТРОГО ЗАПРЕЩЕНО использовать сотрудникам кафе «Папино» по отношению к людям в зале?",
+        correct: "Слова «клиент» и «посетитель» — мы используем только слово «Гость»",
+        options: [
+          "Слова «клиент» и «посетитель» — мы используем только слово «Гость»",
+          "Слова «друзья» и «дамы и господа»",
+          "Слово «компания»",
+          "Слово «столик»"
+        ]
+      },
+      {
+        badge: "Стандарты сервиса • Тайминги",
+        question: "В течение какого времени необходимо поприветствовать Гостя при входе и за сколько минут подать фискальный чек при расчёте?",
+        correct: "Приветствие — за 30–60 секунд; фискальный чек — за 3 минуты (сдача за 4 минуты)",
+        options: [
+          "Приветствие — за 30–60 секунд; фискальный чек — за 3 минуты (сдача за 4 минуты)",
+          "Приветствие — за 5 минут; фискальный чек — за 10 минут",
+          "Приветствие — когда освободится официант; расчёт — за 15 минут",
+          "Приветствие — за 3 минуты; сдача — за 10 минут"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Алгоритм LAST",
+        question: "Как расшифровываются 4 шага выхода из конфликта по правилу LAST?",
+        correct: "Listen (Выслушать) → Apologize (Извиниться) → Solve (Решить проблему и позвать менеджера) → Thank (Поблагодарить за обратную связь)",
+        options: [
+          "Listen (Выслушать) → Apologize (Извиниться) → Solve (Решить проблему и позвать менеджера) → Thank (Поблагодарить за обратную связь)",
+          "Look (Посмотреть) → Ask (Спросить) → Say (Сказать повару) → Take (Забрать оплату)",
+          "Leave (Уйти от стола) → Avoid (Избегать гостя) → Smile (Улыбаться) → Talk (Поговорить с барменом)",
+          "Listen (Выслушать) → Argue (Поспорить) → Stop (Остановить гостя) → Tell (Рассказать директору)"
+        ]
+      },
+      {
+        badge: "Стандарты сервиса • Тайминги кухни",
+        question: "Какие стандартные тайминги подачи блюд нужно озвучивать Гостю при принятии заказа?",
+        correct: "Салаты: 15–20 минут, Горячие блюда: 15–25 минут, Десерты: 5–10 минут",
+        options: [
+          "Салаты: 15–20 минут, Горячие блюда: 15–25 минут, Десерты: 5–10 минут",
+          "Все блюда готовятся ровно 40 минут",
+          "Салаты: 5 минут, Горячие блюда: 45 минут, Десерты: 25 минут",
+          "Тайминги гостю называть не нужно"
+        ]
+      },
+      {
+        badge: "Конфликтные ситуации • Перепутанное блюдо",
+        question: "Гость заказал «Сливочный цыпленок без грибов», а вы по ошибке пробили и вынесли пиццу с грибами. Ваши действия?",
+        correct: "Принести извинения, сразу забрать пиццу со стола, сообщить менеджеру и попросить кухню в приоритете сделать нужную пиццу",
+        options: [
+          "Принести извинения, сразу забрать пиццу со стола, сообщить менеджеру и попросить кухню в приоритете сделать нужную пиццу",
+          "Предложить гостю просто убрать грибы вилкой с кусков пиццы",
+          "Сказать гостю, что разница в цене всего 40 рублей и можно съесть эту",
+          "Убеждать гостя, что он сам не уточнил про грибы"
+        ]
+      }
+    ];
+
+    // Все варианты сервировки для генерации тестов по приборам
+    const ALL_SERVING_OPTIONS = [
+      "Сервировка: вилка и столовая ложка",
+      "Сервировка: столовая ложка",
+      "Подача: оливковое масло, вилка и нож",
+      "Подача: перчатки",
+      "2 круглые белые миски (одна с водой, одна пустая)",
+      "Без приборов (только по просьбе гостя)",
+      "Сервировка: вилка и нож",
+      "Сервировка: палочки или вилка",
+      "Палочки, соевый соус, имбирь, васаби",
+      "Палочки, соевый соус, соус спайси"
     ];
 
     const ALLERGEN_GROUPS = [
@@ -751,7 +954,8 @@
       { kw: 'сухари', label: 'без сухарей (в салате/супе)' }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v16')) || INITIAL_MENU;
+    // Обновляем ключ хранилища v17, чтобы у всех сразу подтянулась новая сервировка
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_complete_v17')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -848,14 +1052,21 @@
       }).join('');
 
       const nonSauceCount = menuData.filter(i => i.category !== 'Соуса').length;
-      const optionsHtml = `<option value="ALL">Вся база (${nonSauceCount} поз. без соусов)</option>` +
-        cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => {
-          const catCount = menuData.filter(i => i.category === c).length;
-          return `<option value="${c}">${c} (${catCount})</option>`;
-        }).join('');
+      const catOptions = cats.filter(c => c !== 'Все' && c !== 'Соуса').map(c => {
+        const catCount = menuData.filter(i => i.category === c).length;
+        return `<option value="${c}">${c} (${catCount})</option>`;
+      }).join('');
 
-      quizSelect.innerHTML = optionsHtml;
-      if (fcSelect) fcSelect.innerHTML = optionsHtml;
+      // В селектор тренажёра добавляем специальные режимы: Сервировка и Конфликтные ситуации
+      quizSelect.innerHTML =
+        `<option value="ALL">📖 Вся база меню (${nonSauceCount} поз.)</option>` +
+        `<option value="SERVING_ONLY">🍽️ Только сервировка и приборы</option>` +
+        `<option value="CONFLICTS_ONLY">⚡ Конфликтные ситуации и сервис</option>` +
+        catOptions;
+
+      if (fcSelect) {
+        fcSelect.innerHTML = `<option value="ALL">Все категории (${nonSauceCount})</option>` + catOptions;
+      }
       if (algSelect) {
         algSelect.innerHTML = `<option value="ALL">Все категории меню (${menuData.length})</option>` +
           cats.filter(c => c !== 'Все').map(c => `<option value="${c}">${c}</option>`).join('');
@@ -1129,12 +1340,11 @@
       nextFlashcard();
     }
 
-    // ================= ЛОГИКА ТЕСТОВ И ЭКЗАМЕНА =================
+    // ================= ЛОГИКА ТЕСТОВ И ЭКЗАМЕНА (БЕЗ ГРАММОВОК, СО СКРЫТИЕМ ОТВЕТОВ И УМНОЙ ПРОВЕРКОЙ) =================
     let quizQuestions = [];
     let currentQIndex = 0;
     let quizScore = 0;
     let quizMistakes = [];
-    let questionAnswered = false;
 
     function shuffleArray(arr) {
       const copy = [...arr];
@@ -1191,19 +1401,94 @@
       }
     }
 
-    function generateRandomQuestions(count, categoryFilter) {
-      const isExam = (count >= 30);
+    // Умная проверка ингредиентов на экзамене (выделяет названные и забытые позиции)
+    function evaluateManualIngredients(userText, targetIngredients) {
+      const userLower = userText.toLowerCase();
+      // Разбиваем эталонный состав по запятым на отдельные ингредиенты
+      const rawItems = targetIngredients.split(',').map(s => s.trim()).filter(Boolean);
+      const foundList = [];
+      const missingList = [];
 
+      rawItems.forEach(ing => {
+        // Извлекаем ключевые слова ингредиента (без кавычек и предлогов)
+        const cleanWords = ing.toLowerCase()
+          .replace(/[«»"()]/g, ' ')
+          .split(/\s+/)
+          .filter(w => w.length > 2 && !['соус', 'сыр', 'филе', 'салат'].includes(w));
+
+        const checkWords = cleanWords.length > 0
+          ? cleanWords
+          : ing.toLowerCase().replace(/[«»"()]/g, ' ').split(/\s+/).filter(w => w.length > 1);
+
+        // Проверяем совпадение по корню/основе слова (первые 4-5 букв для учёта падежей)
+        const isMatched = checkWords.some(w => {
+          const stem = w.length > 4 ? w.slice(0, -1) : w;
+          return userLower.includes(stem);
+        });
+
+        if (isMatched) {
+          foundList.push(ing);
+        } else {
+          missingList.push(ing);
+        }
+      });
+
+      const ratio = foundList.length / Math.max(1, rawItems.length);
+      // Засчитываем ответ как верный, если названо не менее 60% ингредиентов блюда
+      const isPassed = ratio >= 0.6;
+
+      return {
+        isPassed,
+        isPerfect: missingList.length === 0,
+        foundList,
+        missingList,
+        ratio
+      };
+    }
+
+    function generateRandomQuestions(count, categoryFilter) {
+      // 1. Отдельный тест по конфликтным ситуациям и стандартам сервиса
+      if (categoryFilter === 'CONFLICTS_ONLY') {
+        const shuffledConflicts = shuffleArray(CONFLICT_QUESTIONS_BANK);
+        const actualCount = Math.min(count, shuffledConflicts.length);
+        return shuffledConflicts.slice(0, actualCount).map(q => ({
+          badge: q.badge,
+          question: q.question,
+          type: 'choice',
+          options: shuffleArray(q.options),
+          correct: q.correct,
+          item: { name: "Стандарты сервиса и конфликты", category: "Устав Папино", ingredients: q.correct }
+        }));
+      }
+
+      // 2. Отдельный тренажёр по сервировке и приборам
+      if (categoryFilter === 'SERVING_ONLY') {
+        const pool = shuffleArray(menuData.filter(i => i.category !== 'Соуса'));
+        const generated = [];
+        for (let i = 0; i < count; i++) {
+          const target = pool[i % pool.length];
+          const wrongServes = shuffleArray(ALL_SERVING_OPTIONS.filter(s => s !== target.serving)).slice(0, 3);
+          generated.push({
+            badge: `Сервировка и приборы • ${target.category}`,
+            question: `Чем сервируется и как подаётся позиция «${target.name}» (${target.category})?`,
+            type: 'choice',
+            options: shuffleArray([target.serving, ...wrongServes]),
+            correct: target.serving,
+            item: target
+          });
+        }
+        return generated;
+      }
+
+      // 3. Тесты и Экзамен по меню (без граммовок!)
+      const isExam = (count >= 30);
       let pool = menuData.filter(i => i.category !== 'Соуса');
       if (categoryFilter !== 'ALL') {
         pool = pool.filter(i => i.category === categoryFilter);
       }
       if (pool.length === 0) pool = menuData.filter(i => i.category !== 'Соуса');
 
-      // Если выбрана отдельная категория, в которой меньше блюд, чем выбрано вопросов (например, 12 горячих роллов при экзамене),
-      // ограничиваем длину экзамена количеством блюд в этой категории, чтобы не спрашивать одно и то же блюдо дважды!
       const actualCount = (categoryFilter !== 'ALL' && pool.length < count) ? pool.length : count;
-
       const generated = [];
       const shuffledPool = shuffleArray(pool);
 
@@ -1218,36 +1503,60 @@
         if (isExam) {
           generated.push({
             badge: `Экзамен • ${target.category}`,
-            question: `Напишите точный состав позиции «${target.name}» (${target.weight}):`,
+            question: `Напишите полный состав позиции «${target.name}»:`,
             type: 'manual',
             correct: target.ingredients,
             item: target
           });
         } else {
-          const qTypes = ['GUESS_NAME_BY_ING', 'GUESS_ING_BY_NAME', 'SERVING_RULE', 'WEIGHT_CHECK', 'INGREDIENT_CONTAINS'];
+          // 4 типа вопросов для официантов (вопросы на граммовку полностью убраны)
+          const qTypes = ['GUESS_NAME_BY_ING', 'GUESS_ING_BY_NAME', 'SERVING_RULE', 'INGREDIENT_CONTAINS'];
           const chosenType = qTypes[Math.floor(Math.random() * qTypes.length)];
 
           if (chosenType === 'GUESS_NAME_BY_ING') {
             const options = shuffleArray([target.name, ...wrongItems.map(w => w.name)]);
-            generated.push({ badge: `Угадай блюдо • ${target.category}`, question: `Какое блюдо имеет состав: «${target.ingredients}»?`, type: 'choice', options, correct: target.name, item: target });
+            generated.push({
+              badge: `Угадай блюдо • ${target.category}`,
+              question: `Какое блюдо имеет состав: «${target.ingredients}»?`,
+              type: 'choice',
+              options,
+              correct: target.name,
+              item: target
+            });
           } else if (chosenType === 'GUESS_ING_BY_NAME') {
             const options = shuffleArray([target.ingredients, ...wrongItems.map(w => w.ingredients)]);
-            generated.push({ badge: `Состав • ${target.category}`, question: `Выберите точный состав позиции «${target.name}» (${target.weight}):`, type: 'choice', options, correct: target.ingredients, item: target });
+            generated.push({
+              badge: `Состав блюда • ${target.category}`,
+              question: `Выберите точный состав позиции «${target.name}»:`,
+              type: 'choice',
+              options,
+              correct: target.ingredients,
+              item: target
+            });
           } else if (chosenType === 'SERVING_RULE') {
-            const servingOptions = ["Палочки, имбирь маринованный, васаби, соевый соус", "Подача: соус спайси, соевый соус, палочки", "Подача с оливковым маслом", "Подача: перчатки", "Стандартная подача"];
-            const correctServe = target.serving.includes('спайси') ? "Подача: соус спайси, соевый соус, палочки" : (target.serving.includes('Палочки') || target.serving.includes('имбирь')) ? "Палочки, имбирь маринованный, васаби, соевый соус" : target.serving.includes('оливковым') ? "Подача с оливковым маслом" : target.serving.includes('перчатки') ? "Подача: перчатки" : "Стандартная подача";
-            const wrongServes = shuffleArray(servingOptions.filter(s => s !== correctServe)).slice(0, 3);
-            generated.push({ badge: `Подача • ${target.category}`, question: `Какая подача идёт к позиции «${target.name}»?`, type: 'choice', options: shuffleArray([correctServe, ...wrongServes]), correct: correctServe, item: target });
-          } else if (chosenType === 'WEIGHT_CHECK') {
-            const allWeights = [...new Set(pool.map(x => x.weight))].filter(w => w !== target.weight);
-            const wrongWeights = shuffleArray(allWeights).slice(0, 3);
-            generated.push({ badge: `Граммовка • ${target.category}`, question: `Какой выход у позиции «${target.name}»?`, type: 'choice', options: shuffleArray([target.weight, ...wrongWeights]), correct: target.weight, item: target });
+            const wrongServes = shuffleArray(ALL_SERVING_OPTIONS.filter(s => s !== target.serving)).slice(0, 3);
+            generated.push({
+              badge: `Сервировка и подача • ${target.category}`,
+              question: `Какие приборы и подача идут к позиции «${target.name}»?`,
+              type: 'choice',
+              options: shuffleArray([target.serving, ...wrongServes]),
+              correct: target.serving,
+              item: target
+            });
           } else {
             const targetIngs = target.ingredients.split(',').map(s => s.trim()).filter(Boolean);
             const trueIng = targetIngs[Math.floor(Math.random() * targetIngs.length)] || target.ingredients;
-            const fakeCandidates = ['Сыр «Дорблю»', 'Паста «Том ям»', 'Угорь', 'Ореховый соус', 'Перец «Халапеньо»', 'Грибы шиитаке', 'Кинза', 'Бекон', 'Авокадо'].filter(f => !target.ingredients.toLowerCase().includes(f.toLowerCase()));
+            const fakeCandidates = ['Сыр «Дорблю»', 'Паста «Том ям»', 'Угорь', 'Ореховый соус', 'Перец «Халапеньо»', 'Грибы шиитаке', 'Кинза', 'Бекон', 'Авокадо', 'Соус «Песто»', 'Медовый соус']
+              .filter(f => !target.ingredients.toLowerCase().includes(f.toLowerCase()));
             const wrongFakes = shuffleArray(fakeCandidates).slice(0, 3);
-            generated.push({ badge: `Ингредиенты • ${target.category}`, question: `Какой ингредиент ТОЧНО входит в состав «${target.name}»?`, type: 'choice', options: shuffleArray([trueIng, ...wrongFakes]), correct: trueIng, item: target });
+            generated.push({
+              badge: `Знание ингредиентов • ${target.category}`,
+              question: `Какой ингредиент ТОЧНО входит в состав позиции «${target.name}»?`,
+              type: 'choice',
+              options: shuffleArray([trueIng, ...wrongFakes]),
+              correct: trueIng,
+              item: target
+            });
           }
         }
       }
@@ -1260,11 +1569,8 @@
       const count = parseInt(countSelect.value, 10) || 10;
       const cat = catSelect.value;
 
-      // Разрешаем выбор любой категории даже на экзамене (30 вопросов)
-      catSelect.disabled = false;
-      catSelect.classList.remove('opacity-50', 'cursor-not-allowed');
-
-      if (count >= 30) {
+      // Если выбран режим 30 вопросов (Экзамен) для меню — включаем таймер и защиту от списывания
+      if (count >= 30 && cat !== 'CONFLICTS_ONLY' && cat !== 'SERVING_ONLY') {
         setNavigationLock(true);
         startExamTimer();
       } else {
@@ -1282,18 +1588,14 @@
     }
 
     function renderCurrentQuestion() {
-      questionAnswered = false;
       const q = quizQuestions[currentQIndex];
       const total = quizQuestions.length;
 
       document.getElementById('quiz-progress-text').textContent = `Вопрос ${currentQIndex + 1} из ${total}`;
-      document.getElementById('quiz-score-live').textContent = `Правильных: ${quizScore}`;
       document.getElementById('quiz-progress-bar').style.width = `${((currentQIndex + 1) / total) * 100}%`;
 
       document.getElementById('quiz-q-badge').textContent = q.badge;
       document.getElementById('quiz-q-title').textContent = q.question;
-      document.getElementById('quiz-feedback').classList.add('hidden');
-      document.getElementById('quiz-next-btn').classList.add('hidden');
 
       const optsContainer = document.getElementById('quiz-options');
       const manualContainer = document.getElementById('quiz-manual-container');
@@ -1307,69 +1609,64 @@
         manualContainer.classList.add('hidden');
         optsContainer.classList.remove('hidden');
         optsContainer.innerHTML = q.options.map((opt, idx) => `
-          <button onclick="selectQuizOption(${idx})" id="q-opt-${idx}" class="w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-amber-500 hover:bg-slate-800 transition text-xs sm:text-sm font-medium text-white">
+          <button onclick="selectQuizOption(${idx})" class="w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900 hover:border-amber-500 hover:bg-slate-800 transition text-xs sm:text-sm font-medium text-white">
             ${opt}
           </button>
         `).join('');
       }
     }
 
+    // Выбор ответа в тесте: НЕ показываем ошибку сразу, сразу переходим к следующему вопросу!
     function selectQuizOption(idx) {
-      if (questionAnswered) return;
-      questionAnswered = true;
-
       const q = quizQuestions[currentQIndex];
       const chosen = q.options[idx];
-      const isCorrect = chosen === q.correct;
+      const isCorrect = (chosen === q.correct);
 
-      if (isCorrect) quizScore++;
-      else quizMistakes.push({ question: q.question, chosen, correct: q.correct, item: q.item });
+      if (isCorrect) {
+        quizScore++;
+      } else {
+        quizMistakes.push({
+          type: 'choice',
+          question: q.question,
+          chosen: chosen,
+          correct: q.correct,
+          item: q.item
+        });
+      }
 
-      q.options.forEach((opt, i) => {
-        const btn = document.getElementById('q-opt-' + i);
-        if (opt === q.correct) btn.className = 'w-full text-left p-4 rounded-xl border-2 border-emerald-500 bg-emerald-950/60 text-emerald-200 font-bold text-xs sm:text-sm';
-        else if (i === idx && !isCorrect) btn.className = 'w-full text-left p-4 rounded-xl border-2 border-red-500 bg-red-950/60 text-red-200 font-semibold text-xs sm:text-sm';
-        else btn.className = 'w-full text-left p-4 rounded-xl border border-slate-800 bg-slate-900 opacity-40 text-xs sm:text-sm';
-      });
-
-      showFeedback(isCorrect, q.correct, q.item);
+      nextQuizQuestion();
     }
 
+    // Умная проверка ручного ввода на экзамене (тоже без мгновенного спойлера — разбор в конце)
     function submitManualAnswer() {
-      if (questionAnswered) return;
-      const userInput = document.getElementById('quiz-manual-input').value.trim().toLowerCase();
+      const userInput = document.getElementById('quiz-manual-input').value.trim();
       if (!userInput) {
-        alert('Пожалуйста, введите состав!');
+        alert('Пожалуйста, напишите состав блюда перед переходом к следующему вопросу!');
         return;
       }
-      questionAnswered = true;
-      document.getElementById('quiz-manual-container').classList.add('hidden');
 
       const q = quizQuestions[currentQIndex];
-      const correctLower = q.correct.toLowerCase();
-      
-      const correctWords = correctLower.split(/,\s*|\s+/).filter(w => w.length > 2);
-      const matchedCount = correctWords.filter(w => userInput.includes(w)).length;
-      const isCorrect = (matchedCount / Math.max(1, correctWords.length)) >= 0.5;
+      const evalResult = evaluateManualIngredients(userInput, q.correct);
 
-      if (isCorrect) quizScore++;
-      else quizMistakes.push({ question: q.question, chosen: userInput, correct: q.correct, item: q.item });
-
-      showFeedback(isCorrect, q.correct, q.item);
-    }
-
-    function showFeedback(isCorrect, correctText, item) {
-      const fb = document.getElementById('quiz-feedback');
-      fb.classList.remove('hidden');
-      if (isCorrect) {
-        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-emerald-950 border border-emerald-900 text-emerald-200';
-        fb.innerHTML = `✅ <strong>Верно!</strong> ${item.name} (${item.weight}, ${item.price} ₽).<br><span class="text-xs opacity-80">Эталонный состав: ${item.ingredients}</span>`;
-      } else {
-        fb.className = 'mt-4 p-4 rounded-xl text-xs sm:text-sm font-medium bg-red-950 border border-red-900 text-red-200';
-        fb.innerHTML = `❌ <strong>Неточно.</strong> Правильно: <strong>${correctText}</strong>.<br><span class="text-xs">Полный состав: ${item.ingredients}</span>`;
+      if (evalResult.isPassed) {
+        quizScore++;
       }
-      document.getElementById('quiz-score-live').textContent = `Правильных: ${quizScore}`;
-      document.getElementById('quiz-next-btn').classList.remove('hidden');
+
+      // Если ответ неверный ИЛИ сотрудник забыл дописать какие-то ингредиенты — добавляем в финальный разбор
+      if (!evalResult.isPassed || !evalResult.isPerfect) {
+        quizMistakes.push({
+          type: 'manual',
+          isPassed: evalResult.isPassed,
+          question: q.question,
+          chosen: userInput,
+          correct: q.correct,
+          foundList: evalResult.foundList,
+          missingList: evalResult.missingList,
+          item: q.item
+        });
+      }
+
+      nextQuizQuestion();
     }
 
     function nextQuizQuestion() {
@@ -1390,20 +1687,30 @@
 
       const total = quizQuestions.length;
       const pct = Math.round((quizScore / total) * 100);
-      const selectedCat = document.getElementById('quiz-cat-select').value;
+      const catSelect = document.getElementById('quiz-cat-select');
+      const selectedCatValue = catSelect.value;
       const countVal = parseInt(document.getElementById('quiz-count-select').value, 10) || 10;
+
+      let categoryLabel = 'Вся база';
+      if (selectedCatValue === 'SERVING_ONLY') categoryLabel = '🍽️ Сервировка и приборы';
+      else if (selectedCatValue === 'CONFLICTS_ONLY') categoryLabel = '⚡ Конфликтные ситуации';
+      else if (selectedCatValue !== 'ALL') categoryLabel = selectedCatValue;
 
       document.getElementById('quiz-result-emoji').textContent = pct >= 85 ? '🏆' : pct >= 60 ? '👍' : '📚';
       document.getElementById('quiz-result-title').textContent = `Результат: ${quizScore} из ${total} (${pct}%)`;
-      document.getElementById('quiz-result-subtitle').textContent = pct >= 85 ? 'Отличный результат! Сотрудник готов к работе.' : pct >= 60 ? 'Тест сдан, но рекомендуем повторить ошибки.' : 'Аттестация не пройдена. Повторите меню и устав.';
+      document.getElementById('quiz-result-subtitle').textContent = pct >= 85
+        ? 'Отличный результат! Сотрудник готов к работе.'
+        : pct >= 60
+          ? 'Тест сдан, но внимательно изучите разбор ошибок ниже.'
+          : 'Аттестация не пройдена. Изучите разбор ошибок ниже и повторите материал.';
 
       sendResultToGoogleSheets({
         date: new Date().toLocaleString('ru-RU'),
         name: currentStaff ? currentStaff.name : "Гость",
         title: currentStaff ? currentStaff.title : "Сотрудник",
         id: currentStaff ? currentStaff.id : "—",
-        mode: countVal >= 30 ? "Экзамен ✍️" : `Тест (${total} вопр.)`,
-        category: selectedCat === 'ALL' ? 'Вся база' : selectedCat,
+        mode: (countVal >= 30 && selectedCatValue !== 'CONFLICTS_ONLY' && selectedCatValue !== 'SERVING_ONLY') ? "Экзамен ✍️" : `Тест (${total} вопр.)`,
+        category: categoryLabel,
         score: `${quizScore} / ${total}`,
         pct: pct
       });
@@ -1413,23 +1720,43 @@
 
       if (quizMistakes.length > 0) {
         mistakesBox.classList.remove('hidden');
-        mistakesList.innerHTML = quizMistakes.map(m => `
-          <div class="p-4 rounded-xl bg-red-950/40 border border-red-900 text-xs sm:text-sm space-y-1">
-            <div class="font-bold text-white">${m.item.name} (${m.item.category})</div>
-            <div class="text-red-400">Ваш ответ: ${m.chosen}</div>
-            <div class="text-emerald-400 font-semibold">Правильно: ${m.correct}</div>
-          </div>
-        `).join('');
+        mistakesList.innerHTML = quizMistakes.map(m => {
+          if (m.type === 'manual') {
+            const statusBadge = m.isPassed
+              ? `<span class="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">⚠️ Засчитано (но упущены детали)</span>`
+              : `<span class="text-[11px] font-bold px-2 py-0.5 rounded bg-red-500/20 text-red-300 border border-red-500/40">❌ Ошибка (названо менее 60%)</span>`;
+
+            return `
+              <div class="p-4 rounded-xl bg-slate-950 border ${m.isPassed ? 'border-amber-700/60' : 'border-red-900'} text-xs sm:text-sm space-y-2">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div class="font-bold text-white">${m.item.name} <span class="text-slate-400 font-normal">(${m.item.category})</span></div>
+                  ${statusBadge}
+                </div>
+                <div class="text-slate-300"><strong class="text-slate-400">Ваш ответ:</strong> ${m.chosen}</div>
+                ${m.foundList.length > 0 ? `<div class="text-emerald-400">✅ <strong>Названо верно:</strong> ${m.foundList.join(', ')}</div>` : ''}
+                ${m.missingList.length > 0 ? `<div class="text-amber-400 font-semibold">🔍 <strong>Забыли указать:</strong> ${m.missingList.join(', ')}</div>` : ''}
+                <div class="text-slate-400 text-xs pt-1 border-t border-slate-800">Эталонный состав: ${m.correct}</div>
+              </div>
+            `;
+          } else {
+            return `
+              <div class="p-4 rounded-xl bg-red-950/40 border border-red-900 text-xs sm:text-sm space-y-1.5">
+                <div class="font-bold text-white">${m.question}</div>
+                <div class="text-red-400">❌ Ваш ответ: ${m.chosen}</div>
+                <div class="text-emerald-400 font-semibold">✅ Правильно: ${m.correct}</div>
+              </div>
+            `;
+          }
+        }).join('');
       } else {
         mistakesBox.classList.add('hidden');
       }
     }
 
-    // Надежная отправка в Google Apps Script без блокировки CORS (text/plain)
     function sendResultToGoogleSheets(data) {
       const syncStatus = document.getElementById('sync-status');
       syncStatus.textContent = "Сохранение результата в Google Таблицу...";
-      syncStatus.className = "text-xs text-amber-400 mb-4 font-medium";
+      syncStatus.className = "text-xs text-amber-400 mb-5 font-medium";
 
       const payload = JSON.stringify(data);
 
@@ -1443,12 +1770,12 @@
       })
       .then(() => {
         syncStatus.textContent = "✅ Результат успешно отправлен в Google Таблицу!";
-        syncStatus.className = "text-xs text-emerald-400 mb-4 font-medium";
+        syncStatus.className = "text-xs text-emerald-400 mb-5 font-medium";
       })
       .catch(err => {
         console.error("Ошибка отправки в таблицу:", err);
         syncStatus.textContent = "⚠️ Ошибка синхронизации с таблицей. Проверьте доступ к веб-скрипту.";
-        syncStatus.className = "text-xs text-red-400 mb-4 font-medium";
+        syncStatus.className = "text-xs text-red-400 mb-5 font-medium";
       });
     }
 
@@ -1463,10 +1790,10 @@
           ingredients: document.getElementById('new-ing').value.trim(),
           weight: document.getElementById('new-weight').value.trim(),
           price: parseInt(document.getElementById('new-price').value, 10) || 0,
-          serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
+          serving: document.getElementById('new-serve').value.trim() || 'Сервировка: вилка и нож'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_complete_v16', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_complete_v17', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
