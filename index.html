@@ -18,34 +18,34 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-amber-500 selection:text-slate-950">
 
-  <!-- ЭКРАН АВТОРИЗАЦИИ ПО СПИСКУ IIKO -->
+  <!-- ЭКРАН АВТОРИЗАЦИИ ПО НОМЕРАМ IIKO -->
   <div id="login-screen" class="fixed inset-0 bg-slate-950/95 z-50 flex items-center justify-center p-4">
     <div class="bg-slate-900 rounded-2xl shadow-2xl max-w-md w-full p-8 border border-slate-800">
       <div class="text-center mb-6">
         <div class="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-amber-500 text-slate-950 font-extrabold text-3xl mb-3 shadow-lg">П</div>
         <h1 class="text-2xl font-extrabold text-white">Кафе «Папино»</h1>
-        <p class="text-sm text-slate-400 mt-1">Вход по именам сотрудников (iiko)</p>
+        <p class="text-sm text-slate-400 mt-1">Вход по имени и номеру в iiko</p>
       </div>
 
       <form id="login-form" class="space-y-4">
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Ваше имя (Логин)</label>
-          <input type="text" id="login-user" required placeholder="Например: Полина, Изалия, Стажер..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Имя сотрудника (Логин)</label>
+          <input type="text" id="login-user" required placeholder="Например: Полина, Изалия, Максим..." class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
         <div>
-          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль</label>
-          <input type="password" id="login-pass" required placeholder="Введите пароль" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Пароль (Номер в iiko)</label>
+          <input type="password" id="login-pass" required placeholder="Ваш номер в iiko" class="w-full px-4 py-3 rounded-xl bg-slate-950 border border-slate-800 text-white placeholder-slate-600 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition text-sm" />
         </div>
-        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверное имя или пароль. Проверьте правильность написания.</div>
+        <div id="login-error" class="hidden text-xs text-red-400 bg-red-950/50 border border-red-900 p-3 rounded-lg font-medium">Неверное имя или номер в iiko. Проверьте данные.</div>
         <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl shadow-md transition">Войти в портал</button>
       </form>
 
       <div class="mt-6 pt-5 border-t border-slate-800">
-        <p class="text-xs text-center text-slate-400 mb-2 font-medium">Быстрый демо-вход:</p>
+        <p class="text-xs text-center text-slate-400 mb-2 font-medium">Примеры для входа:</p>
         <div class="grid grid-cols-3 gap-2">
-          <button onclick="quickLogin('полина','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-amber-400 rounded-xl text-xs font-semibold transition text-center">👑 Менеджер<br><span class="text-[10px] text-slate-500">Полина</span></button>
-          <button onclick="quickLogin('изалия','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-center">🍽️ Официант<br><span class="text-[10px] text-slate-500">Изалия</span></button>
-          <button onclick="quickLogin('стажер','123')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-emerald-400 rounded-xl text-xs font-semibold transition text-center">🌱 Стажёр<br><span class="text-[10px] text-slate-500">Стажёр</span></button>
+          <button onclick="quickLogin('полина','5802')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-amber-400 rounded-xl text-xs font-semibold transition text-center">👑 Менеджер<br><span class="text-[10px] text-slate-500">Полина (5802)</span></button>
+          <button onclick="quickLogin('изалия','0909')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-slate-300 rounded-xl text-xs font-semibold transition text-center">🍽️ Официант<br><span class="text-[10px] text-slate-500">Изалия (0909)</span></button>
+          <button onclick="quickLogin('стажер','4727')" class="p-2 bg-slate-950 hover:bg-slate-800 border border-slate-800 text-emerald-400 rounded-xl text-xs font-semibold transition text-center">🌱 Стажёр<br><span class="text-[10px] text-slate-500">Стажёр (4727)</span></button>
         </div>
       </div>
     </div>
@@ -339,24 +339,27 @@
   </main>
 
   <script>
-    // БАЗА СОТРУДНИКОВ ИЗ IIKO
+    // БАЗА СОТРУДНИКОВ ИЗ IIKO (Имя — ключ, Пароль — номер в айко)
     const IIKO_STAFF = {
       // Менеджеры (Админы)
-      "полина": { role: "admin", name: "Полина", id: "5802", title: "Менеджер" },
-      "оля": { role: "admin", name: "Оля", id: "8696", title: "Менеджер" },
-      "ангелина": { role: "admin", name: "Ангелина", id: "8688", title: "Менеджер" },
-      // Бармены
-      "максим": { role: "waiter", name: "Максим", id: "4316", title: "Бармен" },
-      "эрик": { role: "waiter", name: "Эрик", id: "2902", title: "Бармен" },
+      "полина": { role: "admin", name: "Полина", id: "5802", title: "Менеджер", pass: "5802" },
+      "оля": { role: "admin", name: "Оля", id: "8696", title: "Менеджер", pass: "8696" },
+      "ангелина": { role: "admin", name: "Ангелина", id: "8688", title: "Менеджер", pass: "8688" },
+      
+      // Бармены (приравнены к официантам)
+      "максим": { role: "waiter", name: "Максим", id: "4316", title: "Бармен", pass: "4316" },
+      "эрик": { role: "waiter", name: "Эрик", id: "2902", title: "Бармен", pass: "2902" },
+      
       // Официанты
-      "изалия": { role: "waiter", name: "Изалия", id: "0909", title: "Официант" },
-      "диляра": { role: "waiter", name: "Диляра", id: "1133", title: "Официант" },
-      "мария": { role: "waiter", name: "Мария", id: "0550", title: "Официант" },
-      "милена": { role: "waiter", name: "Милена", id: "7140", title: "Официант" },
-      "катя": { role: "waiter", name: "Катя", id: "6507", title: "Официант" },
-      "элина": { role: "waiter", name: "Элина", id: "5566", title: "Официант" },
+      "изалия": { role: "waiter", name: "Изалия", id: "0909", title: "Официант", pass: "0909" },
+      "диляра": { role: "waiter", name: "Диляра", id: "1133", title: "Официант", pass: "1133" },
+      "мария": { role: "waiter", name: "Мария", id: "0550", title: "Официант", pass: "0550" },
+      "милена": { role: "waiter", name: "Милена", id: "7140", title: "Официант", pass: "7140" },
+      "катя": { role: "waiter", name: "Катя", id: "6507", title: "Официант", pass: "6507" },
+      "элина": { role: "waiter", name: "Элина", id: "5566", title: "Официант", pass: "5566" },
+      
       // Стажёр
-      "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр" }
+      "стажер": { role: "waiter", name: "Стажёр", id: "4727", title: "Стажёр", pass: "4727" }
     };
 
     const INITIAL_MENU = [
@@ -570,7 +573,7 @@
       { id: "SOU-14", category: "Соуса", name: "Сметана 30гр", weight: "30 г", price: 70, serving: "Соусник", ingredients: "Сметана" }
     ];
 
-    let menuData = JSON.parse(localStorage.getItem('papino_menu_v4')) || INITIAL_MENU;
+    let menuData = JSON.parse(localStorage.getItem('papino_menu_v6')) || INITIAL_MENU;
     let currentCategory = 'Все';
     let currentStaff = null;
 
@@ -579,7 +582,7 @@
       const nameInput = document.getElementById('login-user').value.trim().toLowerCase();
       const passInput = document.getElementById('login-pass').value.trim();
 
-      if (IIKO_STAFF[nameInput] && passInput === "123") {
+      if (IIKO_STAFF[nameInput] && IIKO_STAFF[nameInput].pass === passInput) {
         currentStaff = IIKO_STAFF[nameInput];
         completeLogin(currentStaff);
       } else {
@@ -901,7 +904,7 @@
           serving: document.getElementById('new-serve').value.trim() || 'Стандартная подача'
         };
         menuData.push(newItem);
-        localStorage.setItem('papino_menu_v4', JSON.stringify(menuData));
+        localStorage.setItem('papino_menu_v6', JSON.stringify(menuData));
         this.reset();
         renderCategories();
         renderMenu();
